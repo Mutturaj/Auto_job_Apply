@@ -17,7 +17,7 @@ import java.util.*;
 
 public class LinkedinPage extends GenericMethods {
     Linkedin_Locators locators = new Linkedin_Locators();
-    String datasetName = "Muttu";
+    String datasetName = "Bindu";
     QuestionAnswerHandler questionAnswerHandler = new QuestionAnswerHandler(datasetName);
 
 
@@ -38,7 +38,7 @@ public class LinkedinPage extends GenericMethods {
         clickElement(driver, locators.JobIcon);
         waitForElement(driver, locators.ShowAllButton);
         clickElement(driver, locators.ShowAllButton);
-        clickElement(driver, locators.SearchIcon);
+        //clickElement(driver, locators.SearchIcon);
 
     }
 
