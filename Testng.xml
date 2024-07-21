@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" allow-return-values="true">
+    <test verbose="1" preserve-order="true" name="C:\Users\Welcome\Downloads\testrail_poc-master\AutoJob_Apply">
+        <parameter name="baseURL" value="https://www.linkedin.com/feed/?trk=homepage-basic_sign-in-submit"/>
+        <classes>
+            <class name="Test.LinkedinTest">
+                <methods>
+                    <include name="verifyLoginAndSearchJob"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    </suite>

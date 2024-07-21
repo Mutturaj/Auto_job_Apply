@@ -1,0 +1,44 @@
+{
+  "datasets": [
+    {
+      "name": "Bindu",
+      "data": {
+        "How many years of work experience": "3 years",
+        "Current CTC": "700000",
+        "Expected CTC": "1300000",
+        "Cypress": "Yes, I can take an assignment in Cypress",
+        "Mobile phone number": "7996864461",
+        "First name": "BinduShree",
+        "Last name": "N",
+        "Please enter your current ctc in INR": "500000",
+        "Please enter your expected ctc in INR": "800000",
+        "Please enter your notice period in days. Example: 45": "20",
+        "City": "Bangalore",
+        "LinkedIn Profile": "www.linkedin.com/in/bindushree-n-459988211",
+        "Website": "www.linkedin.com/in/bindushree-n-459988211",
+        "What is your Current Location": "Bangalore",
+        "What is your notice period?": "20"
+      }
+    },
+    {
+      "name": "Muttu",
+      "data": {
+        "How many years of work experience": "2 years",
+        "Current CTC": "711000",
+        "Expected CTC": "1300000",
+        "Cypress": "Yes, I can take an assignment in Cypress",
+        "Mobile phone number": "9343550736",
+        "First name": "Mutturaj",
+        "Last name": "Annigeri",
+        "Please enter your current ctc in INR": "711000",
+        "Please enter your expected ctc in INR": "1300000",
+        "Please enter your notice period in days. Example: 45": "20",
+        "City": "Mumbai",
+        "LinkedIn Profile": "www.linkedin.com/in/mutturaj-annigeri",
+        "Website": "www.linkedin.com/in/mutturaj-annigeri",
+        "What is your Current Location": "Bangalore",
+        "What is your notice period?": "20"
+      }
+    }
+  ]
+}

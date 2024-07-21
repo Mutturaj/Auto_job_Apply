@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "EmailID": "shribindu98@gmail.com",
+      "Password": "Bindu@66",
+      "JobTitle":"Quality Analyst",
+      "JobLocation": "Karnataka, India",
+      "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process"
+    },
+
+      {
+        "EmailID": "mutturaja1996@gmail.com",
+        "Password": "15Muttu@05",
+        "JobTitle":"Quality Analyst",
+        "JobLocation": "Karnataka, India",
+        "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process"
+      }
+  ]
+
+}
