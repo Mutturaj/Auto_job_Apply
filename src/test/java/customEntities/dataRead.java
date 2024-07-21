@@ -18,7 +18,7 @@ public class dataRead {
 
     @DataProvider(name = "login_cred")
     public Object[][] Jsonreader() throws FileNotFoundException {
-        return provideLoginCredentials("data", 1);
+        return provideLoginCredentials("data", 0);
     }
 
     public Object[][] provideLoginCredentials(String dataKey, int index) throws FileNotFoundException {
