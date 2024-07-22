@@ -62,7 +62,7 @@ public class LinkedinPage extends GenericMethods {
     }
 
     public void applyForJobs(WebDriver driver, WebDriverWait wait, JavascriptExecutor js, String[] data) throws InterruptedException {
-        int currentPage = 9;
+        int currentPage = 2;
         int maxScrollAttempts = 10;
         int scrollAttempts = 0;
 
