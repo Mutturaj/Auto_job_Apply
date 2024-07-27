@@ -20,7 +20,7 @@ public class LinkedinTest {
     public LinkedinPage linkedinData;
 
     @BeforeClass
-    @Parameters("baseURL")
+    @Parameters("baseURL1")
     public void setUp(String baseURL) throws FileNotFoundException {
         generic.launchBrowser(baseURL);
         driver = generic.driver;

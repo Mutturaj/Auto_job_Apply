@@ -35,8 +35,5 @@ public class allApi {
                 .patch("http://useronboarding.stg.sb.az6/housekeeping/workflow/disable/user/8BUWC59FP2EG0WK80O19WT8ROD/SB_USER_ONBOARDING")
                 .then()
                 .statusCode(200);
-        // .extract()
-        //                .response()
-        //                .prettyPrint();
 }
 }

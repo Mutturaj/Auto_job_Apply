@@ -3,41 +3,58 @@
     {
       "name": "Bindu",
       "data": {
-        "How many years of work experience": "3 years",
-        "Current CTC": "700000",
-        "Expected CTC": "1300000",
+        "experience": "3",
         "Cypress": "Yes, I can take an assignment in Cypress",
         "Mobile phone number": "7996864461",
-        "First name": "BinduShree",
+        "First name": "bindushree",
         "Last name": "N",
-        "Please enter your current ctc in INR": "500000",
-        "Please enter your expected ctc in INR": "800000",
-        "Please enter your notice period in days. Example: 45": "20",
-        "City": "Bangalore",
+        "current ctc": "550000",
+        "expected ctc": "850000",
+        "notice period": "15",
+        "city": "Bangalore",
         "LinkedIn Profile": "www.linkedin.com/in/bindushree-n-459988211",
         "Website": "www.linkedin.com/in/bindushree-n-459988211",
-        "What is your Current Location": "Bangalore",
-        "What is your notice period?": "20"
+        "current location": "Bangalore",
+        "start date": "08/09/2024",
+        "Current company": "ZETAION SYSTEM PVT LTD"
       }
     },
     {
       "name": "Muttu",
       "data": {
-        "How many years of work experience": "2 years",
-        "Current CTC": "711000",
-        "Expected CTC": "1300000",
+        "experience": "2",
         "Cypress": "Yes, I can take an assignment in Cypress",
         "Mobile phone number": "9343550736",
         "First name": "Mutturaj",
         "Last name": "Annigeri",
-        "Please enter your current ctc in INR": "711000",
-        "Please enter your expected ctc in INR": "1300000",
-        "Please enter your notice period in days. Example: 45": "20",
-        "City": "Mumbai",
+        "current ctc": "711000",
+        "expected ctc": "1300000",
+        "notice period": "15",
+        "city": "Bangalore",
         "LinkedIn Profile": "www.linkedin.com/in/mutturaj-annigeri",
         "Website": "www.linkedin.com/in/mutturaj-annigeri",
-        "What is your Current Location": "Bangalore",
-        "What is your notice period?": "20"
+        "current location": "Bangalore",
+        "start date": "08/09/2024",
+        "Current company": "Qualitrix Technology"
+      }
+    },
+    {
+      "name": "Yogi",
+      "data": {
+        "experience": "3",
+        "Cypress": "Yes, I can take an assignment in Cypress",
+        "Mobile phone number": "9945604439",
+        "First name": "Yogi",
+        "Last name": "C K",
+        "current ctc": "550000",
+        "expected ctc": "850000",
+        "notice period": "15",
+        "city": "Bangalore",
+        "LinkedIn Profile": "www.linkedin.com/in/yogesh-c-k-669a04272",
+        "Website": "www.linkedin.com/in/yogesh-c-k-669a04272",
+        "current location": "Bangalore",
+        "start date": "08/09/2024",
+        "Current company": "Airsme technology pvt ltd"
       }
     }
   ]

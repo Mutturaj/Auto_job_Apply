@@ -220,7 +220,15 @@ public class GenericMethods {
         if (element != null) {
             JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
             jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+            System.out.println("Scrolled to element: " + element);
+        } else {
+            System.out.println("Element not found: " + locatorsDetails);
         }
+    }
+    public void scrollToTop(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0);");
+        System.out.println("Scrolled to the top of the page.");
     }
 
     public static void executeJavaScript(WebDriver driver, String script, LocatorsDetails locatorsDetails) {
