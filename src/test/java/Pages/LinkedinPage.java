@@ -18,14 +18,9 @@ import java.util.*;
 
 public class LinkedinPage extends GenericMethods {
     Linkedin_Locators locators = new Linkedin_Locators();
-<<<<<<< HEAD
-
     String datasetName = DataConfg.getInstance().getDatasetName();
-=======
-    String datasetName = "Bindu";
->>>>>>> origin/master
-    QuestionAnswerHandler questionAnswerHandler = new QuestionAnswerHandler(datasetName);
 
+    QuestionAnswerHandler questionAnswerHandler = new QuestionAnswerHandler(datasetName);
 
     public LinkedinPage(WebDriver driver) throws FileNotFoundException {
         PageFactory.initElements(driver, this);
@@ -44,11 +39,10 @@ public class LinkedinPage extends GenericMethods {
         clickElement(driver, locators.JobIcon);
         waitForElement(driver, locators.ShowAllButton);
         clickElement(driver, locators.ShowAllButton);
-<<<<<<< HEAD
+
         // clickElement(driver, locators.SearchIcon);
-=======
+
         //clickElement(driver, locators.SearchIcon);
->>>>>>> origin/master
 
     }
 
