@@ -19,7 +19,6 @@ import java.util.*;
 public class LinkedinPage extends GenericMethods {
     Linkedin_Locators locators = new Linkedin_Locators();
     String datasetName = DataConfg.getInstance().getDatasetName();
-
     QuestionAnswerHandler questionAnswerHandler = new QuestionAnswerHandler(datasetName);
 
     public LinkedinPage(WebDriver driver) throws FileNotFoundException {
@@ -39,11 +38,6 @@ public class LinkedinPage extends GenericMethods {
         clickElement(driver, locators.JobIcon);
         waitForElement(driver, locators.ShowAllButton);
         clickElement(driver, locators.ShowAllButton);
-
-        // clickElement(driver, locators.SearchIcon);
-
-        //clickElement(driver, locators.SearchIcon);
-
     }
 
     public void searchForJobs(WebDriver driver, String[] data) throws InterruptedException {
@@ -82,19 +76,20 @@ public class LinkedinPage extends GenericMethods {
                         executeJavaScript(driver, "arguments[0].scrollIntoView(true);", easyApply);
                         wait.until(ExpectedConditions.elementToBeClickable(easyApply));
                         easyApply.click();
-                        Thread.sleep(3000);
-
+                        Thread.sleep(2000);
                         if (isElementPresent(driver, locators.easyApplyButton) || isElementPresent(driver, locators.continueButton)) {
                             ClickEasyApplyButtonORContinueButton(driver);
                             handleJobApplicationProcess(driver, wait, data);
                         } else {
-                            System.out.println("Easy Apply or Continue button not present, Marking as a Applied");
+                            System.out.println("Easy Apply or Continue button not present on L2 page, marking this job as Applied and skipping.");
+                            driver.navigate().back();
+                            Thread.sleep(2000);
                             executeJavaScript(driver, "arguments[0].textContent = 'Applied';", easyApply);
-                            waitForPageLoad(driver);
+                            Thread.sleep(3000);
                             jobs = findElements(driver, locators.listOfJobs);
                             i--;
                         }
-                        handleJobApplicationProcess(driver, wait, data);
+
                     } catch (ElementClickInterceptedException e) {
                         System.out.println("ElementClickInterceptedException caught, moving to the next job.");
                     }

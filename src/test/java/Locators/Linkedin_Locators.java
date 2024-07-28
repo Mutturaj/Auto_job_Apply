@@ -14,7 +14,7 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails TitleOfJob = new LocatorsDetails("xpath", "//input[@aria-label='Search by title, skill, or company' and @aria-autocomplete='list']", "Title of the Job Input");
     public GenericMethods.LocatorsDetails LocationOfJob = new LocatorsDetails("xpath", "//input[@aria-label='City, state, or zip code' and @autocomplete='address-level2']", "Location of the Job");
     public GenericMethods.LocatorsDetails SearchBox = new LocatorsDetails("xpath", "//button[text()='Search']", "Search Box");
-    public GenericMethods.LocatorsDetails listOfJobs = new LocatorsDetails("xpath", "//li[@class='job-card-container__apply-method job-card-container__footer-item inline-flex align-items-center']", "List of Jobs");
+    public GenericMethods.LocatorsDetails listOfJobs = new LocatorsDetails("xpath", "//li[contains(@class, 'job-card-container__apply-method') and contains(@class, 'job-card-container__footer-item') and contains(., 'Easy Apply')]", "List of Jobs");
     public GenericMethods.LocatorsDetails EasyApplyFilter = new LocatorsDetails("xpath", "//button[@aria-label='Easy Apply filter.']", "Easy Apply Filter");
     public GenericMethods.LocatorsDetails listOfJobsFrame = new LocatorsDetails("cssSelector", ".scaffold-layout__list .jobs-search-results-list", "List of Jobs Frame");
     public GenericMethods.LocatorsDetails continueButton = new LocatorsDetails("xpath", "//div[@class='display-flex']//button//span[text()='Continue']", "Continue button");
