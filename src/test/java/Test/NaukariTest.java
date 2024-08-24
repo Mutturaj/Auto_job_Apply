@@ -29,7 +29,6 @@ public class NaukariTest {
 
     @Test(priority = 1, dataProvider = "login_cred", dataProviderClass = dataRead.class)
     public void verifyLoginAndUpdateProfile(String[] data, JavascriptExecutor js) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         naukaridata.NaukriLogin(driver, data);
         naukaridata.NaukriUpdate(driver);
         naukaridata.JobApplyFromSearch(driver);

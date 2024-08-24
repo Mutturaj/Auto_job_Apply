@@ -6,7 +6,7 @@
         "experience": "3",
         "Cypress": "Yes, I can take an assignment in Cypress",
         "Mobile phone number": "7996864461",
-        "First name": "bindushree",
+        "First name": "Bindushree",
         "Last name": "N",
         "current ctc": "550000",
         "expected ctc": "850000",
@@ -18,12 +18,15 @@
         "start date": "8/22/2024",
         "Current company": "ZETAION SYSTEM PVT LTD",
         "Please share PAN Card Number": "DYUPB4O39P",
-        "pyton experience": "1",
-        "Appium experience": "1",
-        "Java experience": "1",
+        "pyton Automation": "1",
+        "Appium Automation": "1",
+        "Java Automation": "1",
+        "API Automation": "1",
         "Resident State": "Karnataka",
         "Highest Qualification": "BE",
-       "preferred Location": "Bangalore"
+       "preferred Location": "Bangalore",
+        "offered CTC value": "850000",
+        "Date Of Birth": "19/12/1998"
       }
     },
     {
@@ -43,8 +46,16 @@
         "current location": "Bangalore",
         "start date": "8/22/2024",
         "Current company": "Qualitrix Technology",
+        "Please share PAN Card Number": "BNBPA6760L",
+        "pyton Automation": "2",
+        "Appium Automation": "2",
+        "Java Automation": "2",
+        "API Automation": "2",
+        "Resident State": "Karnataka",
         "Highest Qualification": "BE",
-        "preferred Location": "Bangalore"
+        "preferred Location": "Bangalore",
+        "offered CTC value": "1400000",
+        "Date Of Birth": "15/05/1996"
       }
     },
     {
@@ -64,8 +75,16 @@
         "current location": "Bangalore",
         "start date": "8/22/2024",
         "Current company": "Airsme technology pvt ltd",
+        "Please share PAN Card Number": "DYUPB4O39P",
+        "pyton Automation": "1",
+        "Appium Automation": "1",
+        "Java Automation": "1",
+        "API Automation": "1",
+        "Resident State": "Karnataka",
         "Highest Qualification": "BE",
-        "preferred Location": "Bangalore"
+        "preferred Location": "Bangalore",
+        "offered CTC value": "850000",
+        "Date Of Birth": "19/12/1998"
       }
     },
     {
@@ -85,12 +104,16 @@
         "current location": "Bangalore",
         "start date": "8/22/2024",
         "Current company": "TestYantra Solutions PVT.LTD",
-        "Highest Qualification": "BE",
-        "pyton experience": "1",
-        "Appium experience": "1",
-        "Java experience": "1",
+        "Please share PAN Card Number": "STRING",
+        "pyton Automation": "1",
+        "Appium Automation": "1",
+        "Java Automation": "2",
+        "API Automation": "1",
         "Resident State": "Karnataka",
-        "preferred Location": "Bangalore"
+        "Highest Qualification": "BE",
+        "preferred Location": "Bangalore",
+        "offered CTC value": "950000",
+        "Date Of Birth": "19/12/1996"
       }
     },
     {
@@ -110,12 +133,16 @@
         "current location": "Bangalore",
         "start date": "8/22/2024",
         "Current company": "Moolya Software Testing Private Limited",
-        "Located": "Bangalore",
-        "pyton experience": "2",
-        "Appium experience": "2",
-        "Java experience": "2",
+        "Please share PAN Card Number": "STRING",
+        "pyton Automation": "1",
+        "Appium Automation": "1",
+        "Java Automation": "1",
+        "API Automation": "1",
         "Resident State": "Karnataka",
-        "preferred Location": "Bangalore"
+        "Highest Qualification": "BE",
+        "preferred Location": "Bangalore",
+        "offered CTC value": "1550000",
+        "Date Of Birth": "19/12/1988"
 
       }
     }

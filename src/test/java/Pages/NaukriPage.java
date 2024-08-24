@@ -6,8 +6,11 @@ import customEntities.GenericMethods;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileNotFoundException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +33,9 @@ public class NaukriPage extends GenericMethods {
         clickElement(driver, locators.LoginButton);
         Thread.sleep(3000);
         if (!findElements(driver, locators.closeIcon).isEmpty()) {
-            clickElement(driver, locators.closeIcon);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement closeIcon = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'crossIcon') and contains(@class, 'chatBot-ic-cross')]")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeIcon);
         }
     }
 
@@ -124,7 +129,7 @@ public class NaukriPage extends GenericMethods {
         }
         boolean isChatbotActive = true;
         while (isChatbotActive) {
-
+            waitForPageLoad(driver);
             if (isElementPresent(driver, locators.skipThisQues)) {
                 clickElement(driver, locators.skipThisQues);
                 Thread.sleep(2000);
@@ -135,6 +140,7 @@ public class NaukriPage extends GenericMethods {
                 WebElement answerInput = findElement(driver, locators.answerTextFiled);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", answerInput);
                 if (answerInput.isDisplayed() && answerInput.isEnabled()) {
+                    Thread.sleep(1000);
                     List<WebElement> questionElement = findElements(driver, locators.chatBotQuestion);
                     WebElement latestQuestionElement = questionElement.get(questionElement.size() - 1); // Get the last question
                     String latestQuestionText = latestQuestionElement.getText();

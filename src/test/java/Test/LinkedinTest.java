@@ -36,9 +36,10 @@ public class LinkedinTest {
     public void verifyLoginAndSearchJob(String[] data, JavascriptExecutor js) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         linkedinData.loginToLinkedIn(driver, data);
-        driver.get("https://www.linkedin.com/jobs/collections/recommended/");
-//        linkedinData.navigateToJobs(driver);
-//        linkedinData.searchForJobs(driver, data);
+        System.out.println("This is new code changes");
+//        driver.get("https://www.linkedin.com/jobs/collections/recommended/");
+        linkedinData.navigateToJobs(driver);
+        linkedinData.searchForJobs(driver, data);
 //        linkedinData.navigateToNotification(driver);
         boolean jobApplicationSuccessful = false;
         int retryCount = 0;
