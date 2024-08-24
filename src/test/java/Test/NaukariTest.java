@@ -2,17 +2,17 @@ package Test;
 
 import Pages.NaukriPage;
 import customEntities.GenericMethods;
+import customEntities.ScreenshotListener;
 import customEntities.dataRead;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.FileNotFoundException;
 import java.time.Duration;
 
+@Listeners({ScreenshotListener.class})
 public class NaukariTest {
 
     public static WebDriver driver;
@@ -37,5 +37,9 @@ public class NaukariTest {
 
 
     }
+//    @AfterClass
+//    public void tearDown() {
+//        driver.quit();
+//    }
 
 }

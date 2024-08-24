@@ -11,8 +11,8 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails JobIcon = new LocatorsDetails("xpath", "//li-icon[@type='job']//*[name()='svg' and @class='mercado-match']", "Job Icon");
     public GenericMethods.LocatorsDetails SearchIcon = new LocatorsDetails("xpath", "//*[name()='svg' and @class='jobs-search-box__search-icon--custom']", "Search Icon");
     public GenericMethods.LocatorsDetails ShowAllButton = new LocatorsDetails("xpath", "//div[@class='discovery-templates-vertical-list__footer']/a[@href='https://www.linkedin.com/jobs/collections/recommended?discover=recommended&discoveryOrigin=JOBS_HOME_JYMBII']", "Show All Button");
-    public GenericMethods.LocatorsDetails TitleOfJob = new LocatorsDetails("xpath", "//input[@aria-label='Search by title, skill, or company' and @aria-autocomplete='list']", "Title of the Job Input");
-    public GenericMethods.LocatorsDetails LocationOfJob = new LocatorsDetails("xpath", "//input[@aria-label='City, state, or zip code' and @autocomplete='address-level2']", "Location of the Job");
+    public GenericMethods.LocatorsDetails TitleOfJob = new LocatorsDetails("xpath", "//input[contains(@class, 'jobs-search-box__text-input') and contains(@class, 'jobs-search-global-typeahead__input')]", "Title of the Job Input");
+    public GenericMethods.LocatorsDetails LocationOfJob = new LocatorsDetails("xpath", "//input[@role='combobox' and @aria-autocomplete='list' and contains(@class, 'jobs-search-box__text-input--with-clear')]", "Location of the Job");
     public GenericMethods.LocatorsDetails SearchBox = new LocatorsDetails("xpath", "//button[text()='Search']", "Search Box");
     public GenericMethods.LocatorsDetails listOfJobs = new LocatorsDetails("xpath", "//li[contains(@class, 'job-card-container__apply-method') and contains(@class, 'job-card-container__footer-item') and contains(., 'Easy Apply')]", "List of Jobs");
     public GenericMethods.LocatorsDetails EasyApplyFilter = new LocatorsDetails("xpath", "//button[@aria-label='Easy Apply filter.']", "Easy Apply Filter");
@@ -37,5 +37,8 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails cityName = new LocatorsDetails("xpath", "//input[contains(@id, 'city-HOME-CITY')]", "Enter City Name");
     public GenericMethods.LocatorsDetails DoneButton = new LocatorsDetails("xpath", "//span[text()='Done']", "Done button");
     public GenericMethods.LocatorsDetails textAreaFiled = new LocatorsDetails("xpath", "//textarea[contains(@class, 'artdeco-text-input__textarea') and @required]", "Text Area Filed");
+    public GenericMethods.LocatorsDetails viewJobsButton = new LocatorsDetails("xpath", "//span[@class='artdeco-button__text']//span[1]", "View Jobs Button");
+    public GenericMethods.LocatorsDetails NotificationIcon = new LocatorsDetails("xpath", "//a[contains(@href, '/notifications/')]//li-icon[@type='bell-fill']", "Notification Icon");
+    public GenericMethods.LocatorsDetails nextPage1 = new LocatorsDetails("xpath", "//button[@aria-label='View next page']", "Next Button");
 
 }

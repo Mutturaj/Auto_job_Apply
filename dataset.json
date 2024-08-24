@@ -15,8 +15,15 @@
         "LinkedIn Profile": "www.linkedin.com/in/bindushree-n-459988211",
         "Website": "www.linkedin.com/in/bindushree-n-459988211",
         "current location": "Bangalore",
-        "start date": "08/09/2024",
-        "Current company": "ZETAION SYSTEM PVT LTD"
+        "start date": "8/22/2024",
+        "Current company": "ZETAION SYSTEM PVT LTD",
+        "Please share PAN Card Number": "DYUPB4O39P",
+        "pyton experience": "1",
+        "Appium experience": "1",
+        "Java experience": "1",
+        "Resident State": "Karnataka",
+        "Highest Qualification": "BE",
+       "preferred Location": "Bangalore"
       }
     },
     {
@@ -34,8 +41,10 @@
         "LinkedIn Profile": "www.linkedin.com/in/mutturaj-annigeri",
         "Website": "www.linkedin.com/in/mutturaj-annigeri",
         "current location": "Bangalore",
-        "start date": "08/09/2024",
-        "Current company": "Qualitrix Technology"
+        "start date": "8/22/2024",
+        "Current company": "Qualitrix Technology",
+        "Highest Qualification": "BE",
+        "preferred Location": "Bangalore"
       }
     },
     {
@@ -53,8 +62,61 @@
         "LinkedIn Profile": "www.linkedin.com/in/yogesh-c-k-669a04272",
         "Website": "www.linkedin.com/in/yogesh-c-k-669a04272",
         "current location": "Bangalore",
-        "start date": "08/09/2024",
-        "Current company": "Airsme technology pvt ltd"
+        "start date": "8/22/2024",
+        "Current company": "Airsme technology pvt ltd",
+        "Highest Qualification": "BE",
+        "preferred Location": "Bangalore"
+      }
+    },
+    {
+      "name": "Pavan",
+      "data": {
+        "experience": "4",
+        "Cypress": "Yes, I can take an assignment in Cypress",
+        "Mobile phone number": "9035123096",
+        "First name": "Pavan",
+        "Last name": "guggali",
+        "current ctc": "418000",
+        "expected ctc": "950000",
+        "notice period": "15",
+        "city": "Bangalore",
+        "LinkedIn Profile": "www.linkedin.com/in/pavankumar-guggali-4a007a162",
+        "Website": "www.linkedin.com/in/pavankumar-guggali-4a007a162",
+        "current location": "Bangalore",
+        "start date": "8/22/2024",
+        "Current company": "TestYantra Solutions PVT.LTD",
+        "Highest Qualification": "BE",
+        "pyton experience": "1",
+        "Appium experience": "1",
+        "Java experience": "1",
+        "Resident State": "Karnataka",
+        "preferred Location": "Bangalore"
+      }
+    },
+    {
+      "name": "Jayanth",
+      "data": {
+        "experience": "8",
+        "Cypress": "Yes, I can take an assignment in Cypress",
+        "Mobile phone number": "8553357225",
+        "First name": "Jayanth",
+        "Last name": "G",
+        "current ctc": "120000",
+        "expected ctc": "150000",
+        "notice period": "15",
+        "city": "Bangalore",
+        "LinkedIn Profile": "www.linkedin.com/in/jayanth-g-1b465588",
+        "Website": "www.linkedin.com/in/jayanth-g-1b465588",
+        "current location": "Bangalore",
+        "start date": "8/22/2024",
+        "Current company": "Moolya Software Testing Private Limited",
+        "Located": "Bangalore",
+        "pyton experience": "2",
+        "Appium experience": "2",
+        "Java experience": "2",
+        "Resident State": "Karnataka",
+        "preferred Location": "Bangalore"
+
       }
     }
   ]

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.*;
@@ -40,6 +41,26 @@ public class LinkedinPage extends GenericMethods {
         clickElement(driver, locators.ShowAllButton);
     }
 
+    public void navigateToNotification(WebDriver driver) throws InterruptedException {
+        waitForPageLoad(driver);
+        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.NotificationIcon);
+        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.NotificationIcon);
+        clickElement(driver, locators.NotificationIcon);
+        waitForPageLoad(driver);
+        Thread.sleep(1000);
+        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.viewJobsButton);
+        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.viewJobsButton);
+        List<WebElement> viewJobs = findElements(driver, locators.viewJobsButton);
+        for (int i = 0; i < viewJobs.size(); i++) {
+            if (i == 0) {
+                viewJobs.get(i).click();
+                waitForPageLoad(driver);
+                Thread.sleep(3000);
+                break;
+            }
+        }
+    }
+
     public void searchForJobs(WebDriver driver, String[] data) throws InterruptedException {
         waitForPageLoad(driver);
         Actions actions = new Actions(driver);
@@ -55,8 +76,8 @@ public class LinkedinPage extends GenericMethods {
         sendKeysToElement(driver, locators.LocationOfJob, data[3]);
         waitForPageLoad(driver);
         WebElement locationElement = findElement(driver, locators.LocationOfJob);
+        Thread.sleep(1000);
         actions.sendKeys(locationElement, Keys.ENTER).perform();
-        //clickElement(driver, locators.SearchBox);
         waitForPageLoad(driver);
         clickElement(driver, locators.EasyApplyFilter);
         Thread.sleep(4000);
@@ -85,7 +106,7 @@ public class LinkedinPage extends GenericMethods {
                             driver.navigate().back();
                             Thread.sleep(2000);
                             executeJavaScript(driver, "arguments[0].textContent = 'Applied';", easyApply);
-                            Thread.sleep(3000);
+                            Thread.sleep(2000);
                             jobs = findElements(driver, locators.listOfJobs);
                             i--;
                         }
@@ -125,6 +146,25 @@ public class LinkedinPage extends GenericMethods {
 
     private boolean navigatePagination(WebDriver driver, int currentPage) {
         try {
+            try {
+                WebElement nextPage1Button = driver.findElement(By.xpath("//button[@aria-label='View next page']"));
+                if (nextPage1Button != null) {
+                    System.out.println("Navigating to the next page using 'Next Page' button.");
+                    executeJavaScript(driver, "arguments[0].scrollIntoView(true);", nextPage1Button);
+                    waitForElementToBeClickable(driver, nextPage1Button);
+
+                    try {
+                        nextPage1Button.click();
+                    } catch (ElementNotInteractableException e) {
+                        System.out.println("ElementNotInteractableException occurred, attempting JavaScript click on 'Next Page' button.");
+                        executeJavaScript(driver, "arguments[0].click();", nextPage1Button);
+                    }
+                    Thread.sleep(4000);
+                    return true;
+                }
+            } catch (NoSuchElementException e) {
+                System.out.println("'Next Page' button not found, checking for page number button.");
+            }
             while (true) {
                 String nextPageXPath = "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[@aria-label='Page " + currentPage + "']";
                 WebElement nextPageButton = driver.findElement(By.xpath(nextPageXPath));
@@ -142,7 +182,6 @@ public class LinkedinPage extends GenericMethods {
                     }
                     Thread.sleep(4000);
                     currentPage++;
-
                     return true;
                 } else {
                     System.out.println("No more pages to navigate.");
