@@ -29,15 +29,16 @@ public class NaukariTest {
     @Test(priority = 1, dataProvider = "login_cred", dataProviderClass = dataRead.class)
     public void verifyLoginAndUpdateProfile(String[] data, JavascriptExecutor js) throws InterruptedException {
         naukaridata.NaukriLogin(driver, data);
-       // naukaridata.NaukriUpdate(driver);
-        //naukaridata.JobApplyFromSearch(driver);
+        System.out.println("This is new code changes in naukri");
+        naukaridata.NaukriUpdate(driver);
+        naukaridata.JobApplyFromSearch(driver);
         naukaridata.JobApplyFrom_Recommended(driver);
 
 
     }
-//    @AfterClass
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
 
 }
