@@ -75,20 +75,26 @@ public class NaukriPage extends GenericMethods {
     private void JobsApply(WebDriver driver) throws InterruptedException {
         Thread.sleep(4000);
         List<WebElement> jobList = new ArrayList<>();
+
+        // Collect job elements from both lists
         if (isElementPresent(driver, locators.listOfJobs)) {
             jobList.addAll(findElements(driver, locators.listOfJobs));
         }
         if (isElementPresent(driver, locators.listOfJobsFromSearch)) {
             jobList.addAll(findElements(driver, locators.listOfJobsFromSearch));
         }
+
         String originalWindow = driver.getWindowHandle();
+
         for (WebElement job : jobList) {
             job.click();
             Thread.sleep(3000);
 
+            // Capture all window handles
             Set<String> windowHandles = driver.getWindowHandles();
             String newWindow = null;
 
+            // Find the new window handle
             for (String windowHandle : windowHandles) {
                 if (!windowHandle.equals(originalWindow)) {
                     newWindow = windowHandle;
@@ -99,24 +105,33 @@ public class NaukriPage extends GenericMethods {
             if (newWindow != null) {
                 driver.switchTo().window(newWindow);
 
+                // Check if the Apply button is present and interact with it
                 if (!findElements(driver, locators.ApplyButton).isEmpty()) {
                     clickElement(driver, locators.ApplyButton);
                     waitForPageLoad(driver);
                     Thread.sleep(2000);
 
                     handleChatbot(driver);
+
+                    // Check if the chatbot window is still open
                     if (driver.getWindowHandles().contains(newWindow)) {
+                        System.out.println("Closing the chatbot window.");
                         driver.close();
                     }
                     driver.switchTo().window(originalWindow);
                 } else if (!findElements(driver, locators.ApplyCompanySite).isEmpty()) {
+                    // Close the new window if ApplyCompanySite is present
+                    System.out.println("Closing the company site window.");
                     driver.close();
                     driver.switchTo().window(originalWindow);
-
                 } else {
+                    // Handle cases where neither ApplyButton nor ApplyCompanySite are found
+                    System.out.println("Closing the window as no relevant buttons were found.");
                     driver.close();
                     driver.switchTo().window(originalWindow);
                 }
+            } else {
+                System.out.println("No new window found.");
             }
         }
     }
@@ -127,15 +142,24 @@ public class NaukriPage extends GenericMethods {
             System.out.println("Chatbot is not present");
             return;
         }
+
         boolean isChatbotActive = true;
         while (isChatbotActive) {
             waitForPageLoad(driver);
+
+            boolean skipButtonClicked = false; // Flag to track if skip button is clicked
+
+            // Check for and handle skip button
             if (isElementPresent(driver, locators.skipThisQues)) {
                 clickElement(driver, locators.skipThisQues);
+                skipButtonClicked = true; // Set flag to true
                 Thread.sleep(2000);
-                continue;
+                continue; // Move to the next iteration of the while loop
             }
+
             boolean answerProvided = false;
+
+            // Handle answer text field
             if (findElement(driver, locators.answerTextFiled) != null) {
                 WebElement answerInput = findElement(driver, locators.answerTextFiled);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", answerInput);
@@ -154,6 +178,8 @@ public class NaukriPage extends GenericMethods {
             } else {
                 System.out.println("Answer input field not found.");
             }
+
+            // Handle radio buttons
             if (!findElements(driver, locators.RadioButtons).isEmpty()) {
                 List<WebElement> radioButtons = findElements(driver, locators.RadioButtons);
                 WebElement firstRadioButton = radioButtons.get(0);
@@ -169,6 +195,8 @@ public class NaukriPage extends GenericMethods {
                     System.out.println("Error clicking radio button: " + e.getMessage());
                 }
             }
+
+            // Handle checkboxes
             List<WebElement> checkboxes = findElements(driver, locators.checkbox);
             for (WebElement checkbox : checkboxes) {
                 if (checkbox.isDisplayed() && checkbox.isEnabled()) {
@@ -183,12 +211,15 @@ public class NaukriPage extends GenericMethods {
                     System.out.println("Checkbox is not interactable.");
                 }
             }
+
+            // Handle yes button
             if (!findElements(driver, locators.yesButton).isEmpty()) {
                 clickElement(driver, locators.yesButton);
             } else {
                 System.out.println("Yes button is not present.");
             }
 
+            // Handle search field
             if (!findElements(driver, locators.SearchFiled).isEmpty()) {
                 List<WebElement> questionElement1 = findElements(driver, locators.chatBotQuestion);
                 WebElement latestQuestionElement1 = questionElement1.get(questionElement1.size() - 1); // Get the last question
@@ -201,14 +232,20 @@ public class NaukriPage extends GenericMethods {
                 actions.sendKeys(search, Keys.ENTER).perform();
             }
 
-            if (answerProvided && findElement(driver, locators.saveButtonContainer) != null) {
+            // Handle save button
+            if (answerProvided && !skipButtonClicked && findElement(driver, locators.saveButtonContainer) != null) {
                 WebElement saveButtonContainer = findElement(driver, locators.saveButtonContainer);
                 WebElement saveButton = saveButtonContainer.findElement(By.className("sendMsg"));
                 saveButton.click();
                 waitForPageLoad(driver);
             } else {
-                System.out.println("Save button is not enabled or visible.");
+                if (skipButtonClicked) {
+                    System.out.println("Skip button was clicked, not processing save button.");
+                } else {
+                    System.out.println("Save button is not enabled or visible.");
+                }
             }
+
             Thread.sleep(2000);
             if (!isElementPresent(driver, locators.chatBotPage)) {
                 isChatbotActive = false;
@@ -219,4 +256,31 @@ public class NaukriPage extends GenericMethods {
         System.out.println("Chatbot handling completed");
     }
 
+    public void handleDOB(WebDriver driver) throws InterruptedException {
+        Thread.sleep(1000);
+        List<WebElement> dobFields = findElements(driver, locators.DOBfield);
+        for (WebElement dobField : dobFields) {
+            String placeholder = dobField.getAttribute("placeholder");
+            String ariaLabel = dobField.getAttribute("aria-label");
+            String fieldType = (placeholder != null && !placeholder.isEmpty()) ? placeholder :
+                    (ariaLabel != null && !ariaLabel.isEmpty()) ? ariaLabel : "";
+
+            String answer = "";
+            if (fieldType.contains("Day") || fieldType.equalsIgnoreCase("DD")) {
+                answer = questionAnswerHandler.getAnswer("Day");
+            } else if (fieldType.contains("Month") || fieldType.equalsIgnoreCase("MM")) {
+                answer = questionAnswerHandler.getAnswer("Month");
+            } else if (fieldType.contains("Year") || fieldType.equalsIgnoreCase("YYYY")) {
+                answer = questionAnswerHandler.getAnswer("Year");
+            }
+
+            if (answer != null && !answer.isEmpty()) {
+                dobField.sendKeys(answer);
+            } else {
+                System.out.println("Unrecognized DOB field type, using generic input: " + fieldType);
+                dobField.sendKeys("01");
+            }
+        }
+    }
 }
+

@@ -35,7 +35,7 @@
       "data": {
         "EmailID": "pavanguggali5@gmail.com",
         "Password": "Pavan@1995",
-        "JobTitle": "(\"Software Test Engineer\" OR \"Software Tester\" OR \"QA Engineer\" OR \"Quality Assurance\" OR \"Test Automation Engineer\") AND (\"Manual Testing\" OR \"Automation Testing\" OR \"QA\" OR \"Quality Assurance\")\n",
+        "JobTitle": "\"Software Test Engineer\" OR \"Software Tester\" OR \"QA Engineer\" AND (\"Manual Testing\" OR \"Automation Testing\" OR \"QA\")\n",
         "JobLocation": "Karnataka, India",
         "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process"
       }

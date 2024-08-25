@@ -15,7 +15,7 @@
         "LinkedIn Profile": "www.linkedin.com/in/bindushree-n-459988211",
         "Website": "www.linkedin.com/in/bindushree-n-459988211",
         "current location": "Bangalore",
-        "start date": "8/22/2024",
+        "start availability date": "8/28/2024",
         "Current company": "ZETAION SYSTEM PVT LTD",
         "Please share PAN Card Number": "DYUPB4O39P",
         "pyton Automation": "1",
@@ -26,7 +26,10 @@
         "Highest Qualification": "BE",
        "preferred Location": "Bangalore",
         "offered CTC value": "850000",
-        "Date Of Birth": "19/12/1998"
+        "Date Of Birth": "19/12/1998",
+        "Day": "19",
+        "Month": "12"
+
       }
     },
     {
@@ -44,7 +47,7 @@
         "LinkedIn Profile": "www.linkedin.com/in/mutturaj-annigeri",
         "Website": "www.linkedin.com/in/mutturaj-annigeri",
         "current location": "Bangalore",
-        "start date": "8/22/2024",
+        "start availability date": "8/28/2024",
         "Current company": "Qualitrix Technology",
         "Please share PAN Card Number": "BNBPA6760L",
         "pyton Automation": "2",
@@ -55,7 +58,10 @@
         "Highest Qualification": "BE",
         "preferred Location": "Bangalore",
         "offered CTC value": "1400000",
-        "Date Of Birth": "15/05/1996"
+        "Date Of Birth": "15/05/1996",
+        "Day": "15",
+        "Month": "05",
+        "Year": "1996"
       }
     },
     {
@@ -73,7 +79,7 @@
         "LinkedIn Profile": "www.linkedin.com/in/yogesh-c-k-669a04272",
         "Website": "www.linkedin.com/in/yogesh-c-k-669a04272",
         "current location": "Bangalore",
-        "start date": "8/22/2024",
+        "start availability date": "8/28/2024",
         "Current company": "Airsme technology pvt ltd",
         "Please share PAN Card Number": "DYUPB4O39P",
         "pyton Automation": "1",
@@ -84,7 +90,10 @@
         "Highest Qualification": "BE",
         "preferred Location": "Bangalore",
         "offered CTC value": "850000",
-        "Date Of Birth": "19/12/1998"
+        "Date Of Birth": "19/12/1998",
+        "Day": "19",
+        "Month": "12",
+        "Year": "1998"
       }
     },
     {
@@ -102,7 +111,7 @@
         "LinkedIn Profile": "www.linkedin.com/in/pavankumar-guggali-4a007a162",
         "Website": "www.linkedin.com/in/pavankumar-guggali-4a007a162",
         "current location": "Bangalore",
-        "start date": "8/22/2024",
+        "start date": "8/28/2024",
         "Current company": "TestYantra Solutions PVT.LTD",
         "Please share PAN Card Number": "STRING",
         "pyton Automation": "1",
@@ -113,7 +122,9 @@
         "Highest Qualification": "BE",
         "preferred Location": "Bangalore",
         "offered CTC value": "950000",
-        "Date Of Birth": "19/12/1996"
+        "Date Of Birth": "19/12/1996",
+        "Day": "19",
+        "Month": "12"
       }
     },
     {
@@ -131,7 +142,7 @@
         "LinkedIn Profile": "www.linkedin.com/in/jayanth-g-1b465588",
         "Website": "www.linkedin.com/in/jayanth-g-1b465588",
         "current location": "Bangalore",
-        "start date": "8/22/2024",
+        "start availability date": "8/22/2024",
         "Current company": "Moolya Software Testing Private Limited",
         "Please share PAN Card Number": "STRING",
         "pyton Automation": "1",
@@ -142,7 +153,10 @@
         "Highest Qualification": "BE",
         "preferred Location": "Bangalore",
         "offered CTC value": "1550000",
-        "Date Of Birth": "19/12/1988"
+        "Date Of Birth": "19/12/1988",
+        "Day": "19",
+        "Month": "12"
+
 
       }
     }

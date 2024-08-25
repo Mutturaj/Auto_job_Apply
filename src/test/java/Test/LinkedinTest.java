@@ -37,9 +37,11 @@ public class LinkedinTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         linkedinData.loginToLinkedIn(driver, data);
         System.out.println("This is new code changes");
+        driver.get("https://www.linkedin.com/jobs/search/?currentJobId=3959737275&f_AL=true&keywords=%22Software%20Test%20Engineer%22%20OR%20%22Software%20Tester%22%20OR%20%22QA%20Engineer%22%20AND%20(%22Manual%20Testing%22%20OR%20%22Automation%20Testing%22%20OR%20%22QA%22)&origin=JOB_SEARCH_PAGE_JOB_FILTER&refresh=true&start=100");
+
 //        driver.get("https://www.linkedin.com/jobs/collections/recommended/");
-        linkedinData.navigateToJobs(driver);
-        linkedinData.searchForJobs(driver, data);
+//        linkedinData.navigateToJobs(driver);
+//        linkedinData.searchForJobs(driver, data);
 //        linkedinData.navigateToNotification(driver);
         boolean jobApplicationSuccessful = false;
         int retryCount = 0;

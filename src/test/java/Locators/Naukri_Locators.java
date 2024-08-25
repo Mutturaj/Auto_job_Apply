@@ -31,5 +31,6 @@ public class Naukri_Locators {
     public GenericMethods.LocatorsDetails checkbox = new GenericMethods.LocatorsDetails("xpath", "//div[@class='multicheckboxes-container']//label[1]", "Check box");
     public GenericMethods.LocatorsDetails yesButton = new GenericMethods.LocatorsDetails("xpath", "//div[@class='chatbot_Chip chipInRow chipItem']//span", "Yes button");
     public GenericMethods.LocatorsDetails SearchFiled = new GenericMethods.LocatorsDetails("xpath", "//div[@class='ssc__input-container']/input", "Search Textfield");
+    public GenericMethods.LocatorsDetails DOBfield = new GenericMethods.LocatorsDetails("xpath", "//div[@class='dob__input-container']//input[contains(@id, 'dobInput')]", "DOB Filed");
 
 }
