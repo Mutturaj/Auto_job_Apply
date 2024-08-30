@@ -237,17 +237,25 @@ public class LinkedinPage extends GenericMethods {
             break;
         }
         waitForPageLoad(driver);
+
         if (applicationSubmitted) {
             Thread.sleep(3000);
+            if (isElementPresent(driver, locators.closeIcon)) {
+                waitForElement(driver, locators.closeIcon);
+                executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.closeIcon);
+                clickElement(driver, locators.closeIcon);
+                System.out.println("Clicked Close icon, exiting further actions.");
+                return;
+            }
+
             if (isElementPresent(driver, locators.DoneButton)) {
                 waitForElement(driver, locators.DoneButton);
                 clickElement(driver, locators.DoneButton);
                 System.out.println("Clicked Done button");
             } else {
                 waitForElement(driver, locators.DoneButton);
-                System.out.println("Done button not found Truing to find and clicking once again");
+                System.out.println("Done button not found. Trying to find and click it once again.");
                 clickElement(driver, locators.DoneButton);
-
             }
         }
     }

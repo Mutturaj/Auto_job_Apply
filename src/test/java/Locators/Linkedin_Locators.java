@@ -19,7 +19,6 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails listOfJobsFrame = new LocatorsDetails("cssSelector", ".scaffold-layout__list .jobs-search-results-list", "List of Jobs Frame");
     public GenericMethods.LocatorsDetails continueButton = new LocatorsDetails("xpath", "//div[@class='display-flex']//button//span[text()='Continue']", "Continue button");
     public GenericMethods.LocatorsDetails easyApplyButton = new LocatorsDetails("xpath", "//button[@class='jobs-apply-button artdeco-button artdeco-button--3 artdeco-button--primary ember-view']//span[text()='Easy Apply' and @class='artdeco-button__text']", "Easy Apply button");
-    public GenericMethods.LocatorsDetails closeIcon = new LocatorsDetails("xpath", "//button[@aria-label='Dismiss']//*[name()='svg' and @class='artdeco-button__icon ']", "Close icon");
     public GenericMethods.LocatorsDetails discard = new LocatorsDetails("xpath", "//button[@data-control-name='discard_application_confirm_btn']//span[text()='Discard']", "Discard Button");
     public GenericMethods.LocatorsDetails listOfPages = new LocatorsDetails("xpath", "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[contains(@aria-label, 'Page')]", "List of Pages");
     public GenericMethods.LocatorsDetails dot = new LocatorsDetails("xpath", "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[contains(@aria-label, 'Page')]", "Dots in the list of the pages");
@@ -40,5 +39,6 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails viewJobsButton = new LocatorsDetails("xpath", "//span[@class='artdeco-button__text']//span[1]", "View Jobs Button");
     public GenericMethods.LocatorsDetails NotificationIcon = new LocatorsDetails("xpath", "//a[contains(@href, '/notifications/')]//li-icon[@type='bell-fill']", "Notification Icon");
     public GenericMethods.LocatorsDetails nextPage1 = new LocatorsDetails("xpath", "//button[@aria-label='View next page']", "Next Button");
+    public GenericMethods.LocatorsDetails closeIcon = new LocatorsDetails("xpath", "//div[@aria-labelledby=\"post-apply-modal\"]//*[name()='svg'and @data-test-icon=\"close-medium\"]", "Close Icon");
 
 }

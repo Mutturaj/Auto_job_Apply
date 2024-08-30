@@ -4,7 +4,6 @@ import AppConfg.DataConfg;
 import Locators.Naukri_Locators;
 import customEntities.GenericMethods;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,11 +31,12 @@ public class NaukriPage extends GenericMethods {
         sendKeysToElement(driver, locators.Password, data[1]);
         clickElement(driver, locators.LoginButton);
         Thread.sleep(3000);
-        if (!findElements(driver, locators.closeIcon).isEmpty()) {
+        if (isElementPresent(driver, locators.chatBotPage)) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement closeIcon = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'crossIcon') and contains(@class, 'chatBot-ic-cross')]")));
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeIcon);
         }
+
     }
 
     public void NaukriUpdate(WebDriver driver) throws InterruptedException {
@@ -76,7 +76,6 @@ public class NaukriPage extends GenericMethods {
         Thread.sleep(4000);
         List<WebElement> jobList = new ArrayList<>();
 
-        // Collect job elements from both lists
         if (isElementPresent(driver, locators.listOfJobs)) {
             jobList.addAll(findElements(driver, locators.listOfJobs));
         }
@@ -90,11 +89,9 @@ public class NaukriPage extends GenericMethods {
             job.click();
             Thread.sleep(3000);
 
-            // Capture all window handles
             Set<String> windowHandles = driver.getWindowHandles();
             String newWindow = null;
 
-            // Find the new window handle
             for (String windowHandle : windowHandles) {
                 if (!windowHandle.equals(originalWindow)) {
                     newWindow = windowHandle;
@@ -104,8 +101,6 @@ public class NaukriPage extends GenericMethods {
 
             if (newWindow != null) {
                 driver.switchTo().window(newWindow);
-
-                // Check if the Apply button is present and interact with it
                 if (!findElements(driver, locators.ApplyButton).isEmpty()) {
                     clickElement(driver, locators.ApplyButton);
                     waitForPageLoad(driver);
@@ -113,19 +108,16 @@ public class NaukriPage extends GenericMethods {
 
                     handleChatbot(driver);
 
-                    // Check if the chatbot window is still open
                     if (driver.getWindowHandles().contains(newWindow)) {
                         System.out.println("Closing the chatbot window.");
                         driver.close();
                     }
                     driver.switchTo().window(originalWindow);
                 } else if (!findElements(driver, locators.ApplyCompanySite).isEmpty()) {
-                    // Close the new window if ApplyCompanySite is present
                     System.out.println("Closing the company site window.");
                     driver.close();
                     driver.switchTo().window(originalWindow);
                 } else {
-                    // Handle cases where neither ApplyButton nor ApplyCompanySite are found
                     System.out.println("Closing the window as no relevant buttons were found.");
                     driver.close();
                     driver.switchTo().window(originalWindow);
@@ -147,23 +139,24 @@ public class NaukriPage extends GenericMethods {
         while (isChatbotActive) {
             waitForPageLoad(driver);
 
-            boolean skipButtonClicked = false; // Flag to track if skip button is clicked
-
-            // Check for and handle skip button
-            if (isElementPresent(driver, locators.skipThisQues)) {
-                clickElement(driver, locators.skipThisQues);
-                skipButtonClicked = true; // Set flag to true
-                Thread.sleep(2000);
-                continue; // Move to the next iteration of the while loop
-            }
-
+            boolean skipButtonClicked = false;
             boolean answerProvided = false;
 
-            // Handle answer text field
-            if (findElement(driver, locators.answerTextFiled) != null) {
+            if (isElementPresent(driver, locators.skipThisQues)) {
+                clickElement(driver, locators.skipThisQues);
+                skipButtonClicked = true;
+                Thread.sleep(2000);
+                continue;
+            }
+
+            if (!findElements(driver,locators.DOBfield).isEmpty()) {
+                handleDOB(driver);
+                answerProvided = true;
+            }
+
+            if (!answerProvided && isElementPresent(driver, locators.answerTextFiled)) {
                 WebElement answerInput = findElement(driver, locators.answerTextFiled);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", answerInput);
-                if (answerInput.isDisplayed() && answerInput.isEnabled()) {
+                if (answerInput != null && answerInput.isDisplayed() && answerInput.isEnabled()) {
                     Thread.sleep(1000);
                     List<WebElement> questionElement = findElements(driver, locators.chatBotQuestion);
                     WebElement latestQuestionElement = questionElement.get(questionElement.size() - 1); // Get the last question
@@ -173,14 +166,11 @@ public class NaukriPage extends GenericMethods {
                     Thread.sleep(2000);
                     answerProvided = true;
                 } else {
-                    System.out.println("Answer input field is not interactable.");
+                    System.out.println("Answer input field is not interactable or not found.");
                 }
-            } else {
-                System.out.println("Answer input field not found.");
             }
 
-            // Handle radio buttons
-            if (!findElements(driver, locators.RadioButtons).isEmpty()) {
+            if (!answerProvided && !findElements(driver, locators.RadioButtons).isEmpty()) {
                 List<WebElement> radioButtons = findElements(driver, locators.RadioButtons);
                 WebElement firstRadioButton = radioButtons.get(0);
                 try {
@@ -196,56 +186,55 @@ public class NaukriPage extends GenericMethods {
                 }
             }
 
-            // Handle checkboxes
-            List<WebElement> checkboxes = findElements(driver, locators.checkbox);
-            for (WebElement checkbox : checkboxes) {
-                if (checkbox.isDisplayed() && checkbox.isEnabled()) {
-                    if (!checkbox.isSelected()) {
-                        checkbox.click();
-                        Thread.sleep(1000);
+            if (!answerProvided) {
+                List<WebElement> checkboxes = findElements(driver, locators.checkbox);
+                for (WebElement checkbox : checkboxes) {
+                    if (checkbox.isDisplayed() && checkbox.isEnabled()) {
+                        if (!checkbox.isSelected()) {
+                            checkbox.click();
+                            Thread.sleep(1000);
+                        } else {
+                            System.out.println("Checkbox already selected.");
+                        }
+                        answerProvided = true;
                     } else {
-                        System.out.println("Checkbox already selected.");
+                        System.out.println("Checkbox is not interactable.");
                     }
-                    answerProvided = true;
-                } else {
-                    System.out.println("Checkbox is not interactable.");
                 }
             }
-
-            // Handle yes button
-            if (!findElements(driver, locators.yesButton).isEmpty()) {
+            if (!answerProvided && !findElements(driver, locators.yesButton).isEmpty()) {
                 clickElement(driver, locators.yesButton);
-            } else {
-                System.out.println("Yes button is not present.");
+                answerProvided = true;
             }
 
-            // Handle search field
-            if (!findElements(driver, locators.SearchFiled).isEmpty()) {
+            if (!answerProvided && !findElements(driver, locators.SearchFiled).isEmpty()) {
                 List<WebElement> questionElement1 = findElements(driver, locators.chatBotQuestion);
                 WebElement latestQuestionElement1 = questionElement1.get(questionElement1.size() - 1); // Get the last question
                 String latestQuestionText1 = latestQuestionElement1.getText();
                 String answers = questionAnswerHandler.getAnswer(latestQuestionText1);
                 sendKeysToElement(driver, locators.SearchFiled, answers);
-                Thread.sleep(1000);
-                WebElement search = findElement(driver, locators.SearchFiled);
-                Actions actions = new Actions(driver);
-                actions.sendKeys(search, Keys.ENTER).perform();
+                Thread.sleep(2000);
+                clickElement(driver, locators.suggestionList);
+                answerProvided = true;
             }
 
-            // Handle save button
             if (answerProvided && !skipButtonClicked && findElement(driver, locators.saveButtonContainer) != null) {
                 WebElement saveButtonContainer = findElement(driver, locators.saveButtonContainer);
                 WebElement saveButton = saveButtonContainer.findElement(By.className("sendMsg"));
-                saveButton.click();
-                waitForPageLoad(driver);
+
+                if (saveButton.isEnabled()) { // Check if the save button is enabled
+                    saveButton.click();
+                    waitForPageLoad(driver);
+                } else {
+                    System.out.println("Save button is present but not enabled.");
+                }
             } else {
                 if (skipButtonClicked) {
                     System.out.println("Skip button was clicked, not processing save button.");
                 } else {
-                    System.out.println("Save button is not enabled or visible.");
+                    System.out.println("Save button is not enabled, visible, or answer not provided.");
                 }
             }
-
             Thread.sleep(2000);
             if (!isElementPresent(driver, locators.chatBotPage)) {
                 isChatbotActive = false;
@@ -257,7 +246,6 @@ public class NaukriPage extends GenericMethods {
     }
 
     public void handleDOB(WebDriver driver) throws InterruptedException {
-        Thread.sleep(1000);
         List<WebElement> dobFields = findElements(driver, locators.DOBfield);
         for (WebElement dobField : dobFields) {
             String placeholder = dobField.getAttribute("placeholder");
@@ -267,11 +255,11 @@ public class NaukriPage extends GenericMethods {
 
             String answer = "";
             if (fieldType.contains("Day") || fieldType.equalsIgnoreCase("DD")) {
-                answer = questionAnswerHandler.getAnswer("Day");
+                answer = questionAnswerHandler.getAnswer("DD");
             } else if (fieldType.contains("Month") || fieldType.equalsIgnoreCase("MM")) {
-                answer = questionAnswerHandler.getAnswer("Month");
+                answer = questionAnswerHandler.getAnswer("MM");
             } else if (fieldType.contains("Year") || fieldType.equalsIgnoreCase("YYYY")) {
-                answer = questionAnswerHandler.getAnswer("Year");
+                answer = questionAnswerHandler.getAnswer("YYYY");
             }
 
             if (answer != null && !answer.isEmpty()) {
@@ -282,5 +270,6 @@ public class NaukriPage extends GenericMethods {
             }
         }
     }
+
 }
 

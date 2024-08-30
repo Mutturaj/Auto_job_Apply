@@ -29,8 +29,8 @@ public class Naukri_Locators {
     public GenericMethods.LocatorsDetails RadioButtons = new GenericMethods.LocatorsDetails("xpath", "//div[@class='ssrc__radio-btn-container']/label", "Radio buttons");
     public GenericMethods.LocatorsDetails saveButtonContainer = new GenericMethods.LocatorsDetails("xpath", "//div[starts-with(@id, 'sendMsg__') and contains(@class, 'send') and not(contains(@class, 'disabled'))]", "Save Button");
     public GenericMethods.LocatorsDetails checkbox = new GenericMethods.LocatorsDetails("xpath", "//div[@class='multicheckboxes-container']//label[1]", "Check box");
-    public GenericMethods.LocatorsDetails yesButton = new GenericMethods.LocatorsDetails("xpath", "//div[@class='chatbot_Chip chipInRow chipItem']//span", "Yes button");
+    public GenericMethods.LocatorsDetails yesButton = new GenericMethods.LocatorsDetails("xpath", "//div[@class='chatbot_Chip chipInRow chipItem']//span[text()='Yes']", "Yes button");
     public GenericMethods.LocatorsDetails SearchFiled = new GenericMethods.LocatorsDetails("xpath", "//div[@class='ssc__input-container']/input", "Search Textfield");
     public GenericMethods.LocatorsDetails DOBfield = new GenericMethods.LocatorsDetails("xpath", "//div[@class='dob__input-container']//input[contains(@id, 'dobInput')]", "DOB Filed");
-
+    public GenericMethods.LocatorsDetails suggestionList = new GenericMethods.LocatorsDetails("xpath", "//div[@id='ssc__option_0']//div[@class='ssc__heading']", "Suggestion list");
 }
