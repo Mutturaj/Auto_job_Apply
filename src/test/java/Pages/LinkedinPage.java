@@ -1,5 +1,6 @@
 package Pages;
 
+import AppConfg.DataConfg;
 import Locators.Linkedin_Locators;
 import customEntities.GenericMethods;
 import org.openqa.selenium.*;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.*;
@@ -17,9 +19,8 @@ import java.util.*;
 
 public class LinkedinPage extends GenericMethods {
     Linkedin_Locators locators = new Linkedin_Locators();
-    String datasetName = "Bindu";
+    String datasetName = DataConfg.getInstance().getDatasetName();
     QuestionAnswerHandler questionAnswerHandler = new QuestionAnswerHandler(datasetName);
-
 
     public LinkedinPage(WebDriver driver) throws FileNotFoundException {
         PageFactory.initElements(driver, this);
@@ -38,26 +39,50 @@ public class LinkedinPage extends GenericMethods {
         clickElement(driver, locators.JobIcon);
         waitForElement(driver, locators.ShowAllButton);
         clickElement(driver, locators.ShowAllButton);
-        //clickElement(driver, locators.SearchIcon);
+    }
 
+    public void navigateToNotification(WebDriver driver) throws InterruptedException {
+        waitForPageLoad(driver);
+        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.NotificationIcon);
+        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.NotificationIcon);
+        clickElement(driver, locators.NotificationIcon);
+        waitForPageLoad(driver);
+        Thread.sleep(1000);
+        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.viewJobsButton);
+        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.viewJobsButton);
+        List<WebElement> viewJobs = findElements(driver, locators.viewJobsButton);
+        for (int i = 0; i < viewJobs.size(); i++) {
+            if (i == 0) {
+                viewJobs.get(i).click();
+                waitForPageLoad(driver);
+                Thread.sleep(3000);
+                break;
+            }
+        }
     }
 
     public void searchForJobs(WebDriver driver, String[] data) throws InterruptedException {
         waitForPageLoad(driver);
+        Actions actions = new Actions(driver);
         executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.TitleOfJob);
         executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.TitleOfJob);
         sendKeysToElement(driver, locators.TitleOfJob, data[2]);
+        Thread.sleep(2000);
+        WebElement titleElement = findElement(driver, locators.TitleOfJob);
+        actions.sendKeys(titleElement, Keys.ENTER).perform();
         waitForPageLoad(driver);
-        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.LocationOfJob);
-        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.LocationOfJob);
-        sendKeysToElement(driver, locators.LocationOfJob, data[3]);
-        waitForPageLoad(driver);
-        WebElement locationElement = findElement(driver, locators.LocationOfJob);
-        Actions actions = new Actions(driver);
-        actions.sendKeys(locationElement, Keys.ENTER).perform();
-        //clickElement(driver, locators.SearchBox);
+        Thread.sleep(1000);
+
+//        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.LocationOfJob);
+//        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.LocationOfJob);
+//        sendKeysToElement(driver, locators.LocationOfJob, data[3]);
+//        waitForPageLoad(driver);
+//        WebElement locationElement = findElement(driver, locators.LocationOfJob);
+//        Thread.sleep(1000);
+//        actions.sendKeys(locationElement, Keys.ENTER).perform();
         waitForPageLoad(driver);
         clickElement(driver, locators.EasyApplyFilter);
+        waitForPageLoad(driver);
         Thread.sleep(4000);
     }
 
@@ -69,23 +94,26 @@ public class LinkedinPage extends GenericMethods {
         while (true) {
             List<WebElement> jobs = findElements(driver, locators.listOfJobs);
             if (!isElementListEmpty(jobs)) {
-                for (WebElement easyApply : jobs) {
+                for (int i = 0; i < jobs.size(); i++) {
+                    WebElement easyApply = jobs.get(i);
                     try {
                         executeJavaScript(driver, "arguments[0].scrollIntoView(true);", easyApply);
                         wait.until(ExpectedConditions.elementToBeClickable(easyApply));
                         easyApply.click();
-                        Thread.sleep(3000);
-
+                        Thread.sleep(2000);
                         if (isElementPresent(driver, locators.easyApplyButton) || isElementPresent(driver, locators.continueButton)) {
                             ClickEasyApplyButtonORContinueButton(driver);
                             handleJobApplicationProcess(driver, wait, data);
                         } else {
-                            System.out.println("Easy Apply or Continue button not present, skipping to next job.");
-                            driver.navigate().refresh();
-                            continue;
+                            System.out.println("Easy Apply or Continue button not present on L2 page, marking this job as Applied and skipping.");
+                            driver.navigate().back();
+                            Thread.sleep(2000);
+                            executeJavaScript(driver, "arguments[0].textContent = 'Applied';", easyApply);
+                            Thread.sleep(2000);
+                            jobs = findElements(driver, locators.listOfJobs);
+                            i--;
                         }
 
-                        handleJobApplicationProcess(driver, wait, data);
                     } catch (ElementClickInterceptedException e) {
                         System.out.println("ElementClickInterceptedException caught, moving to the next job.");
                     }
@@ -121,6 +149,25 @@ public class LinkedinPage extends GenericMethods {
 
     private boolean navigatePagination(WebDriver driver, int currentPage) {
         try {
+            try {
+                WebElement nextPage1Button = driver.findElement(By.xpath("//button[@aria-label='View next page']"));
+                if (nextPage1Button != null) {
+                    System.out.println("Navigating to the next page using 'Next Page' button.");
+                    executeJavaScript(driver, "arguments[0].scrollIntoView(true);", nextPage1Button);
+                    waitForElementToBeClickable(driver, nextPage1Button);
+
+                    try {
+                        nextPage1Button.click();
+                    } catch (ElementNotInteractableException e) {
+                        System.out.println("ElementNotInteractableException occurred, attempting JavaScript click on 'Next Page' button.");
+                        executeJavaScript(driver, "arguments[0].click();", nextPage1Button);
+                    }
+                    Thread.sleep(4000);
+                    return true;
+                }
+            } catch (NoSuchElementException e) {
+                System.out.println("'Next Page' button not found, checking for page number button.");
+            }
             while (true) {
                 String nextPageXPath = "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[@aria-label='Page " + currentPage + "']";
                 WebElement nextPageButton = driver.findElement(By.xpath(nextPageXPath));
@@ -138,7 +185,6 @@ public class LinkedinPage extends GenericMethods {
                     }
                     Thread.sleep(4000);
                     currentPage++;
-
                     return true;
                 } else {
                     System.out.println("No more pages to navigate.");
@@ -146,9 +192,9 @@ public class LinkedinPage extends GenericMethods {
                 }
             }
         } catch (TimeoutException e) {
-            System.out.println("TimeoutException occurred while waiting for the element to be clickable: " + e.getMessage());
+            System.out.println("TimeoutException occurred while waiting for the element to be clickable " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception occurred while navigating pagination: " + e.getMessage());
+            System.out.println("Exception occurred while navigating pagination " + e.getMessage());
         }
         return false;
     }
@@ -191,14 +237,25 @@ public class LinkedinPage extends GenericMethods {
             break;
         }
         waitForPageLoad(driver);
+
         if (applicationSubmitted) {
             Thread.sleep(3000);
+            if (isElementPresent(driver, locators.closeIcon)) {
+                waitForElement(driver, locators.closeIcon);
+                executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.closeIcon);
+                clickElement(driver, locators.closeIcon);
+                System.out.println("Clicked Close icon, exiting further actions.");
+                return;
+            }
+
             if (isElementPresent(driver, locators.DoneButton)) {
                 waitForElement(driver, locators.DoneButton);
                 clickElement(driver, locators.DoneButton);
                 System.out.println("Clicked Done button");
             } else {
-                System.out.println("Done button not found");
+                waitForElement(driver, locators.DoneButton);
+                System.out.println("Done button not found. Trying to find and click it once again.");
+                clickElement(driver, locators.DoneButton);
             }
         }
     }
@@ -230,12 +287,11 @@ public class LinkedinPage extends GenericMethods {
         allQuestions.addAll(questions1);
         allQuestions.addAll(questions2);
         List<WebElement> answerFields = findElements(driver, locators.AnswerTextfield);
-        Map<String, String> questionAnswerMap = questionAnswerHandler.getQuestionAnswerMap();
         for (int i = 0; i < allQuestions.size(); i++) {
             WebElement questionElement = allQuestions.get(i);
             WebElement answerField = answerFields.get(i);
             String questionText = questionElement.getText();
-            String answer = questionAnswerMap.getOrDefault(questionText, "2");
+            String answer = questionAnswerHandler.getAnswer(questionText);
             answerField.clear();
             answerField.sendKeys(answer);
         }
@@ -246,6 +302,7 @@ public class LinkedinPage extends GenericMethods {
             List<WebElement> cityNameTextfield = findElements(driver, locators.cityName);
             for (WebElement send : cityNameTextfield) {
                 send.sendKeys("Bengaluru, Karnataka, India");
+                Thread.sleep(2000);
                 WebElement ele = findElement(driver, locators.cityName);
                 Actions actions = new Actions(driver);
                 actions.sendKeys(ele, Keys.ENTER).perform();

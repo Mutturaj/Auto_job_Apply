@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" allow-return-values="true">
+<suite name="Parallel Test Suite" thread-count="2" parallel="classes">
+    <listeners>
+        <listener class-name="customEntities.ScreenshotListener"/>
+    </listeners>
     <test verbose="1" preserve-order="true" name="C:\Users\Welcome\Downloads\testrail_poc-master\AutoJob_Apply">
-        <parameter name="baseURL" value="https://www.linkedin.com/feed/?trk=homepage-basic_sign-in-submit"/>
+        <parameter name="baseURL1" value="https://www.linkedin.com/feed/?trk=homepage-basic_sign-in-submit"/>
+        <parameter name="baseURL2" value="https://www.naukri.com/nlogin/login"></parameter>
         <classes>
             <class name="Test.LinkedinTest">
-                <methods>
-                    <include name="verifyLoginAndSearchJob"/>
-                </methods>
+            </class>
+            <class name="Test.NaukariTest">
             </class>
         </classes>
     </test>
