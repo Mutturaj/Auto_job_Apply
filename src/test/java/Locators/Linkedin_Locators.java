@@ -12,7 +12,7 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails SearchIcon = new LocatorsDetails("xpath", "//*[name()='svg' and @class='jobs-search-box__search-icon--custom']", "Search Icon");
     public GenericMethods.LocatorsDetails ShowAllButton = new LocatorsDetails("xpath", "//div[@class='discovery-templates-vertical-list__footer']/a[@href='https://www.linkedin.com/jobs/collections/recommended?discover=recommended&discoveryOrigin=JOBS_HOME_JYMBII']", "Show All Button");
     public GenericMethods.LocatorsDetails TitleOfJob = new LocatorsDetails("xpath", "//input[contains(@class, 'jobs-search-box__text-input') and contains(@class, 'jobs-search-global-typeahead__input')]", "Title of the Job Input");
-    public GenericMethods.LocatorsDetails LocationOfJob = new LocatorsDetails("xpath", "//input[@role='combobox' and @aria-autocomplete='list' and contains(@class, 'jobs-search-box__text-input--with-clear')]", "Location of the Job");
+    public GenericMethods.LocatorsDetails LocationOfJob = new LocatorsDetails("xpath", "//div[@class='jobs-search-box__inner']//input[@role='combobox' and @aria-autocomplete='list' and contains(@class, 'jobs-search-box__text-input--with-clear')]", "Location of the Job");
     public GenericMethods.LocatorsDetails SearchBox = new LocatorsDetails("xpath", "//button[text()='Search']", "Search Box");
     public GenericMethods.LocatorsDetails listOfJobs = new LocatorsDetails("xpath", "//li[contains(@class, 'job-card-container__apply-method') and contains(@class, 'job-card-container__footer-item') and contains(., 'Easy Apply')]", "List of Jobs");
     public GenericMethods.LocatorsDetails EasyApplyFilter = new LocatorsDetails("xpath", "//button[@aria-label='Easy Apply filter.']", "Easy Apply Filter");
@@ -33,7 +33,8 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails AnswerTextfield = new LocatorsDetails("xpath", "//div[@class='artdeco-text-input--container ember-view']//input[@type='text']", "List of answers Textfield");
     public GenericMethods.LocatorsDetails Questions1 = new LocatorsDetails("xpath", "//div[@class='artdeco-text-input--container ember-view']//label[@class='artdeco-text-input--label']", "All Questions");
     public GenericMethods.LocatorsDetails Question2 = new LocatorsDetails("xpath", "//span[@class='jobs-easy-apply-form-section__group-title t-14']", "All Questions");
-    public GenericMethods.LocatorsDetails cityName = new LocatorsDetails("xpath", "//input[contains(@id, 'city-HOME-CITY')]", "Enter City Name");
+    public GenericMethods.LocatorsDetails Question3 = new LocatorsDetails("xpath", "//label[contains(@class, 'fb-dash-form-element__label')]//span[contains(., 'Location (city)')][1]", "Email or Location text");
+    public GenericMethods.LocatorsDetails cityName = new LocatorsDetails("xpath", "//input[contains(@id, 'location-GEO-LOCATION') or contains(@id, 'city-HOME-CITY')]", "Enter City Name");
     public GenericMethods.LocatorsDetails DoneButton = new LocatorsDetails("xpath", "//span[text()='Done']", "Done button");
     public GenericMethods.LocatorsDetails textAreaFiled = new LocatorsDetails("xpath", "//textarea[contains(@class, 'artdeco-text-input__textarea') and @required]", "Text Area Filed");
     public GenericMethods.LocatorsDetails viewJobsButton = new LocatorsDetails("xpath", "//span[@class='artdeco-button__text']//span[1]", "View Jobs Button");

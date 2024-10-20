@@ -33,14 +33,14 @@ public class ScreenshotListener implements ITestListener {
         }
     }
 
-    // Other overridden methods...
+    // Other overridden methods
 
     private void takeScreenshot(String methodName) {
         File screenshotDir = new File(System.getProperty("user.dir") + "/screenshots/");
         if (!screenshotDir.exists()) {
             boolean dirCreated = screenshotDir.mkdir();
             if (!dirCreated) {
-                System.out.println("Failed to create directory: " + screenshotDir.getAbsolutePath());
+                System.out.println("Failed to create directory:" + screenshotDir.getAbsolutePath());
                 return;
             }
         }

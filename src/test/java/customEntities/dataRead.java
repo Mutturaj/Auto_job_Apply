@@ -1,6 +1,6 @@
 package customEntities;
 
-import AppConfg.DataConfg;
+import AppConfg.DataConfig;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -20,7 +20,7 @@ public class dataRead {
 
     @DataProvider(name = "login_cred")
     public Object[][] Jsonreader() throws FileNotFoundException {
-        return provideLoginCredentials("data", DataConfg.getInstance().getDatasetName());
+        return provideLoginCredentials("data", DataConfig.getInstance().getDatasetName());
     }
 
     public Object[][] provideLoginCredentials(String dataKey, String name) throws FileNotFoundException {

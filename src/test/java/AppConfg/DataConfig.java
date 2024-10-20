@@ -1,17 +1,17 @@
 package AppConfg;
 
-public class DataConfg {
-    private static DataConfg instance;
+public class DataConfig {
+    private static DataConfig instance;
     private String datasetName;
 
-    private DataConfg() {
+    private DataConfig() {
         this.datasetName = "Jayanth"; // Set your default value here
 
     }
 
-    public static DataConfg getInstance() {
+    public static DataConfig getInstance() {
         if (instance == null) {
-            instance = new DataConfg();
+            instance = new DataConfig();
         }
         return instance;
     }

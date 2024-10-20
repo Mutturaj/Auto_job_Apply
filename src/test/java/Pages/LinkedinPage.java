@@ -1,6 +1,6 @@
 package Pages;
 
-import AppConfg.DataConfg;
+import AppConfg.DataConfig;
 import Locators.Linkedin_Locators;
 import customEntities.GenericMethods;
 import org.openqa.selenium.*;
@@ -19,7 +19,7 @@ import java.util.*;
 
 public class LinkedinPage extends GenericMethods {
     Linkedin_Locators locators = new Linkedin_Locators();
-    String datasetName = DataConfg.getInstance().getDatasetName();
+    String datasetName = DataConfig.getInstance().getDatasetName();
     QuestionAnswerHandler questionAnswerHandler = new QuestionAnswerHandler(datasetName);
 
     public LinkedinPage(WebDriver driver) throws FileNotFoundException {
@@ -72,15 +72,16 @@ public class LinkedinPage extends GenericMethods {
         actions.sendKeys(titleElement, Keys.ENTER).perform();
         waitForPageLoad(driver);
         Thread.sleep(1000);
-
-//        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.LocationOfJob);
-//        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.LocationOfJob);
-//        sendKeysToElement(driver, locators.LocationOfJob, data[3]);
-//        waitForPageLoad(driver);
-//        WebElement locationElement = findElement(driver, locators.LocationOfJob);
-//        Thread.sleep(1000);
-//        actions.sendKeys(locationElement, Keys.ENTER).perform();
+        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.LocationOfJob);
+        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.LocationOfJob);
+        sendKeysToElement(driver, locators.LocationOfJob, data[3]);
         waitForPageLoad(driver);
+        WebElement locationElement = findElement(driver, locators.LocationOfJob);
+        Thread.sleep(1000);
+        actions.sendKeys(locationElement, Keys.ENTER).perform();
+        waitForPageLoad(driver);
+        executeJavaScript(driver, "arguments[0].removeAttribute('aria-checked');", locators.EasyApplyFilter);
+        Thread.sleep(1000);
         clickElement(driver, locators.EasyApplyFilter);
         waitForPageLoad(driver);
         Thread.sleep(4000);

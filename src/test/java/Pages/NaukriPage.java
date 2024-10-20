@@ -1,9 +1,10 @@
 package Pages;
 
-import AppConfg.DataConfg;
+import AppConfg.DataConfig;
 import Locators.Naukri_Locators;
 import customEntities.GenericMethods;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,7 +17,7 @@ import java.util.Set;
 
 public class NaukriPage extends GenericMethods {
     Naukri_Locators locators = new Naukri_Locators();
-    String datasetName = DataConfg.getInstance().getDatasetName();
+    String datasetName = DataConfig.getInstance().getDatasetName();
     QuestionAnswerHandler questionAnswerHandler = new QuestionAnswerHandler(datasetName);
 
     public NaukriPage(WebDriver driver) throws FileNotFoundException {
@@ -30,18 +31,49 @@ public class NaukriPage extends GenericMethods {
         sendKeysToElement(driver, locators.EmailID, data[0]);
         sendKeysToElement(driver, locators.Password, data[1]);
         clickElement(driver, locators.LoginButton);
+        waitForPageLoad(driver);
         Thread.sleep(3000);
-        if (isElementPresent(driver, locators.chatBotPage)) {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement closeIcon = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'crossIcon') and contains(@class, 'chatBot-ic-cross')]")));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeIcon);
+
+        if (!isElementPresent(driver, locators.chatBotPage)) {
+            System.out.println("Chatbot is not present");
+            return;
         }
 
+        boolean isChatbotActive = true;
+
+        while (isChatbotActive) {
+            waitForPageLoad(driver);
+
+            if (isElementPresent(driver, locators.chatBotPage)) {
+                WebElement closeIcon = driver.findElement(By.xpath("//div[@class='crossIcon chatBot chatBot-ic-cross']"));
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                wait.until(ExpectedConditions.elementToBeClickable(closeIcon));
+
+                Actions actions = new Actions(driver);
+                actions.moveToElement(closeIcon).click().perform();
+
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeIcon);
+
+                try {
+                    Thread.sleep(2000); // Sleep for 2 seconds to wait for the chatbot to close
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (!isElementPresent(driver, locators.chatBotPage)) {
+                    isChatbotActive = false;
+                    System.out.println("Chatbot closed successfully");
+                }
+            } else {
+                isChatbotActive = false;
+            }
+        }
     }
 
     public void NaukriUpdate(WebDriver driver) throws InterruptedException {
         waitForPageLoad(driver);
-        clickElement(driver, locators.ViewProfile);
+        driver.get("https://www.naukri.com/mnjuser/profile");
+        //clickElement(driver, locators.ViewProfile);
         waitForPageLoad(driver);
         clickElement(driver, locators.EditIcon);
         Thread.sleep(3000);
@@ -53,7 +85,6 @@ public class NaukriPage extends GenericMethods {
         clickElement(driver, locators.JobButton);
         waitForPageLoad(driver);
         JobsApply(driver);
-
     }
 
     public void JobApplyFromSearch(WebDriver driver) throws InterruptedException {
@@ -82,7 +113,6 @@ public class NaukriPage extends GenericMethods {
         if (isElementPresent(driver, locators.listOfJobsFromSearch)) {
             jobList.addAll(findElements(driver, locators.listOfJobsFromSearch));
         }
-
         String originalWindow = driver.getWindowHandle();
 
         for (WebElement job : jobList) {
@@ -105,7 +135,6 @@ public class NaukriPage extends GenericMethods {
                     clickElement(driver, locators.ApplyButton);
                     waitForPageLoad(driver);
                     Thread.sleep(2000);
-
                     handleChatbot(driver);
 
                     if (driver.getWindowHandles().contains(newWindow)) {
@@ -149,7 +178,7 @@ public class NaukriPage extends GenericMethods {
                 continue;
             }
 
-            if (!findElements(driver,locators.DOBfield).isEmpty()) {
+            if (!findElements(driver, locators.DOBfield).isEmpty()) {
                 handleDOB(driver);
                 answerProvided = true;
             }
@@ -221,8 +250,7 @@ public class NaukriPage extends GenericMethods {
             if (answerProvided && !skipButtonClicked && findElement(driver, locators.saveButtonContainer) != null) {
                 WebElement saveButtonContainer = findElement(driver, locators.saveButtonContainer);
                 WebElement saveButton = saveButtonContainer.findElement(By.className("sendMsg"));
-
-                if (saveButton.isEnabled()) { // Check if the save button is enabled
+                if (saveButton.isEnabled()) {
                     saveButton.click();
                     waitForPageLoad(driver);
                 } else {
@@ -261,7 +289,6 @@ public class NaukriPage extends GenericMethods {
             } else if (fieldType.contains("Year") || fieldType.equalsIgnoreCase("YYYY")) {
                 answer = questionAnswerHandler.getAnswer("YYYY");
             }
-
             if (answer != null && !answer.isEmpty()) {
                 dobField.sendKeys(answer);
             } else {
