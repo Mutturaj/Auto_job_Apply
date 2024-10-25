@@ -282,15 +282,24 @@ public class LinkedinPage extends GenericMethods {
     }
 
     private void fillTextQuestions(WebDriver driver) throws InterruptedException {
+        List<WebElement> answerFields = findElements(driver, locators.AnswerTextfield);
+        List<WebElement> answerFields2 = findElements(driver, locators.textAreaFiled);
+        List<WebElement> allAnswerFields = new ArrayList<>();
+        allAnswerFields.addAll(answerFields);
+        allAnswerFields.addAll(answerFields2);
+        int answerCount = allAnswerFields.size();
+
         List<WebElement> questions1 = findElements(driver, locators.Questions1);
         List<WebElement> questions2 = findElements(driver, locators.Question2);
         List<WebElement> allQuestions = new ArrayList<>();
         allQuestions.addAll(questions1);
         allQuestions.addAll(questions2);
-        List<WebElement> answerFields = findElements(driver, locators.AnswerTextfield);
+        if (allQuestions.size() > answerCount) {
+            allQuestions = allQuestions.subList(0, answerCount);
+        }
         for (int i = 0; i < allQuestions.size(); i++) {
             WebElement questionElement = allQuestions.get(i);
-            WebElement answerField = answerFields.get(i);
+            WebElement answerField = allAnswerFields.get(i);
             String questionText = questionElement.getText();
             String answer = questionAnswerHandler.getAnswer(questionText);
             answerField.clear();
@@ -384,7 +393,7 @@ public class LinkedinPage extends GenericMethods {
 
     private void handleDropdowns(WebDriver driver, WebDriverWait wait) throws InterruptedException {
         List<WebElement> dropdowns = findElements(driver, locators.dropdownButtons);
-        if (!isElementListEmpty(findElements(driver, locators.dropdownButtons))) {
+        if (!dropdowns.isEmpty()) {
             for (WebElement dropdown : dropdowns) {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dropdown);
                 wait.until(ExpectedConditions.visibilityOf(dropdown));
@@ -392,12 +401,14 @@ public class LinkedinPage extends GenericMethods {
 
                 Select select = new Select(dropdown);
                 select.selectByIndex(1);
+
                 System.out.println("Selected option: " + select.getFirstSelectedOption().getText());
             }
         } else {
             System.out.println("No Dropdowns found");
         }
     }
+
 
     private void handleCheckboxes(WebDriver driver, WebDriverWait wait) throws InterruptedException {
         List<WebElement> checkboxes = findElements(driver, locators.checkBox);
