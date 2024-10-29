@@ -29,7 +29,6 @@ public class NaukariTest {
     @Test(priority = 1, dataProvider = "login_cred", dataProviderClass = dataRead.class)
     public void verifyLoginAndUpdateProfile(String[] data, JavascriptExecutor js) throws InterruptedException {
         naukaridata.NaukriLogin(driver, data);
-        System.out.println("This is new code changes in naukri.com");
         naukaridata.NaukriUpdate(driver);
         naukaridata.JobApplyFromSearch(driver);
         naukaridata.JobApplyFrom_Recommended(driver);

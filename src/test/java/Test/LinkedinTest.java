@@ -40,7 +40,7 @@ public class LinkedinTest {
 //       driver.get("https://www.linkedin.com/jobs/collections/recommended/");
         linkedinData.navigateToJobs(driver);
         linkedinData.searchForJobs(driver, data);
-//        linkedinData.navigateToNotification(driver);
+ //      linkedinData.navigateToNotification(driver);
         boolean jobApplicationSuccessful = false;
         int retryCount = 0;
         int maxRetries = 5;
