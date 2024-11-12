@@ -33,33 +33,28 @@ public class LinkedinTest {
     }
 
     @Test(priority = 1, dataProvider = "login_cred", dataProviderClass = dataRead.class)
-    public void verifyLoginAndSearchJob(String[] data, JavascriptExecutor js) throws InterruptedException {
+    public void applyJobFromSearchJob(String[] data, JavascriptExecutor js) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         linkedinData.loginToLinkedIn(driver, data);
-        System.out.println("This is new code changes in the LinkedIn");
-//       driver.get("https://www.linkedin.com/jobs/collections/recommended/");
         linkedinData.navigateToJobs(driver);
         linkedinData.searchForJobs(driver, data);
- //      linkedinData.navigateToNotification(driver);
-        boolean jobApplicationSuccessful = false;
-        int retryCount = 0;
-        int maxRetries = 5;
-        while (!jobApplicationSuccessful && retryCount < maxRetries) {
-            try {
-                linkedinData.applyForJobs(driver, wait, js, data);
-                jobApplicationSuccessful = true;
-            } catch (Exception e) {
-                System.out.println("Apply for jobs failed. Retrying...");
-                driver.navigate().refresh();
-                Thread.sleep(5000);
-                retryCount++;
-            }
-        }
+        linkedinData.applyForJobs(driver, wait, js, data);
 
-        if (!jobApplicationSuccessful) {
-            System.out.println("Maximum retries reached. Failed to apply for jobs.");
-        }
+    }
+
+    @Test(priority = 3, dataProvider = "login_cred", dataProviderClass = dataRead.class)
+    public void applyJobFromNotifications(String[] data, JavascriptExecutor js) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        linkedinData.navigateToNotification(driver);
+        linkedinData.applyForJobs(driver, wait, js, data);
+
+    }
+
+    @Test(priority = 2, dataProvider = "login_cred", dataProviderClass = dataRead.class)
+    public void applyJobFromCollection(String[] data, JavascriptExecutor js) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.get("https://www.linkedin.com/jobs/collections/recommended/");
+        linkedinData.applyForJobs(driver, wait, js, data);
+
     }
 }
-
-

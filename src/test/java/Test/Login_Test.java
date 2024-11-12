@@ -2,6 +2,7 @@ package Test;
 
 import Pages.LoginPage;
 import customEntities.GenericMethods;
+import customEntities.RetryAnalyzer;
 import customEntities.dataRead;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
@@ -11,6 +12,7 @@ import org.testng.annotations.Test;
 public class Login_Test {
     public static WebDriver driver;
     GenericMethods generic = new GenericMethods();
+    RetryAnalyzer retryAnalyzer=new RetryAnalyzer();
     public LoginPage loginData;
 
     @BeforeClass

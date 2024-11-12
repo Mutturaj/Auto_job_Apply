@@ -261,15 +261,6 @@ public class LinkedinPage extends GenericMethods {
         }
     }
 
-    private void handleInterferingElements(WebDriver driver) {
-        List<WebElement> overlays = driver.findElements(By.xpath("//div[@class='overlay-class']"));
-        for (WebElement overlay : overlays) {
-            if (overlay.isDisplayed()) {
-                overlay.click();
-            }
-        }
-    }
-
     public void ClickEasyApplyButtonORContinueButton(WebDriver driver) throws InterruptedException {
         if (!isElementListEmpty(findElements(driver, locators.continueButton))) {
             waitForElement(driver, locators.continueButton);
