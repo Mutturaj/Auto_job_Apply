@@ -55,7 +55,7 @@ public class NaukriPage extends GenericMethods {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeIcon);
 
                 try {
-                    Thread.sleep(2000); // Sleep for 2 seconds to wait for the chatbot to close
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -93,7 +93,7 @@ public class NaukriPage extends GenericMethods {
         Thread.sleep(2000);
         clickElement(driver, locators.SearchIcon1);
         waitForPageLoad(driver);
-        sendKeysToElement(driver, locators.Designation, "Automation Test Engineer, Selenium Testing, Selenium Java, Software Test Engineer, QA Automation");
+        sendKeysToElement(driver, locators.Designation, "qa");
         clickElement(driver, locators.Experience);
         clickElement(driver, locators.ExperienceButton);
         sendKeysToElement(driver, locators.Location, "Bangalore, Hyderabad");
@@ -104,24 +104,51 @@ public class NaukriPage extends GenericMethods {
     }
 
     private void JobsApply(WebDriver driver) throws InterruptedException {
-        Thread.sleep(4000);
-        List<WebElement> jobList = new ArrayList<>();
+        applyJobsOnCurrentPage(driver);
 
+        while (true) {
+            List<WebElement> pageNumbers = findElements(driver, locators.pageNum);
+
+            boolean nextPageFound = false;
+
+            for (int i = 0; i < pageNumbers.size(); i++) {
+                Thread.sleep(2000);
+                pageNumbers = findElements(driver, locators.pageNum);
+                if (pageNumbers.get(i).getAttribute("class").contains("styles_selected__")) {
+                    if (i + 1 < pageNumbers.size()) {
+                        pageNumbers.get(i + 1).click();
+                        Thread.sleep(2000);
+                        nextPageFound = true;
+                        applyJobsOnCurrentPage(driver);
+                        break;
+                    }
+                }
+            }
+
+            if (!nextPageFound) {
+                System.out.println("No more pages to navigate.");
+                break;
+            }
+        }
+    }
+
+    private void applyJobsOnCurrentPage(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
+        List<WebElement> jobList = new ArrayList<>();
         if (isElementPresent(driver, locators.listOfJobs)) {
             jobList.addAll(findElements(driver, locators.listOfJobs));
         }
         if (isElementPresent(driver, locators.listOfJobsFromSearch)) {
             jobList.addAll(findElements(driver, locators.listOfJobsFromSearch));
         }
-        String originalWindow = driver.getWindowHandle();
 
+        String originalWindow = driver.getWindowHandle();
         for (WebElement job : jobList) {
             job.click();
             Thread.sleep(3000);
 
             Set<String> windowHandles = driver.getWindowHandles();
             String newWindow = null;
-
             for (String windowHandle : windowHandles) {
                 if (!windowHandle.equals(originalWindow)) {
                     newWindow = windowHandle;
@@ -131,6 +158,7 @@ public class NaukriPage extends GenericMethods {
 
             if (newWindow != null) {
                 driver.switchTo().window(newWindow);
+
                 if (!findElements(driver, locators.ApplyButton).isEmpty()) {
                     clickElement(driver, locators.ApplyButton);
                     waitForPageLoad(driver);
@@ -238,7 +266,7 @@ public class NaukriPage extends GenericMethods {
 
             if (!answerProvided && !findElements(driver, locators.SearchFiled).isEmpty()) {
                 List<WebElement> questionElement1 = findElements(driver, locators.chatBotQuestion);
-                WebElement latestQuestionElement1 = questionElement1.get(questionElement1.size() - 1); // Get the last question
+                WebElement latestQuestionElement1 = questionElement1.get(questionElement1.size() - 1);
                 String latestQuestionText1 = latestQuestionElement1.getText();
                 String answers = questionAnswerHandler.getAnswer(latestQuestionText1);
                 sendKeysToElement(driver, locators.SearchFiled, answers);

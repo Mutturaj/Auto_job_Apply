@@ -14,35 +14,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ScreenshotListener implements ITestListener {
-
     private WebDriver driver;
 
     @Override
     public void onStart(ITestContext context) {
-        // WebDriver should be set in the context by your setup method
         this.driver = (WebDriver) context.getAttribute("WebDriver");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        // Capture screenshot on test failure
         if (driver != null) {
+            System.out.println("Driver is set, taking screenshot for failure in " + result.getMethod().getMethodName());
             takeScreenshot(result.getMethod().getMethodName());
         } else {
             System.out.println("WebDriver is null. Cannot take screenshot.");
         }
     }
 
-    // Other overridden methods
-
     private void takeScreenshot(String methodName) {
         File screenshotDir = new File(System.getProperty("user.dir") + "/screenshots/");
-        if (!screenshotDir.exists()) {
-            boolean dirCreated = screenshotDir.mkdir();
-            if (!dirCreated) {
-                System.out.println("Failed to create directory:" + screenshotDir.getAbsolutePath());
-                return;
-            }
+        if (!screenshotDir.exists() && !screenshotDir.mkdir()) {
+            System.out.println("Failed to create directory: " + screenshotDir.getAbsolutePath());
+            return;
         }
         try {
             File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -56,3 +49,4 @@ public class ScreenshotListener implements ITestListener {
         }
     }
 }
+

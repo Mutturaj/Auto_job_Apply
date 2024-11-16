@@ -31,7 +31,7 @@ public class NaukariTest {
         naukaridata.NaukriLogin(driver, data);
         naukaridata.NaukriUpdate(driver);
         naukaridata.JobApplyFromSearch(driver);
-        naukaridata.JobApplyFrom_Recommended(driver);
+        // naukaridata.JobApplyFrom_Recommended(driver);
 
 
     }
