@@ -30,7 +30,7 @@ public class NaukariTest {
     public void verifyLoginAndUpdateProfile(String[] data, JavascriptExecutor js) throws InterruptedException {
         naukaridata.NaukriLogin(driver, data);
         naukaridata.NaukriUpdate(driver);
-        naukaridata.JobApplyFromSearch(driver);
+        naukaridata.JobApplyFromSearch(driver,data);
         // naukaridata.JobApplyFrom_Recommended(driver);
 
 

@@ -87,16 +87,19 @@ public class NaukriPage extends GenericMethods {
         JobsApply(driver);
     }
 
-    public void JobApplyFromSearch(WebDriver driver) throws InterruptedException {
+    public void JobApplyFromSearch(WebDriver driver, String data[]) throws InterruptedException {
         waitForPageLoad(driver);
         scrollToTop(driver);
         Thread.sleep(2000);
         clickElement(driver, locators.SearchIcon1);
         waitForPageLoad(driver);
-        sendKeysToElement(driver, locators.Designation, "qa");
-        clickElement(driver, locators.Experience);
+        sendKeysToElement(driver, locators.Designation, data[2]);
         clickElement(driver, locators.ExperienceButton);
-        sendKeysToElement(driver, locators.Location, "Bangalore, Hyderabad");
+        String experience = data[4].replace("\"", "");
+        String xpath = "//span[.='" + experience + " years']";
+        WebElement exper = driver.findElement(By.xpath(xpath));
+        exper.click();
+        sendKeysToElement(driver, locators.Location, data[3]);
         clickElement(driver, locators.SearchIcon2);
         waitForPageLoad(driver);
         JobsApply(driver);

@@ -7,6 +7,18 @@
         "Password": "Bindu@66",
         "JobTitle":"qa",
         "JobLocation": "Karnataka, India",
+        "Experience": "3",
+        "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process"
+      }
+    },
+    {
+      "name": "Raju",
+      "data": {
+        "EmailID": "rmn81058@gmail.com",
+        "Password": "Rajunavi@123",
+        "JobTitle": "Software Front-end Development Engineer",
+        "JobLocation": "Karnataka, India",
+        "Experience": "2",
         "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process"
       }
     },
@@ -17,6 +29,7 @@
         "Password": "15Muttu@05",
         "JobTitle":"qa",
         "JobLocation": "Karnataka, India",
+        "Experience": "2",
         "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process"
       }
     },
@@ -27,6 +40,7 @@
         "Password": "Yogi@131994",
         "JobTitle": "\"Software Test Engineer\" OR \"Software Tester\" OR \"QA Engineer\" AND (\"Manual Testing\" OR \"Automation Testing\" OR \"QA\")\n",
         "JobLocation": "Karnataka, India",
+        "Experience": "3",
         "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process"
       }
     },
@@ -37,6 +51,7 @@
         "Password": "Pavan@1995",
         "JobTitle": "\"Software Test Engineer\" OR \"Software Tester\" OR \"QA Engineer\" AND (\"Manual Testing\" OR \"Automation Testing\" OR \"QA\")\n",
         "JobLocation": "Karnataka, India",
+        "Experience": "3",
         "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process"
       }
     },
@@ -47,6 +62,7 @@
         "Password": "Jay@nth5589",
         "JobTitle": "qa",
         "JobLocation": "Karnataka, India",
+        "Experience": "8",
         "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process"
       }
     }

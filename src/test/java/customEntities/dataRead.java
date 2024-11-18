@@ -44,7 +44,7 @@ public class dataRead {
         }
 
         Object[][] data = new Object[1][2];
-        List<String> keys = Arrays.asList("EmailID", "Password", "JobTitle", "JobLocation", "Hiring Manager Message");
+        List<String> keys = Arrays.asList("EmailID", "Password", "JobTitle", "JobLocation","Experience", "Hiring Manager Message");
         List<String> values = getValues(selectedUser, keys);
         data[0][0] = values.toArray(new String[0]);
         data[0][1] = (JavascriptExecutor) driver;

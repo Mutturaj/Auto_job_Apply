@@ -16,8 +16,7 @@ public class Naukri_Locators {
     public GenericMethods.LocatorsDetails ApplyButton = new GenericMethods.LocatorsDetails("xpath", "//div[@class='styles_jhc__apply-button-container__5Bqnb']/button[.='Apply']", "Apply Button");
     public GenericMethods.LocatorsDetails ApplyCompanySite = new GenericMethods.LocatorsDetails("xpath", "//div[@class='styles_jhc__apply-button-container__5Bqnb']/button[.='Apply on company site']", "Apply On Company Site Button");
     public GenericMethods.LocatorsDetails Designation = new GenericMethods.LocatorsDetails("xpath", "//input[@placeholder=\"Enter keyword / designation / companies\"]", "Job Search");
-    public GenericMethods.LocatorsDetails Experience = new GenericMethods.LocatorsDetails("xpath", "//input[@id='experienceDD']", "Experience ");
-    public GenericMethods.LocatorsDetails ExperienceButton = new GenericMethods.LocatorsDetails("xpath", "//span[.='3 years']", "Experience button");
+    public GenericMethods.LocatorsDetails ExperienceButton = new GenericMethods.LocatorsDetails("xpath", "//input[@id='experienceDD']", "Experience ");
     public GenericMethods.LocatorsDetails Location = new GenericMethods.LocatorsDetails("xpath", "//input[@placeholder=\"Enter location\"]", "Location Text Filed");
     public GenericMethods.LocatorsDetails SearchIcon2 = new GenericMethods.LocatorsDetails("xpath", "//span[.='Search']", "Search Icon");
     public GenericMethods.LocatorsDetails SearchIcon1 = new GenericMethods.LocatorsDetails("xpath", "//button[@class='nI-gNb-sb__icon-wrapper']//span[@class=\"ni-gnb-icn ni-gnb-icn-search\"]", "Search Icon");
