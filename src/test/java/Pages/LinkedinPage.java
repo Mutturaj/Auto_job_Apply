@@ -12,9 +12,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.*;
+import java.util.List;
 
 
 public class LinkedinPage extends GenericMethods {
@@ -31,14 +34,20 @@ public class LinkedinPage extends GenericMethods {
         waitForPageLoad(driver);
         sendKeysToElement(driver, locators.EmailID, data[0]);
         sendKeysToElement(driver, locators.Password, data[1]);
-        clickElement(driver, locators.SignInButton);
+        if (!findElements(driver, locators.SignInButton).isEmpty()) {
+            clickElement(driver, locators.SignInButton);
+        } else {
+            clickElement(driver, locators.AgreeAndReJoinButton);
+        }
     }
 
     public void navigateToJobs(WebDriver driver) throws InterruptedException {
         waitForPageLoad(driver);
+        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.JobIcon);
+        Thread.sleep(1000);
         clickElement(driver, locators.JobIcon);
-        waitForElement(driver, locators.ShowAllButton);
-        clickElement(driver, locators.ShowAllButton);
+//        waitForElement(driver, locators.ShowAllButton);
+//        clickElement(driver, locators.ShowAllButton);
     }
 
     public void navigateToNotification(WebDriver driver) throws InterruptedException {
@@ -103,6 +112,8 @@ public class LinkedinPage extends GenericMethods {
                         easyApply.click();
                         Thread.sleep(2000);
                         if (isElementPresent(driver, locators.easyApplyButton) || isElementPresent(driver, locators.continueButton)) {
+                            executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.easyApplyButton);
+                            Thread.sleep(1000);
                             ClickEasyApplyButtonORContinueButton(driver);
                             handleJobApplicationProcess(driver, wait, data);
                         } else {
@@ -126,7 +137,9 @@ public class LinkedinPage extends GenericMethods {
                 boolean pagesFound = false;
 
                 while (!jobsFound && !pagesFound && scrollAttempts < maxScrollAttempts) {
-                    js.executeScript("document.querySelector('.scaffold-layout__list .jobs-search-results-list').scrollTop += 450;");
+                    js.executeScript("document.querySelector('.scaffold-layout__list').scrollTop += 450;");
+
+                    //  js.executeScript("document.querySelector('.scaffold-layout__list .jobs-search-results-list').scrollTop += 450;");
                     waitForPageLoad(driver);
                     jobs = findElements(driver, locators.listOfJobs);
                     jobsFound = !jobs.isEmpty();
@@ -502,6 +515,22 @@ public class LinkedinPage extends GenericMethods {
             clickElement(driver, locators.reviewButton);
             Thread.sleep(5000);
         }
+    }
+
+    public void ZoomOut(WebDriver driver) throws AWTException, InterruptedException {
+        Robot robot = new Robot();
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_SUBTRACT);
+        robot.keyRelease(KeyEvent.VK_SUBTRACT);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        Thread.sleep(1000);
+    }
+
+    public void SignedOut(WebDriver driver, WebDriverWait wait) throws InterruptedException {
+        driver.manage().deleteAllCookies();
+        driver.get("https://www.linkedin.com/m/logout/");
+        waitForPageLoad(driver);
+        driver.navigate().refresh();
     }
 
 }

@@ -2,44 +2,56 @@
   "datasets": [
     {
       "name": "Bindu",
-      "data": {
-        "years of experience": "3",
-        "years of experience in Automation Cypress": "1",
-        "Mobile phone number": "7996864461",
-        "First name": "Bindushree",
-        "Last name": "N",
-        "current ctc": "550000",
-        "expected ctc": "850000",
-        "notice period": "15",
-        "city": "Bangalore",
-        "LinkedIn Profile": "www.linkedin.com/in/bindushree-n-459988211",
-        "Website": "www.linkedin.com/in/bindushree-n-459988211",
-        "current location": "Bangalore",
-        "start availability date": "8/28/2024",
-        "Current company": "ZETAION SYSTEM PVT LTD",
-        "Please share PAN Card Number": "DYUPB4O39P",
-        "years of experience in pyton Automation": "1",
-        "years of experience in Appium Automation": "1",
-        "years of experience in Java Automation": "1",
-        "years of experience in API Automation": "1",
-        "Resident State": "Karnataka",
-        "Highest Qualification": "BE",
-        "Field(s) of Study": "BE",
-       "preferred Location": "Bangalore",
-        "offered CTC value": "850000",
-        "Date Of Birth": "19/12/1998",
-        "DD": "19",
-        "MM": "12",
-        "YYYY": "1998",
-        "Last Working Date": "20/10/2024",
-        "your City respect to the state selected above": "Bangalore",
-        "CGPA/ Percentage (last Edu)": "8.5",
-        "years of experience in Automation Framework": "3"
-      }
-    },
+        "data": {
+          "EmailID": "shribindu98@gmail.com",
+          "Password": "Bindu@66",
+          "JobTitle": "qa",
+          "JobLocation": "Karnataka, India",
+          "Experience": "3",
+          "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process",
+          "years of experience": "3",
+          "years of experience in Automation Cypress": "1",
+          "Mobile phone number": "7996864461",
+          "First name": "Bindushree",
+          "Last name": "N",
+          "current ctc": "550000",
+          "expected ctc": "850000",
+          "notice period": "15",
+          "city": "Bangalore",
+          "LinkedIn Profile": "www.linkedin.com/in/bindushree-n-459988211",
+          "Website": "www.linkedin.com/in/bindushree-n-459988211",
+          "current location": "Bangalore",
+          "start availability date": "8/28/2024",
+          "Current company": "ZETAION SYSTEM PVT LTD",
+          "Please share PAN Card Number": "DYUPB4O39P",
+          "years of experience in pyton Automation": "1",
+          "years of experience in Appium Automation": "1",
+          "years of experience in Java Automation": "1",
+          "years of experience in API Automation": "1",
+          "Resident State": "Karnataka",
+          "Highest Qualification": "BE",
+          "Field(s) of Study": "BE",
+          "preferred Location": "Bangalore",
+          "offered CTC value": "850000",
+          "Date Of Birth": "19/12/1998",
+          "DD": "19",
+          "MM": "12",
+          "YYYY": "1998",
+          "Last Working Date": "20/10/2024",
+          "your City respect to the state selected above": "Bangalore",
+          "CGPA/ Percentage (last Edu)": "8.5",
+          "years of experience in Automation Framework": "3"
+        }
+      },
     {
       "name": "Raju",
       "data": {
+        "EmailID": "rmn81058@gmail.com",
+        "Password": "Rajunavi@123",
+        "JobTitle": "Software Front-end Development Engineer",
+        "JobLocation": "Karnataka, India",
+        "Experience": "2",
+        "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process",
         "years of experience": "2.5",
         "years of experience in Web Application": "2.5",
         "Mobile phone number": "8105875070",
@@ -71,12 +83,17 @@
         "CGPA/ Percentage (last Edu)": "8.2",
         "years of experience in Web Application": "2.5",
         "Please provide your City respect to the state selected above": "Bangalore"
-
       }
     },
     {
       "name": "Muttu",
       "data": {
+        "EmailID": "mutturaja1996@gmail.com",
+        "Password": "15Muttu@05",
+        "JobTitle":"qa",
+        "JobLocation": "Karnataka, India",
+        "Experience": "2",
+        "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process",
         "years of experience": "2",
         "years of experience in Automation Cypress": "1",
         "Mobile phone number": "9343550736",
@@ -108,12 +125,17 @@
         "your City respect to the state selected above": "Bangalore",
         "CGPA/ Percentage (last Edu)": "8.5",
         "years of experience in Automation Framework": "3"
-
       }
     },
     {
       "name": "Yogi",
       "data": {
+        "EmailID": "yogishck6@gmail.com",
+        "Password": "Yogi@131994",
+        "JobTitle": "\"Software Test Engineer\" OR \"Software Tester\" OR \"QA Engineer\" AND (\"Manual Testing\" OR \"Automation Testing\" OR \"QA\")\n",
+        "JobLocation": "Karnataka, India",
+        "Experience": "3",
+        "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process",
         "years of experience": "3",
         "years of experience in Automation Cypress": "1",
         "Mobile phone number": "9945604439",
@@ -144,12 +166,17 @@
         "your City respect to the state selected above": "Bangalore",
         "CGPA/ Percentage (last Edu)": "8.5",
         "years of experience in Automation Framework": "3"
-
       }
     },
     {
       "name": "Pavan",
       "data": {
+        "EmailID": "pavanguggali5@gmail.com",
+        "Password": "Pavan@1995",
+        "JobTitle": "\"Software Test Engineer\" OR \"Software Tester\" OR \"QA Engineer\" AND (\"Manual Testing\" OR \"Automation Testing\" OR \"QA\")\n",
+        "JobLocation": "Karnataka, India",
+        "Experience": "3",
+        "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process",
         "years of experience": "4",
         "years of experience in Automation Cypress": "1",
         "Mobile phone number": "9035123096",
@@ -181,12 +208,17 @@
         "your City respect to the state selected above": "Bangalore",
         "CGPA/ Percentage (last Edu)": "8.5",
         "years of experience in Automation Framework": "3"
-
       }
     },
     {
       "name": "Jayanth",
       "data": {
+        "EmailID": "jayanth044@gmail.com",
+        "Password": "Jay@nth5589",
+        "JobTitle": "qa",
+        "JobLocation": "Karnataka, India",
+        "Experience": "8",
+        "Hiring Manager Message": "Hi, Pls find my resume and looking forward for the next Process",
         "years of experience": "8",
         "years of experience in Automation Cypress": "1",
         "Mobile phone number": "8553357225",
@@ -218,7 +250,6 @@
         "your City respect to the state selected above": "Bangalore",
         "CGPA/ Percentage (last Edu)": "8.5",
         "years of experience in Automation Framework": "3"
-
       }
     }
   ]

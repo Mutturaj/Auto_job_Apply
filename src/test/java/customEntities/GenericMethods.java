@@ -16,6 +16,7 @@ import java.util.Set;
 
 public class GenericMethods {
     public WebDriver driver;
+
     public void launchBrowser(String baseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
@@ -48,6 +49,7 @@ public class GenericMethods {
     public static boolean isElementListEmpty(List<WebElement> elements) {
         return elements == null || elements.isEmpty();
     }
+
     public void waitForElementToBeClickable(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -57,6 +59,7 @@ public class GenericMethods {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
     public void waitForElementToBeClickable(WebDriver driver, LocatorsDetails locatorsDetails) {
         By locator = getByFromDetails(locatorsDetails);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -83,9 +86,9 @@ public class GenericMethods {
 
     public void sendKeysToElement(WebDriver driver, LocatorsDetails locatorsDetails, String text) {
         WebElement element = waitForElement(driver, locatorsDetails);
-            element.click();
-            element.clear();
-            element.sendKeys(text);
+        element.click();
+        element.clear();
+        element.sendKeys(text);
     }
 
     public static WebElement waitForElement(WebDriver driver, LocatorsDetails locatorsDetails) {
@@ -116,6 +119,7 @@ public class GenericMethods {
             throw e;
         }
     }
+
     public boolean isElementPresent(WebDriver driver, LocatorsDetails locatorsDetails) {
         try {
             By locator = getByFromDetails(locatorsDetails);
@@ -128,7 +132,7 @@ public class GenericMethods {
 
     public void clickElement(WebDriver driver, LocatorsDetails locatorsDetails) {
         WebElement element = waitForElement(driver, locatorsDetails);
-            element.click();
+        element.click();
 
     }
 
@@ -210,6 +214,7 @@ public class GenericMethods {
             jsExecutor.executeScript("arguments[0].scrollTop += arguments[1]; arguments[0].scrollLeft += arguments[2];", element, yOffset, xOffset);
         }
     }
+
     public void scrollElementBy(WebDriver driver, LocatorsDetails locatorsDetails, int yOffset) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].scrollTop += arguments[1];", locatorsDetails, yOffset);
@@ -225,6 +230,7 @@ public class GenericMethods {
             System.out.println("Element not found: " + locatorsDetails);
         }
     }
+
     public void scrollToTop(WebDriver driver) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 0);");
@@ -253,7 +259,6 @@ public class GenericMethods {
             throw new NoSuchElementException("WebElement must not be null");
         }
     }
-
 
 
     public static class LocatorsDetails {

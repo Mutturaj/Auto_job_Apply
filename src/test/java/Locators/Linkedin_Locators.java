@@ -4,17 +4,17 @@ import customEntities.GenericMethods;
 
 public class Linkedin_Locators extends GenericMethods {
 
-    public GenericMethods.LocatorsDetails EmailID = new GenericMethods.LocatorsDetails("xpath", "//input[@id='username']", "EmailID Input");
+    public GenericMethods.LocatorsDetails EmailID = new GenericMethods.LocatorsDetails("xpath", "//input[@id='username' or @id='email-or-phone']", "EmailID Input");
     public GenericMethods.LocatorsDetails Password = new LocatorsDetails("xpath", "//input[@id='password']", "Password Input");
 
-    public GenericMethods.LocatorsDetails SignInButton = new LocatorsDetails("xpath", "//button[@type='submit']", "Sign in Button");
+    public GenericMethods.LocatorsDetails SignInButton = new LocatorsDetails("xpath", "//button[@type='submit' or @value='Agree & Join']", "Sign in Button");
     public GenericMethods.LocatorsDetails JobIcon = new LocatorsDetails("xpath", "//li-icon[@type='job']//*[name()='svg' and @class='mercado-match']", "Job Icon");
     public GenericMethods.LocatorsDetails SearchIcon = new LocatorsDetails("xpath", "//*[name()='svg' and @class='jobs-search-box__search-icon--custom']", "Search Icon");
     public GenericMethods.LocatorsDetails ShowAllButton = new LocatorsDetails("xpath", "//div[@class='discovery-templates-vertical-list__footer']/a[@href='https://www.linkedin.com/jobs/collections/recommended?discover=recommended&discoveryOrigin=JOBS_HOME_JYMBII']", "Show All Button");
     public GenericMethods.LocatorsDetails TitleOfJob = new LocatorsDetails("xpath", "//input[contains(@class, 'jobs-search-box__text-input') and contains(@class, 'jobs-search-global-typeahead__input')]", "Title of the Job Input");
     public GenericMethods.LocatorsDetails LocationOfJob = new LocatorsDetails("xpath", "//input[@aria-label=\"City, state, or zip code\" and contains(@id, 'jobs-search-box-location-id-')]", "Location of the Job");
     public GenericMethods.LocatorsDetails SearchBox = new LocatorsDetails("xpath", "//button[text()='Search']", "Search Box");
-    public GenericMethods.LocatorsDetails listOfJobs = new LocatorsDetails("xpath", "//li[contains(@class, 'job-card-container__apply-method') and contains(@class, 'job-card-container__footer-item') and contains(., 'Easy Apply')]", "List of Jobs");
+    public GenericMethods.LocatorsDetails listOfJobs = new LocatorsDetails("xpath", "//li[contains(@class, 'job-card-container__footer-item') and contains(., 'Easy Apply')]", "List of Jobs");
     public GenericMethods.LocatorsDetails EasyApplyFilter = new LocatorsDetails("xpath", "//button[@aria-label='Easy Apply filter.']", "Easy Apply Filter");
     public GenericMethods.LocatorsDetails listOfJobsFrame = new LocatorsDetails("cssSelector", ".scaffold-layout__list .jobs-search-results-list", "List of Jobs Frame");
     public GenericMethods.LocatorsDetails continueButton = new LocatorsDetails("xpath", "//div[@class='display-flex']//button//span[text()='Continue']", "Continue button");
@@ -41,5 +41,8 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails NotificationIcon = new LocatorsDetails("xpath", "//a[contains(@href, '/notifications/')]//li-icon[@type='bell-fill']", "Notification Icon");
     public GenericMethods.LocatorsDetails nextPage1 = new LocatorsDetails("xpath", "//button[@aria-label='View next page']", "Next Button");
     public GenericMethods.LocatorsDetails closeIcon = new LocatorsDetails("xpath", "//div[@aria-labelledby=\"post-apply-modal\"]//*[name()='svg'and @data-test-icon=\"close-medium\"]", "Close Icon");
+    public GenericMethods.LocatorsDetails profileIcon = new LocatorsDetails("xpath", "//span[@class='t-12 global-nav__primary-link-text' and text()='Me']", "Profile Icon");
+    public GenericMethods.LocatorsDetails LoginWithEmail = new LocatorsDetails("xpath", "//a[@class=\"sign-in-form__sign-in-cta my-2 py-1 btn-md btn-secondary block min-h-[40px] babybear:w-full\"]", "Login with Email button");
+    public GenericMethods.LocatorsDetails AgreeAndReJoinButton=new LocatorsDetails("xpath","//button[@value='Agree & Join']","Agree and Re-Join Button");
 
 }
