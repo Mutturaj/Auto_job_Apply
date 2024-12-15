@@ -1,4 +1,3 @@
-
 package AppConfg;
 
 public class DataConfig {

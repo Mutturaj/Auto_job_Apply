@@ -8,12 +8,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.time.Duration;
-
 
 @Listeners({ScreenshotListener.class})
 public class LinkedinTest {
@@ -22,7 +24,6 @@ public class LinkedinTest {
     GenericMethods generic = new GenericMethods();
     public LinkedinPage linkedinData;
 
-
     @BeforeClass
     @Parameters("baseURL1")
     public void setUp(String baseURL, ITestContext context) throws FileNotFoundException {
@@ -30,7 +31,6 @@ public class LinkedinTest {
         driver = generic.driver;
         linkedinData = new LinkedinPage(driver);
     }
-
 
     @Test(priority = 1, dataProvider = "login_cred", dataProviderClass = dataRead.class)
     public void applyJobFromSearchJob(String[] data, JavascriptExecutor js) throws InterruptedException, AWTException {
@@ -60,7 +60,7 @@ public class LinkedinTest {
     }
 
     @Test(priority = 4, dataProvider = "login_cred", dataProviderClass = dataRead.class)
-    public void SignOut(String[] data, JavascriptExecutor js) throws InterruptedException, AWTException, FileNotFoundException {
+    public void SignOut(String[] data, JavascriptExecutor js) throws InterruptedException, AWTException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         linkedinData.SignedOut(driver, wait);
 

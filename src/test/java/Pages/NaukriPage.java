@@ -17,13 +17,17 @@ import java.util.Set;
 
 public class NaukriPage extends GenericMethods {
     Naukri_Locators locators = new Naukri_Locators();
-    String datasetName = DataConfig.getInstance().getDatasetName();
-    QuestionAnswerHandler questionAnswerHandler = new QuestionAnswerHandler(datasetName);
+
+    QuestionAnswerHandler questionAnswerHandler;
 
     public NaukriPage(WebDriver driver) throws FileNotFoundException {
         PageFactory.initElements(driver, this);
-        questionAnswerHandler.initializeQuestionAnswerMap(datasetName);
+        String currentDatasetName = DataConfig.getInstance().getDatasetName();
 
+        if (currentDatasetName != null) {
+            questionAnswerHandler = new QuestionAnswerHandler(currentDatasetName);
+            questionAnswerHandler.initializeQuestionAnswerMap(currentDatasetName);
+        }
     }
 
     public void NaukriLogin(WebDriver driver, String[] data) throws InterruptedException {
@@ -164,6 +168,7 @@ public class NaukriPage extends GenericMethods {
 
                 if (!findElements(driver, locators.ApplyButton).isEmpty()) {
                     clickElement(driver, locators.ApplyButton);
+                    JobName(driver);
                     waitForPageLoad(driver);
                     Thread.sleep(2000);
                     handleChatbot(driver);
@@ -328,6 +333,14 @@ public class NaukriPage extends GenericMethods {
             }
         }
     }
-
+    private int appliedJobsCount=0;
+    private void JobName(WebDriver driver) {
+        waitForPageLoad(driver);
+        String jobTitle = findElement(driver, locators.JobTitle).getText();
+        String cleanJobTitle = jobTitle.replace("Apply to ", "");
+        appliedJobsCount++;
+        System.out.println("Applied to this Job from Naukri: " + cleanJobTitle);
+        System.out.println("Total Jobs Applied on Naukri: " + appliedJobsCount);
+    }
 }
 

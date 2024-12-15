@@ -41,6 +41,7 @@ public class LinkedinPage extends GenericMethods {
         }
     }
 
+
     public void navigateToJobs(WebDriver driver) throws InterruptedException {
         waitForPageLoad(driver);
         executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.JobIcon);
@@ -338,6 +339,7 @@ public class LinkedinPage extends GenericMethods {
 
     private boolean clickSubmitApplication(WebDriver driver) throws InterruptedException {
         boolean isSubmitted = false;
+        JobName(driver);
         List<WebElement> submitButtons = findElements(driver, locators.submitApplicationButton);
         if (!isElementListEmpty(submitButtons)) {
             scrollToElement(driver, locators.submitApplicationButton);
@@ -531,6 +533,15 @@ public class LinkedinPage extends GenericMethods {
         driver.get("https://www.linkedin.com/m/logout/");
         waitForPageLoad(driver);
         driver.navigate().refresh();
+    }
+    private int appliedJobsCount = 0;
+    private void JobName(WebDriver driver) {
+        waitForPageLoad(driver);
+        String jobTitle = findElement(driver, locators.JobTitle).getText();
+        String cleanJobTitle = jobTitle.replace("Apply to ", "");
+        appliedJobsCount++;
+        System.out.println("Applied to this Job from LinkedIn: " + cleanJobTitle);
+        System.out.println("Total Jobs Applied in LinkedIn: " + appliedJobsCount);
     }
 
 }
