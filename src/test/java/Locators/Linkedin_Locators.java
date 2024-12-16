@@ -29,7 +29,7 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails radioButtons1 = new LocatorsDetails("xpath", "//div[@class='fb-text-selectable__option display-flex']//input[@type='radio']", "List of Radio buttons");
     public GenericMethods.LocatorsDetails radioButtons2 = new LocatorsDetails("xpath", "//div[@class='fb-text-selectable__option display-flex']//input[@type='radio']", "Radio buttons");
     public GenericMethods.LocatorsDetails dropdownButtons = new LocatorsDetails("xpath", "//span[@class='visually-hidden']//following::select", "List of DropDowns");
-    public GenericMethods.LocatorsDetails checkBox = new LocatorsDetails("xpath", "//div[contains(@class, 'display-flex')]//input[@type='checkbox' and contains(@data-test-text-selectable-option__input, 'I Agree Terms & Conditions')]", "List of Checkbox");
+    public GenericMethods.LocatorsDetails checkBox = new LocatorsDetails("xpath", "//div[contains(@class, 'display-flex')]//input[@type='checkbox' and contains(@data-test-text-selectable-option__input, 'I Agree Terms & Conditions' or 'Yes') or @class='fb-form-element__checkbox']", "List of Checkbox");
     public GenericMethods.LocatorsDetails reviewButton = new LocatorsDetails("xpath", "//span[text()='Review']", "Review Button");
     public GenericMethods.LocatorsDetails AnswerTextfield = new LocatorsDetails("xpath", "//div[@class='artdeco-text-input--container ember-view']//input[@type='text']", "List of answers Textfield");
     public GenericMethods.LocatorsDetails Questions1 = new LocatorsDetails("xpath", "//div[@class='artdeco-text-input--container ember-view']//label[@class='artdeco-text-input--label']", "All Questions");

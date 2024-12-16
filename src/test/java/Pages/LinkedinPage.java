@@ -541,7 +541,7 @@ public class LinkedinPage extends GenericMethods {
         String cleanJobTitle = jobTitle.replace("Apply to ", "");
         appliedJobsCount++;
         System.out.println("Applied to this Job from LinkedIn: " + cleanJobTitle);
-        System.out.println("Total Jobs Applied in LinkedIn: " + appliedJobsCount);
+        System.out.println("Total Jobs Applied on LinkedIn: " + appliedJobsCount);
     }
 
 }

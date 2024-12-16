@@ -37,6 +37,7 @@ public class NaukriPage extends GenericMethods {
         clickElement(driver, locators.LoginButton);
         waitForPageLoad(driver);
         Thread.sleep(3000);
+        driver.navigate().refresh();
 
         if (!isElementPresent(driver, locators.chatBotPage)) {
             System.out.println("Chatbot is not present");
