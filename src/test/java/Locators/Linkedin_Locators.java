@@ -45,5 +45,5 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails profileIcon = new LocatorsDetails("xpath", "//span[@class='t-12 global-nav__primary-link-text' and text()='Me']", "Profile Icon");
     public GenericMethods.LocatorsDetails LoginWithEmail = new LocatorsDetails("xpath", "//a[@class=\"sign-in-form__sign-in-cta my-2 py-1 btn-md btn-secondary block min-h-[40px] babybear:w-full\"]", "Login with Email button");
     public GenericMethods.LocatorsDetails AgreeAndReJoinButton=new LocatorsDetails("xpath","//button[@value='Agree & Join']","Agree and Re-Join Button");
-
+    public GenericMethods.LocatorsDetails AppliedText=new LocatorsDetails("xpath","//li[contains(@class, 'job-card-container__footer-item') and contains(@class, 'job-card-container__footer-job-state') and contains(., 'Applied')]","Applied Text");
 }

@@ -97,71 +97,6 @@ public class LinkedinPage extends GenericMethods {
         Thread.sleep(4000);
     }
 
-    public void applyForJobs(WebDriver driver, WebDriverWait wait, JavascriptExecutor js, String[] data) throws InterruptedException {
-        int currentPage = 2;
-        int maxScrollAttempts = 10;
-        int scrollAttempts = 0;
-
-        while (true) {
-            List<WebElement> jobs = findElements(driver, locators.listOfJobs);
-            if (!isElementListEmpty(jobs)) {
-                for (int i = 0; i < jobs.size(); i++) {
-                    WebElement easyApply = jobs.get(i);
-                    try {
-                        executeJavaScript(driver, "arguments[0].scrollIntoView(true);", easyApply);
-                        wait.until(ExpectedConditions.elementToBeClickable(easyApply));
-                        easyApply.click();
-                        Thread.sleep(2000);
-                        if (isElementPresent(driver, locators.easyApplyButton) || isElementPresent(driver, locators.continueButton)) {
-                            executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.easyApplyButton);
-                            Thread.sleep(1000);
-                            ClickEasyApplyButtonORContinueButton(driver);
-                            handleJobApplicationProcess(driver, wait, data);
-                        } else {
-                            System.out.println("Easy Apply or Continue button not present on L2 page, marking this job as Applied and skipping.");
-                            driver.navigate().back();
-                            Thread.sleep(2000);
-                            executeJavaScript(driver, "arguments[0].textContent = 'Applied';", easyApply);
-                            Thread.sleep(2000);
-                            jobs = findElements(driver, locators.listOfJobs);
-                            i--;
-                        }
-
-                    } catch (ElementClickInterceptedException e) {
-                        System.out.println("ElementClickInterceptedException caught, moving to the next job.");
-                    }
-                }
-                Thread.sleep(4000);
-                scrollAttempts = 0;
-            } else {
-                boolean jobsFound = false;
-                boolean pagesFound = false;
-
-                while (!jobsFound && !pagesFound && scrollAttempts < maxScrollAttempts) {
-                    js.executeScript("document.querySelector('.scaffold-layout__list').scrollTop += 450;");
-
-                    //  js.executeScript("document.querySelector('.scaffold-layout__list .jobs-search-results-list').scrollTop += 450;");
-                    waitForPageLoad(driver);
-                    jobs = findElements(driver, locators.listOfJobs);
-                    jobsFound = !jobs.isEmpty();
-                    pagesFound = !findElements(driver, locators.listOfPages).isEmpty();
-                    scrollAttempts++;
-                }
-
-                if (!jobsFound && scrollAttempts >= maxScrollAttempts) {
-                    System.out.println("Reached maximum scroll attempts, navigating to next page...");
-                    if (navigatePagination(driver, currentPage)) {
-                        currentPage++;
-                        waitForPageLoad(driver);
-                        scrollAttempts = 0;
-                    } else {
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
     private boolean navigatePagination(WebDriver driver, int currentPage) {
         try {
             try {
@@ -534,7 +469,9 @@ public class LinkedinPage extends GenericMethods {
         waitForPageLoad(driver);
         driver.navigate().refresh();
     }
+
     private int appliedJobsCount = 0;
+
     private void JobName(WebDriver driver) {
         waitForPageLoad(driver);
         String jobTitle = findElement(driver, locators.JobTitle).getText();
@@ -542,6 +479,102 @@ public class LinkedinPage extends GenericMethods {
         appliedJobsCount++;
         System.out.println("Applied to this Job from LinkedIn: " + cleanJobTitle);
         System.out.println("Total Jobs Applied on LinkedIn: " + appliedJobsCount);
+    }
+
+    public void applyForJobs(WebDriver driver, WebDriverWait wait, JavascriptExecutor js, String[] data) throws InterruptedException {
+        int currentPage = 2;
+        int maxScrollAttempts = 10;
+
+        while (true) {
+            List<WebElement> jobs = findElements(driver, locators.listOfJobs);
+            if (!isElementListEmpty(jobs)) {
+                processJobList(driver, wait, js, jobs, data);
+            } else {
+                boolean jobsFound = scrollForJobs(driver, js, maxScrollAttempts);
+                if (!jobsFound) {
+                    if (navigateToNextPage(driver, currentPage)) {
+                        currentPage++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void processJobList(WebDriver driver, WebDriverWait wait, JavascriptExecutor js, List<WebElement> jobs, String[] data) throws InterruptedException {
+        for (int i = 0; i < jobs.size(); i++) {
+            WebElement easyApply = jobs.get(i);
+            try {
+                scrollToElement(driver, easyApply);
+                waitUntilClickable(wait, easyApply);
+                easyApply.click();
+                Thread.sleep(2000);
+
+                if (isEasyApplyOrContinuePresent(driver)) {
+                    handleEasyApply(driver, wait, data);
+                } else {
+                    markJobAsApplied(driver, easyApply);
+                    i--; // Recheck the updated list
+                }
+            } catch (ElementClickInterceptedException e) {
+                System.out.println("ElementClickInterceptedException caught, moving to the next job.");
+            }
+        }
+        Thread.sleep(4000);
+    }
+
+    private boolean scrollForJobs(WebDriver driver, JavascriptExecutor js, int maxScrollAttempts) {
+        int scrollAttempts = 0;
+        boolean jobsFound = false;
+        boolean pagesFound = false;
+
+        while (!jobsFound && !pagesFound && scrollAttempts < maxScrollAttempts) {
+            js.executeScript("document.querySelector('.scaffold-layout__list').scrollTop += 450;");
+            waitForPageLoad(driver);
+
+            jobsFound = !findElements(driver, locators.listOfJobs).isEmpty();
+            pagesFound = !findElements(driver, locators.listOfPages).isEmpty();
+            scrollAttempts++;
+        }
+
+        return jobsFound;
+    }
+
+    private boolean navigateToNextPage(WebDriver driver, int currentPage) {
+        System.out.println("Reached maximum scroll attempts, navigating to next page...");
+        if (navigatePagination(driver, currentPage)) {
+            waitForPageLoad(driver);
+            return true;
+        }
+        return false;
+    }
+
+    private void scrollToElement(WebDriver driver, WebElement element) {
+        executeJavaScript(driver, "arguments[0].scrollIntoView(true);", element);
+    }
+
+    private void waitUntilClickable(WebDriverWait wait, WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    private boolean isEasyApplyOrContinuePresent(WebDriver driver) {
+        return isElementPresent(driver, locators.easyApplyButton) || isElementPresent(driver, locators.continueButton);
+    }
+
+    private void handleEasyApply(WebDriver driver, WebDriverWait wait, String[] data) throws InterruptedException {
+        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.easyApplyButton);
+        Thread.sleep(1000);
+        ClickEasyApplyButtonORContinueButton(driver);
+        handleJobApplicationProcess(driver, wait, data);
+    }
+
+    private void markJobAsApplied(WebDriver driver, WebElement easyApply) throws InterruptedException {
+        System.out.println("Easy Apply or Continue button not present on L2 page, marking this job as Applied and skipping.");
+        driver.navigate().back();
+        Thread.sleep(2000);
+        executeJavaScript(driver, "arguments[0].textContent = 'Applied';", easyApply);
+        Thread.sleep(2000);
     }
 
 }

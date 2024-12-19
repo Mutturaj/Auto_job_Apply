@@ -340,7 +340,7 @@ public class NaukriPage extends GenericMethods {
         String jobTitle = findElement(driver, locators.JobTitle).getText();
         String cleanJobTitle = jobTitle.replace("Apply to ", "");
         appliedJobsCount++;
-        System.out.println("Applied to this Job from Naukri: " + cleanJobTitle);
+        System.out.println("Applied to  Job from Naukri: " + cleanJobTitle);
         System.out.println("Total Jobs Applied on Naukri: " + appliedJobsCount);
     }
 }
