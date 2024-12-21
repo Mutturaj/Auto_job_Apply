@@ -312,29 +312,49 @@ public class NaukriPage extends GenericMethods {
 
     public void handleDOB(WebDriver driver) throws InterruptedException {
         List<WebElement> dobFields = findElements(driver, locators.DOBfield);
-        for (WebElement dobField : dobFields) {
-            String placeholder = dobField.getAttribute("placeholder");
-            String ariaLabel = dobField.getAttribute("aria-label");
-            String fieldType = (placeholder != null && !placeholder.isEmpty()) ? placeholder :
-                    (ariaLabel != null && !ariaLabel.isEmpty()) ? ariaLabel : "";
 
-            String answer = "";
-            if (fieldType.contains("Day") || fieldType.equalsIgnoreCase("DD")) {
-                answer = questionAnswerHandler.getAnswer("DD");
-            } else if (fieldType.contains("Month") || fieldType.equalsIgnoreCase("MM")) {
-                answer = questionAnswerHandler.getAnswer("MM");
-            } else if (fieldType.contains("Year") || fieldType.equalsIgnoreCase("YYYY")) {
-                answer = questionAnswerHandler.getAnswer("YYYY");
+        if (dobFields.isEmpty()) {
+            System.out.println("No DOB fields found on the page.");
+            return;
+        }
+        String questionText = findElement(driver, locators.chatBotQuestion).getText();
+        String dateValue = questionAnswerHandler.getAnswer(questionText);
+        if (dateValue != null && !dateValue.isEmpty()) {
+            String[] dateParts = dateValue.split("/");
+            String day = dateParts[0];
+            String month = dateParts[1];
+            String year = dateParts[2];
+
+            for (WebElement dobField : dobFields) {
+                String placeholder = dobField.getAttribute("placeholder");
+                String ariaLabel = dobField.getAttribute("aria-label");
+                String fieldType = (placeholder != null && !placeholder.isEmpty()) ? placeholder :
+                        (ariaLabel != null && !ariaLabel.isEmpty()) ? ariaLabel : "";
+
+                String answer = "";
+
+                if (fieldType.contains("Day") || fieldType.equalsIgnoreCase("DD")) {
+                    answer = day;
+                } else if (fieldType.contains("Month") || fieldType.equalsIgnoreCase("MM")) {
+                    answer = month;
+                } else if (fieldType.contains("Year") || fieldType.equalsIgnoreCase("YYYY")) {
+                    answer = year;
+                }
+
+                if (answer != null && !answer.isEmpty()) {
+                    dobField.sendKeys(answer);
+                } else {
+                    System.out.println("Unrecognized DOB field type, using generic input: " + fieldType);
+                    dobField.sendKeys("01");  // Default value for unrecognized fields
+                }
             }
-            if (answer != null && !answer.isEmpty()) {
-                dobField.sendKeys(answer);
-            } else {
-                System.out.println("Unrecognized DOB field type, using generic input: " + fieldType);
-                dobField.sendKeys("01");
-            }
+        } else {
+            System.out.println("No valid date found for the question: " + questionText);
         }
     }
-    private int appliedJobsCount=0;
+
+    private int appliedJobsCount = 0;
+
     private void JobName(WebDriver driver) {
         waitForPageLoad(driver);
         String jobTitle = findElement(driver, locators.JobTitle).getText();
