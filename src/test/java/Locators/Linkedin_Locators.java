@@ -18,7 +18,7 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails EasyApplyFilter = new LocatorsDetails("xpath", "//button[@aria-label='Easy Apply filter.']", "Easy Apply Filter");
     public GenericMethods.LocatorsDetails listOfJobsFrame = new LocatorsDetails("cssSelector", ".scaffold-layout__list .jobs-search-results-list", "List of Jobs Frame");
     public GenericMethods.LocatorsDetails continueButton = new LocatorsDetails("xpath", "//div[@class='display-flex']//button//span[text()='Continue']", "Continue button");
-    public GenericMethods.LocatorsDetails easyApplyButton = new LocatorsDetails("xpath", "//button[@class='jobs-apply-button artdeco-button artdeco-button--3 artdeco-button--primary ember-view']//span[text()='Easy Apply' and @class='artdeco-button__text']", "Easy Apply button");
+    public GenericMethods.LocatorsDetails easyApplyButton = new LocatorsDetails("xpath", "//button[contains(normalize-space(@class), 'jobs-apply-button artdeco-button artdeco-button--3 artdeco-button--primary ember-view')]//span[text()='Easy Apply']", "Easy Apply button");
     public GenericMethods.LocatorsDetails JobTitle=new LocatorsDetails("xpath","//h2[@id='jobs-apply-header']","Job Name");
     public GenericMethods.LocatorsDetails discard = new LocatorsDetails("xpath", "//button[@data-control-name='discard_application_confirm_btn']//span[text()='Discard']", "Discard Button");
     public GenericMethods.LocatorsDetails listOfPages = new LocatorsDetails("xpath", "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[contains(@aria-label, 'Page')]", "List of Pages");
@@ -29,13 +29,15 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails radioButtons1 = new LocatorsDetails("xpath", "//div[@class='fb-text-selectable__option display-flex']//input[@type='radio']", "List of Radio buttons");
     public GenericMethods.LocatorsDetails radioButtons2 = new LocatorsDetails("xpath", "//div[@class='fb-text-selectable__option display-flex']//input[@type='radio']", "Radio buttons");
     public GenericMethods.LocatorsDetails dropdownButtons = new LocatorsDetails("xpath", "//span[@class='visually-hidden']//following::select", "List of DropDowns");
-    public GenericMethods.LocatorsDetails checkBox = new LocatorsDetails("xpath", "//div[contains(@class, 'display-flex')]//input[@type='checkbox' and contains(@data-test-text-selectable-option__input, 'I Agree Terms & Conditions' or 'Yes') or @class='fb-form-element__checkbox']", "List of Checkbox");
+    public GenericMethods.LocatorsDetails checkBox = new LocatorsDetails("xpath", "//input[@type='checkbox' and contains(@class, 'fb-form-element__checkbox')]", "List of Checkbox");
     public GenericMethods.LocatorsDetails reviewButton = new LocatorsDetails("xpath", "//span[text()='Review']", "Review Button");
     public GenericMethods.LocatorsDetails AnswerTextfield = new LocatorsDetails("xpath", "//div[@class='artdeco-text-input--container ember-view']//input[@type='text']", "List of answers Textfield");
     public GenericMethods.LocatorsDetails Questions1 = new LocatorsDetails("xpath", "//div[@class='artdeco-text-input--container ember-view']//label[@class='artdeco-text-input--label']", "All Questions");
     public GenericMethods.LocatorsDetails Question2 = new LocatorsDetails("xpath", "//span[@class='jobs-easy-apply-form-section__group-title t-14']", "All Questions");
     public GenericMethods.LocatorsDetails Question3 = new LocatorsDetails("xpath", "//label[contains(@class, 'fb-dash-form-element__label')]//span[contains(., 'Location (city)')][1]", "Email or Location text");
     public GenericMethods.LocatorsDetails cityName = new LocatorsDetails("xpath", "//input[contains(@id, 'location-GEO-LOCATION') or contains(@id, 'city-HOME-CITY')]", "Enter City Name");
+    public GenericMethods.LocatorsDetails radioButtons=new LocatorsDetails("xpath",".//input[@type='radio' and @value='Yes']","Radio button");
+   public GenericMethods.LocatorsDetails radioGroups=new LocatorsDetails("xpath","//fieldset[@data-test-form-builder-radio-button-form-component='true']","Radio Groups");
     public GenericMethods.LocatorsDetails DoneButton = new LocatorsDetails("xpath", "//span[text()='Done']", "Done button");
     public GenericMethods.LocatorsDetails textAreaFiled = new LocatorsDetails("xpath", "//textarea[contains(@class, 'artdeco-text-input__textarea') and @required]", "Text Area Filed");
     public GenericMethods.LocatorsDetails viewJobsButton = new LocatorsDetails("xpath", "//span[@class='artdeco-button__text']//span[1]", "View Jobs Button");

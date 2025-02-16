@@ -16,6 +16,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
@@ -291,7 +293,7 @@ public class LinkedinPage extends GenericMethods {
         for (int i = 0; i < radioGroups.size(); i++) {
             WebElement group = radioGroups.get(i);
             System.out.println("Processing group " + (i + 1) + ": " + group.getText());
-            List<WebElement> radioButtons = group.findElements(By.xpath(".//input[@type='radio']"));
+            List<WebElement> radioButtons = group.findElements(By.xpath(".//input[@type='radio' and @value='Yes']"));
             System.out.println("Total radio buttons found in group " + (i + 1) + ": " + radioButtons.size());
 
             boolean yesFound = false;
@@ -331,7 +333,6 @@ public class LinkedinPage extends GenericMethods {
         }
     }
 
-
     private void handleDropdowns(WebDriver driver, WebDriverWait wait) throws InterruptedException {
         List<WebElement> dropdowns = findElements(driver, locators.dropdownButtons);
         if (!dropdowns.isEmpty()) {
@@ -349,7 +350,6 @@ public class LinkedinPage extends GenericMethods {
             System.out.println("No Dropdowns found");
         }
     }
-
 
     private void handleCheckboxes(WebDriver driver, WebDriverWait wait) throws InterruptedException {
         List<WebElement> checkboxes = findElements(driver, locators.checkBox);
@@ -577,6 +577,15 @@ public class LinkedinPage extends GenericMethods {
         Thread.sleep(2000);
     }
 
+    public void DynamicDateSelector() {
+        LocalDate today = LocalDate.now();
+        LocalDate targetDate = today.plusDays(15);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy'.'");
+        String formattedDate = targetDate.format(formatter);
+        String dynamicXPath = "//button[@aria-label='" + formattedDate + "']";
+        System.out.println("Dynamic XPath: " + dynamicXPath);
+
+    }
 }
 
 
