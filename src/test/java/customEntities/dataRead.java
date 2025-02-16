@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.DataProvider;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import AppConfg.DataConfig;
+
 import static Test.LinkedinTest.driver;
 
 public class dataRead {
@@ -28,7 +30,8 @@ public class dataRead {
         String datasetName = DataConfig.getInstance().getDatasetName();
 
         JsonParser jsonParser = new JsonParser();
-        FileReader reader = new FileReader("C:\\Users\\Welcome\\Downloads\\testrail_poc-master\\AutoJob_Apply\\dataset.json");
+        String filePath = System.getProperty("user.dir") + File.separator +"dataset.json";
+        FileReader reader = new FileReader(filePath);
         Object obj = jsonParser.parse(reader);
         JsonObject userlogin = (JsonObject) obj;
         JsonArray userloginsarray = (JsonArray) userlogin.get(dataKey);

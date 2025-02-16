@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -23,7 +24,8 @@ public class QuestionAnswerHandler {
 
     public void initializeQuestionAnswerMap(String datasetName) throws FileNotFoundException {
         JsonParser jsonParser = new JsonParser();
-        FileReader reader = new FileReader("C:\\Users\\Welcome\\Downloads\\testrail_poc-master\\AutoJob_Apply\\dataset.json");
+        String filePath = System.getProperty("user.dir") + File.separator +"dataset.json";
+        FileReader reader = new FileReader(filePath);
         JsonObject obj = (JsonObject) jsonParser.parse(reader);
         JsonArray datasets = obj.getAsJsonArray("datasets");
 
