@@ -19,7 +19,7 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails listOfJobsFrame = new LocatorsDetails("cssSelector", ".scaffold-layout__list .jobs-search-results-list", "List of Jobs Frame");
     public GenericMethods.LocatorsDetails continueButton = new LocatorsDetails("xpath", "//div[@class='display-flex']//button//span[text()='Continue']", "Continue button");
     public GenericMethods.LocatorsDetails easyApplyButton = new LocatorsDetails("xpath", "//button[contains(normalize-space(@class), 'jobs-apply-button artdeco-button artdeco-button--3 artdeco-button--primary ember-view')]//span[text()='Easy Apply']", "Easy Apply button");
-    public GenericMethods.LocatorsDetails JobTitle=new LocatorsDetails("xpath","//h2[@id='jobs-apply-header']","Job Name");
+    public GenericMethods.LocatorsDetails JobTitle = new LocatorsDetails("xpath", "//h2[@id='jobs-apply-header']", "Job Name");
     public GenericMethods.LocatorsDetails discard = new LocatorsDetails("xpath", "//button[@data-control-name='discard_application_confirm_btn']//span[text()='Discard']", "Discard Button");
     public GenericMethods.LocatorsDetails listOfPages = new LocatorsDetails("xpath", "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[contains(@aria-label, 'Page')]", "List of Pages");
     public GenericMethods.LocatorsDetails dot = new LocatorsDetails("xpath", "//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li//button[contains(@aria-label, 'Page')]", "Dots in the list of the pages");
@@ -36,8 +36,8 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails Question2 = new LocatorsDetails("xpath", "//span[@class='jobs-easy-apply-form-section__group-title t-14']", "All Questions");
     public GenericMethods.LocatorsDetails Question3 = new LocatorsDetails("xpath", "//label[contains(@class, 'fb-dash-form-element__label')]//span[contains(., 'Location (city)')][1]", "Email or Location text");
     public GenericMethods.LocatorsDetails cityName = new LocatorsDetails("xpath", "//input[contains(@id, 'location-GEO-LOCATION') or contains(@id, 'city-HOME-CITY')]", "Enter City Name");
-    public GenericMethods.LocatorsDetails radioButtons=new LocatorsDetails("xpath",".//input[@type='radio' and @value='Yes']","Radio button");
-   public GenericMethods.LocatorsDetails radioGroups=new LocatorsDetails("xpath","//fieldset[@data-test-form-builder-radio-button-form-component='true']","Radio Groups");
+    public GenericMethods.LocatorsDetails radioButtons = new LocatorsDetails("xpath", ".//input[@type='radio' and @value='Yes']", "Radio button");
+    public GenericMethods.LocatorsDetails radioGroups = new LocatorsDetails("xpath", "//fieldset[@data-test-form-builder-radio-button-form-component='true']", "Radio Groups");
     public GenericMethods.LocatorsDetails DoneButton = new LocatorsDetails("xpath", "//span[text()='Done']", "Done button");
     public GenericMethods.LocatorsDetails textAreaFiled = new LocatorsDetails("xpath", "//textarea[contains(@class, 'artdeco-text-input__textarea') and @required]", "Text Area Filed");
     public GenericMethods.LocatorsDetails viewJobsButton = new LocatorsDetails("xpath", "//span[@class='artdeco-button__text']//span[1]", "View Jobs Button");
@@ -46,6 +46,8 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails closeIcon = new LocatorsDetails("xpath", "//div[@aria-labelledby=\"post-apply-modal\"]//*[name()='svg'and @data-test-icon=\"close-medium\"]", "Close Icon");
     public GenericMethods.LocatorsDetails profileIcon = new LocatorsDetails("xpath", "//span[@class='t-12 global-nav__primary-link-text' and text()='Me']", "Profile Icon");
     public GenericMethods.LocatorsDetails LoginWithEmail = new LocatorsDetails("xpath", "//a[@class=\"sign-in-form__sign-in-cta my-2 py-1 btn-md btn-secondary block min-h-[40px] babybear:w-full\"]", "Login with Email button");
-    public GenericMethods.LocatorsDetails AgreeAndReJoinButton=new LocatorsDetails("xpath","//button[@value='Agree & Join']","Agree and Re-Join Button");
-    public GenericMethods.LocatorsDetails AppliedText=new LocatorsDetails("xpath","//li[contains(@class, 'job-card-container__footer-item') and contains(@class, 'job-card-container__footer-job-state') and contains(., 'Applied')]","Applied Text");
+    public GenericMethods.LocatorsDetails AgreeAndReJoinButton = new LocatorsDetails("xpath", "//button[@value='Agree & Join']", "Agree and Re-Join Button");
+    public GenericMethods.LocatorsDetails AppliedText = new LocatorsDetails("xpath", "//li[contains(@class, 'job-card-container__footer-item') and contains(@class, 'job-card-container__footer-job-state') and contains(., 'Applied')]", "Applied Text");
+
+    public GenericMethods.LocatorsDetails DateTextField = new LocatorsDetails("xpath", "//input[@placeholder='mm/dd/yyyy']", "Date Text field");
 }

@@ -292,43 +292,26 @@ public class LinkedinPage extends GenericMethods {
 
         for (int i = 0; i < radioGroups.size(); i++) {
             WebElement group = radioGroups.get(i);
-            System.out.println("Processing group " + (i + 1) + ": " + group.getText());
-            List<WebElement> radioButtons = group.findElements(By.xpath(".//input[@type='radio' and @value='Yes']"));
-            System.out.println("Total radio buttons found in group " + (i + 1) + ": " + radioButtons.size());
+            System.out.println("Processing group " + (i + 1));
 
-            boolean yesFound = false;
-            boolean anySelected = false;
+            List<WebElement> radioButtons = group.findElements(By.xpath(".//input[@type='radio']"));
+            System.out.println("Total radio buttons in group " + (i + 1) + ": " + radioButtons.size());
 
-            for (WebElement radioButton : radioButtons) {
-                System.out.println("Radio button ID: " + radioButton.getAttribute("id"));
-                if (radioButton.isSelected()) {
-                    anySelected = true;
-                    System.out.println("Radio button already selected in group " + (i + 1) + ".");
-                    break;
-                }
-            }
-
-            if (!anySelected) {
-                for (WebElement radioButton : radioButtons) {
-                    String radioId = radioButton.getAttribute("id");
-                    WebElement label = driver.findElement(By.xpath("//label[@for='" + radioId + "']"));
-                    System.out.println("Label text: " + label.getText());
-                    if (label.getText().equalsIgnoreCase("Yes")) {
-                        label.click();
-                        System.out.println("Selected 'Yes' in group " + (i + 1) + ".");
-                        yesFound = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!yesFound && !anySelected) {
+            if (!radioButtons.isEmpty()) {
                 WebElement firstRadioButton = radioButtons.get(0);
-                String firstRadioId = firstRadioButton.getAttribute("id");
-                WebElement firstLabel = driver.findElement(By.xpath("//label[@for='" + firstRadioId + "']"));
-                firstLabel.click();
-                System.out.println("Selected first available option in group " + (i + 1) + ".");
+
+                if (!firstRadioButton.isSelected()) {
+                    String firstRadioId = firstRadioButton.getAttribute("id");
+                    WebElement firstLabel = driver.findElement(By.xpath("//label[@for='" + firstRadioId + "']"));
+                    firstLabel.click();
+                    System.out.println("Selected first available option in group " + (i + 1) + ".");
+                } else {
+                    System.out.println("First option in group " + (i + 1) + " is already selected. Skipping.");
+                }
+            } else {
+                System.out.println("No radio buttons found in group " + (i + 1) + ".");
             }
+
             Thread.sleep(2000);
         }
     }
@@ -434,6 +417,7 @@ public class LinkedinPage extends GenericMethods {
             handleRadioButtons1(driver);
             handleDropdowns(driver, wait);
             handleCheckboxes(driver, wait);
+            JoiningDate(driver);
             textAreaFiled1(driver, data);
             scrollToElement(driver, locators.nextButton);
         }
@@ -446,6 +430,7 @@ public class LinkedinPage extends GenericMethods {
             handleDropdowns(driver, wait);
             handleRadioButtons1(driver);
             handleCheckboxes(driver, wait);
+            JoiningDate(driver);
             textAreaFiled1(driver, data);
             scrollToElement(driver, locators.reviewButton);
             waitForElement(driver, locators.reviewButton);
@@ -577,15 +562,33 @@ public class LinkedinPage extends GenericMethods {
         Thread.sleep(2000);
     }
 
-    public void DynamicDateSelector() {
+    public void JoiningDate(WebDriver driver) throws InterruptedException {
+        waitForPageLoad(driver);
+        if (!findElements(driver, locators.DateTextField).isEmpty()) {
+            clickElement(driver, locators.DateTextField);
+            Thread.sleep(2000);
+            DynamicDateSelector(driver);
+        }
+    }
+
+    public void DynamicDateSelector(WebDriver driver) {
         LocalDate today = LocalDate.now();
         LocalDate targetDate = today.plusDays(15);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy'.'");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy");
         String formattedDate = targetDate.format(formatter);
-        String dynamicXPath = "//button[@aria-label='" + formattedDate + "']";
+        String dynamicXPath = "//button[@aria-label='" + formattedDate + ".']";
         System.out.println("Dynamic XPath: " + dynamicXPath);
 
+        try {
+            WebElement dateButton = driver.findElement(By.xpath(dynamicXPath));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", dateButton);
+            dateButton.click();
+            System.out.println("Selected date: " + formattedDate);
+        } catch (NoSuchElementException e) {
+            System.out.println("Date button not found for: " + formattedDate);
+        }
     }
+
 }
 
 
