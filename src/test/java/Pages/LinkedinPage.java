@@ -86,7 +86,7 @@ public class LinkedinPage extends GenericMethods {
         Thread.sleep(1000);
         executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.LocationOfJob);
         executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.LocationOfJob);
-        sendKeysToElement(driver, locators.LocationOfJob, data[5]);
+        sendKeysToElement(driver, locators.LocationOfJob, data[4]);
         waitForPageLoad(driver);
         WebElement locationElement = findElement(driver, locators.LocationOfJob);
         Thread.sleep(1000);
