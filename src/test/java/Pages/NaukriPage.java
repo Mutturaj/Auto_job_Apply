@@ -37,7 +37,13 @@ public class NaukriPage extends GenericMethods {
         clickElement(driver, locators.LoginButton);
         waitForPageLoad(driver);
         Thread.sleep(3000);
+    }
+
+    public void NaukriUpdate(WebDriver driver) throws InterruptedException {
+        waitForPageLoad(driver);
+        driver.get("https://www.naukri.com/mnjuser/profile");
         driver.navigate().refresh();
+        Thread.sleep(2000);
 
         if (!isElementPresent(driver, locators.chatBotPage)) {
             System.out.println("Chatbot is not present");
@@ -73,12 +79,6 @@ public class NaukriPage extends GenericMethods {
                 isChatbotActive = false;
             }
         }
-    }
-
-    public void NaukriUpdate(WebDriver driver) throws InterruptedException {
-        waitForPageLoad(driver);
-        driver.get("https://www.naukri.com/mnjuser/profile");
-        //clickElement(driver, locators.ViewProfile);
         waitForPageLoad(driver);
         clickElement(driver, locators.EditIcon);
         Thread.sleep(3000);
@@ -98,13 +98,13 @@ public class NaukriPage extends GenericMethods {
         Thread.sleep(2000);
         clickElement(driver, locators.SearchIcon1);
         waitForPageLoad(driver);
-        sendKeysToElement(driver, locators.Designation, data[2]);
+        sendKeysToElement(driver, locators.Designation, data[3]);
         clickElement(driver, locators.ExperienceButton);
-        String experience = data[4].replace("\"", "");
+        String experience = data[5].replace("\"", "");
         String xpath = "//span[.='" + experience + " years']";
         WebElement exper = driver.findElement(By.xpath(xpath));
         exper.click();
-        sendKeysToElement(driver, locators.Location, data[3]);
+        sendKeysToElement(driver, locators.Location, data[4]);
         clickElement(driver, locators.SearchIcon2);
         waitForPageLoad(driver);
         JobsApply(driver);

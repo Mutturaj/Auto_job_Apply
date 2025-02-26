@@ -21,7 +21,7 @@ public class dataRead {
 
     @DataProvider(name = "login_cred")
     public Object[][] Jsonreader() throws FileNotFoundException {
-        List<String> keys = Arrays.asList("EmailID", "Password", "JobTitle", "JobLocation", "Experience", "Hiring Manager Message");
+        List<String> keys = Arrays.asList("EmailID", "Password", "LinkedInJobTitle","NaukriJobTitle", "JobLocation", "Experience", "Hiring Manager Message");
         return provideLoginCredentials("datasets", keys); // Pass keys dynamically
     }
 
