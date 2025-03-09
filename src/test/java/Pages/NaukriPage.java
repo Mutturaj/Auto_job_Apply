@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -107,6 +108,7 @@ public class NaukriPage extends GenericMethods {
         sendKeysToElement(driver, locators.Location, data[4]);
         clickElement(driver, locators.SearchIcon2);
         waitForPageLoad(driver);
+        Thread.sleep(2000);
         JobsApply(driver);
 
     }
@@ -169,8 +171,13 @@ public class NaukriPage extends GenericMethods {
 
                 if (!findElements(driver, locators.ApplyButton).isEmpty()) {
                     clickElement(driver, locators.ApplyButton);
-                    JobName(driver);
                     waitForPageLoad(driver);
+                    Thread.sleep(1000);
+                    if (!findElements(driver, locators.ReachedMaxLimit).isEmpty()) {
+                        System.out.println("Reached Max Limit exciting the Job Application Process");
+                        driver.quit();
+                    }
+                    JobName(driver);
                     Thread.sleep(2000);
                     handleChatbot(driver);
 
@@ -194,123 +201,8 @@ public class NaukriPage extends GenericMethods {
         }
     }
 
-//    public void handleChatbot(WebDriver driver) throws InterruptedException {
-//        waitForPageLoad(driver);
-//        if (!isElementPresent(driver, locators.chatBotPage)) {
-//            System.out.println("Chatbot is not present");
-//            return;
-//        }
-//
-//        boolean isChatbotActive = true;
-//        while (isChatbotActive) {
-//            waitForPageLoad(driver);
-//
-//            boolean skipButtonClicked = false;
-//            boolean answerProvided = false;
-//
-//            if (isElementPresent(driver, locators.skipThisQues)) {
-//                clickElement(driver, locators.skipThisQues);
-//                skipButtonClicked = true;
-//                Thread.sleep(2000);
-//                continue;
-//            }
-//
-//            if (!findElements(driver, locators.DOBfield).isEmpty()) {
-//                handleDOB(driver);
-//                answerProvided = true;
-//            }
-//
-//            if (!answerProvided && isElementPresent(driver, locators.answerTextFiled)) {
-//                WebElement answerInput = findElement(driver, locators.answerTextFiled);
-//                if (answerInput != null && answerInput.isDisplayed() && answerInput.isEnabled()) {
-//                    Thread.sleep(1000);
-//                    List<WebElement> questionElement = findElements(driver, locators.chatBotQuestion);
-//                    WebElement latestQuestionElement = questionElement.get(questionElement.size() - 1); // Get the last question
-//                    String latestQuestionText = latestQuestionElement.getText();
-//                    String answers = questionAnswerHandler.getAnswer(latestQuestionText);
-//                    sendKeysToElement(driver, locators.answerTextFiled, answers);
-//                    Thread.sleep(2000);
-//                    answerProvided = true;
-//                } else {
-//                    System.out.println("Answer input field is not interactable or not found.");
-//                }
-//            }
-//
-//            if (!answerProvided && !findElements(driver, locators.RadioButtons).isEmpty()) {
-//                List<WebElement> radioButtons = findElements(driver, locators.RadioButtons);
-//                WebElement firstRadioButton = radioButtons.get(0);
-//                try {
-//                    if (firstRadioButton.isDisplayed() && firstRadioButton.isEnabled()) {
-//                        firstRadioButton.click();
-//                    } else {
-//                        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", firstRadioButton);
-//                    }
-//                    Thread.sleep(2000);
-//                    answerProvided = true;
-//                } catch (Exception e) {
-//                    System.out.println("Error clicking radio button: " + e.getMessage());
-//                }
-//            }
-//
-//            if (!answerProvided) {
-//                List<WebElement> checkboxes = findElements(driver, locators.checkbox);
-//                for (WebElement checkbox : checkboxes) {
-//                    if (checkbox.isDisplayed() && checkbox.isEnabled()) {
-//                        if (!checkbox.isSelected()) {
-//                            checkbox.click();
-//                            Thread.sleep(1000);
-//                        } else {
-//                            System.out.println("Checkbox already selected.");
-//                        }
-//                        answerProvided = true;
-//                    } else {
-//                        System.out.println("Checkbox is not interactable.");
-//                    }
-//                }
-//            }
-//            if (!answerProvided && !findElements(driver, locators.yesButton).isEmpty()) {
-//                clickElement(driver, locators.yesButton);
-//                answerProvided = true;
-//            }
-//
-//            if (!answerProvided && !findElements(driver, locators.SearchFiled).isEmpty()) {
-//                List<WebElement> questionElement1 = findElements(driver, locators.chatBotQuestion);
-//                WebElement latestQuestionElement1 = questionElement1.get(questionElement1.size() - 1);
-//                String latestQuestionText1 = latestQuestionElement1.getText();
-//                String answers = questionAnswerHandler.getAnswer(latestQuestionText1);
-//                sendKeysToElement(driver, locators.SearchFiled, answers);
-//                Thread.sleep(2000);
-//                clickElement(driver, locators.suggestionList);
-//                answerProvided = true;
-//            }
-//
-//            if (answerProvided && !skipButtonClicked && findElement(driver, locators.saveButtonContainer) != null) {
-//                WebElement saveButtonContainer = findElement(driver, locators.saveButtonContainer);
-//                WebElement saveButton = saveButtonContainer.findElement(By.className("sendMsg"));
-//                if (saveButton.isEnabled()) {
-//                    saveButton.click();
-//                    waitForPageLoad(driver);
-//                } else {
-//                    System.out.println("Save button is present but not enabled.");
-//                }
-//            } else {
-//                if (skipButtonClicked) {
-//                    System.out.println("Skip button was clicked, not processing save button.");
-//                } else {
-//                    System.out.println("Save button is not enabled, visible, or answer not provided.");
-//                }
-//            }
-//            Thread.sleep(2000);
-//            if (!isElementPresent(driver, locators.chatBotPage)) {
-//                isChatbotActive = false;
-//            } else {
-//                System.out.println("Chatbot is still active, processing next question.");
-//            }
-//        }
-//        System.out.println("Chatbot handling completed");
-//    }
-
     public void handleDOB(WebDriver driver) throws InterruptedException {
+        waitForPageLoad(driver);
         List<WebElement> dobFields = findElements(driver, locators.DOBfield);
 
         if (dobFields.isEmpty()) {
@@ -319,6 +211,7 @@ public class NaukriPage extends GenericMethods {
         }
         String questionText = findElement(driver, locators.chatBotQuestion).getText();
         String dateValue = questionAnswerHandler.getAnswer(questionText);
+        Thread.sleep(1000);
         if (dateValue != null && !dateValue.isEmpty()) {
             String[] dateParts = dateValue.split("/");
             String day = dateParts[0];
@@ -428,6 +321,8 @@ public class NaukriPage extends GenericMethods {
     }
 
     private boolean handleTextFieldAnswer(WebDriver driver) throws InterruptedException {
+        waitForPageLoad(driver);
+        Thread.sleep(1000);
         if (isElementPresent(driver, locators.answerTextFiled)) {
             WebElement answerInput = findElement(driver, locators.answerTextFiled);
             if (answerInput != null && answerInput.isDisplayed() && answerInput.isEnabled()) {
@@ -445,6 +340,8 @@ public class NaukriPage extends GenericMethods {
     }
 
     private boolean handleRadioButtons(WebDriver driver) throws InterruptedException {
+        waitForPageLoad(driver);
+        Thread.sleep(1000);
         List<WebElement> radioButtons = findElements(driver, locators.RadioButtons);
         if (!radioButtons.isEmpty()) {
             WebElement firstRadioButton = radioButtons.get(0);
@@ -464,6 +361,7 @@ public class NaukriPage extends GenericMethods {
     }
 
     private boolean handleCheckboxes(WebDriver driver) throws InterruptedException {
+        waitForPageLoad(driver);
         List<WebElement> checkboxes = findElements(driver, locators.checkbox);
         for (WebElement checkbox : checkboxes) {
             if (checkbox.isDisplayed() && checkbox.isEnabled()) {
@@ -488,6 +386,7 @@ public class NaukriPage extends GenericMethods {
     }
 
     private boolean handleSearchField(WebDriver driver) throws InterruptedException {
+        waitForPageLoad(driver);
         if (!findElements(driver, locators.SearchFiled).isEmpty()) {
             List<WebElement> questionElement = findElements(driver, locators.chatBotQuestion);
             WebElement latestQuestionElement = questionElement.get(questionElement.size() - 1);
@@ -502,6 +401,7 @@ public class NaukriPage extends GenericMethods {
     }
 
     private void handleSaveButton(WebDriver driver, boolean skipButtonClicked, boolean answerProvided) throws InterruptedException {
+        waitForPageLoad(driver);
         if (answerProvided && !skipButtonClicked && findElement(driver, locators.saveButtonContainer) != null) {
             WebElement saveButtonContainer = findElement(driver, locators.saveButtonContainer);
             WebElement saveButton = saveButtonContainer.findElement(By.className("sendMsg"));

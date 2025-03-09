@@ -8,8 +8,7 @@ import com.google.gson.JsonParser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +23,7 @@ public class QuestionAnswerHandler {
 
     public void initializeQuestionAnswerMap(String datasetName) throws FileNotFoundException {
         JsonParser jsonParser = new JsonParser();
-        String filePath = System.getProperty("user.dir") + File.separator +"dataset.json";
+        String filePath = System.getProperty("user.dir") + File.separator + "dataset.json";
         FileReader reader = new FileReader(filePath);
         JsonObject obj = (JsonObject) jsonParser.parse(reader);
         JsonArray datasets = obj.getAsJsonArray("datasets");
@@ -41,6 +40,36 @@ public class QuestionAnswerHandler {
             }
         }
     }
+
+//    public String getAnswer(String question) {
+//        String normalizedQuestion = normalizeText(question);
+//        String bestMatchKey = null;
+//        int bestMatchScore = 0;
+//
+//        for (Map.Entry<String, String> entry : questionAnswerMap.entrySet()) {
+//            String key = normalizeText(entry.getKey());
+//            int matchScore = calculateMatchScore(normalizedQuestion, key);
+//
+//            if (matchScore > bestMatchScore) {
+//                bestMatchScore = matchScore;
+//                bestMatchKey = key;
+//            }
+//        }
+//
+//        if (bestMatchKey != null) {
+//            System.out.println("Best Match Found: " + bestMatchKey + " -> " + questionAnswerMap.get(bestMatchKey));
+//            return questionAnswerMap.get(bestMatchKey);
+//        }
+//        System.out.println("No match found.");
+//        return "3";
+//    }
+//
+//    private int calculateMatchScore(String question, String key) {
+//        Set<String> questionWords = new HashSet<>(Arrays.asList(question.split("\\s+")));
+//        Set<String> keyWords = new HashSet<>(Arrays.asList(key.split("\\s+")));
+//        questionWords.retainAll(keyWords);
+//        return questionWords.size();
+//    }
 
     public String getAnswer(String question) {
         String normalizedQuestion = normalizeText(question);
@@ -67,7 +96,9 @@ public class QuestionAnswerHandler {
     }
 
     private String normalizeText(String text) {
-        return text.toLowerCase().replaceAll("[^a-zA-Z0-9 ]", " ").trim();
+        return text.toLowerCase()
+                .replaceAll("[^a-zA-Z0-9 ]", " ")
+                .trim();
     }
 
     public Map<String, String> getQuestionAnswerMap() {

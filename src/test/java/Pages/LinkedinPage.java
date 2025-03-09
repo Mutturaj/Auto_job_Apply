@@ -495,6 +495,10 @@ public class LinkedinPage extends GenericMethods {
                 waitUntilClickable(wait, easyApply);
                 easyApply.click();
                 Thread.sleep(2000);
+                if (!findElements(driver,locators.reachedMaxLimit).isEmpty()){
+                    System.out.println("Reached Max Limit so stopped the JOB Application Process");
+                    throw new RuntimeException("Easy Apply limit reached");
+                }
 
                 if (isEasyApplyOrContinuePresent(driver)) {
                     handleEasyApply(driver, wait, data);

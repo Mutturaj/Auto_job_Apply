@@ -34,4 +34,5 @@ public class Naukri_Locators {
     public GenericMethods.LocatorsDetails SearchFiled = new GenericMethods.LocatorsDetails("xpath", "//div[@class='ssc__input-container']/input", "Search Textfield");
     public GenericMethods.LocatorsDetails DOBfield = new GenericMethods.LocatorsDetails("xpath", "//div[@class='dob__input-container']//input[contains(@id, 'dobInput')]", "DOB Filed");
     public GenericMethods.LocatorsDetails suggestionList = new GenericMethods.LocatorsDetails("xpath", "//div[@id='ssc__option_0']//div[@class='ssc__heading']", "Suggestion list");
+    public GenericMethods.LocatorsDetails ReachedMaxLimit=new GenericMethods.LocatorsDetails("xpath","//span[.='There was an error while processing your request, please try again later']","Reached Max Limit");
 }
