@@ -170,6 +170,7 @@ public class NaukriPage extends GenericMethods {
                 driver.switchTo().window(newWindow);
 
                 if (!findElements(driver, locators.ApplyButton).isEmpty()) {
+                    JobName(driver);
                     clickElement(driver, locators.ApplyButton);
                     waitForPageLoad(driver);
                     Thread.sleep(1000);
@@ -177,7 +178,6 @@ public class NaukriPage extends GenericMethods {
                         System.out.println("Reached Max Limit exciting the Job Application Process");
                         driver.quit();
                     }
-                    JobName(driver);
                     Thread.sleep(2000);
                     handleChatbot(driver);
 
@@ -203,6 +203,7 @@ public class NaukriPage extends GenericMethods {
 
     public void handleDOB(WebDriver driver) throws InterruptedException {
         waitForPageLoad(driver);
+        Thread.sleep(1000);
         List<WebElement> dobFields = findElements(driver, locators.DOBfield);
 
         if (dobFields.isEmpty()) {
