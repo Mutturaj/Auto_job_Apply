@@ -49,5 +49,9 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails AgreeAndReJoinButton = new LocatorsDetails("xpath", "//button[@value='Agree & Join']", "Agree and Re-Join Button");
     public GenericMethods.LocatorsDetails AppliedText = new LocatorsDetails("xpath", "//li[contains(@class, 'job-card-container__footer-item') and contains(@class, 'job-card-container__footer-job-state') and contains(., 'Applied')]", "Applied Text");
     public GenericMethods.LocatorsDetails DateTextField = new LocatorsDetails("xpath", "//input[@placeholder='mm/dd/yyyy']", "Date Text field");
-    public GenericMethods.LocatorsDetails reachedMaxLimit=new LocatorsDetails("xpath","//span[text()='You’ve reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']","Reached Max limit");
+    public GenericMethods.LocatorsDetails reachedMaxLimit = new LocatorsDetails("xpath", "//span[text()='You’ve reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']", "Reached Max limit");
+    public GenericMethods.LocatorsDetails AllFiltersButton = new LocatorsDetails("xpath", "//button[text()='All filters']", "All filters Button");
+    public GenericMethods.LocatorsDetails JobTitleCheckbox = new LocatorsDetails("xpath", "//h3[text()='Title']/ancestor::fieldset//input[@name='title-filter-value']", "Jobs Title Check Boxes");
+    public GenericMethods.LocatorsDetails JobTitleFilter = new LocatorsDetails("xpath", "//h3[text()='Title']", "Job Titel Filter");
+    public GenericMethods.LocatorsDetails ShowAllResults = new LocatorsDetails("xpath", "//button[@data-test-reusables-filters-modal-show-results-button='true']", "Show All results Button");
 }

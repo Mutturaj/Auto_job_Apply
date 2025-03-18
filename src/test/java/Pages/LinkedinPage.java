@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
@@ -94,8 +93,23 @@ public class LinkedinPage extends GenericMethods {
         waitForPageLoad(driver);
         executeJavaScript(driver, "arguments[0].removeAttribute('aria-checked');", locators.EasyApplyFilter);
         Thread.sleep(1000);
+        ApplyFilters(driver);
+    }
+
+    public void ApplyFilters(WebDriver driver) throws InterruptedException {
+        Thread.sleep(1000);
         clickElement(driver, locators.EasyApplyFilter);
         waitForPageLoad(driver);
+        clickElement(driver, locators.AllFiltersButton);
+        Thread.sleep(2000);
+        scrollToElement(driver, locators.JobTitleFilter);
+        List<WebElement> AllJobTitles = findElements(driver, locators.JobTitleCheckbox);
+        for (WebElement checkbox : findElements(driver, locators.JobTitleCheckbox)) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+        }
+        Thread.sleep(2000);
+        clickElement(driver, locators.ShowAllResults);
+        System.out.println("Applied advanced filters");
         Thread.sleep(4000);
     }
 
@@ -495,7 +509,7 @@ public class LinkedinPage extends GenericMethods {
                 waitUntilClickable(wait, easyApply);
                 easyApply.click();
                 Thread.sleep(2000);
-                if (!findElements(driver,locators.reachedMaxLimit).isEmpty()){
+                if (!findElements(driver, locators.reachedMaxLimit).isEmpty()) {
                     System.out.println("Reached Max Limit so stopped the JOB Application Process");
                     throw new RuntimeException("Easy Apply limit reached");
                 }

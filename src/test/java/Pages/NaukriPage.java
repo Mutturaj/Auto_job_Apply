@@ -22,7 +22,7 @@ public class NaukriPage extends GenericMethods {
     QuestionAnswerHandler questionAnswerHandler;
 
     public NaukriPage(WebDriver driver) throws FileNotFoundException {
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(driver,this);
         String currentDatasetName = DataConfig.getInstance().getDatasetName();
 
         if (currentDatasetName != null) {
@@ -215,6 +215,8 @@ public class NaukriPage extends GenericMethods {
         Thread.sleep(1000);
         if (dateValue != null && !dateValue.isEmpty()) {
             String[] dateParts = dateValue.split("/");
+            System.out.println("DOB is "+ Arrays.toString(dateParts));
+
             String day = dateParts[0];
             String month = dateParts[1];
             String year = dateParts[2];
