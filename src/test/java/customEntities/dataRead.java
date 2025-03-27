@@ -21,7 +21,7 @@ public class dataRead {
 
     @DataProvider(name = "login_cred")
     public Object[][] Jsonreader() throws FileNotFoundException {
-        List<String> keys = Arrays.asList("EmailID", "Password", "LinkedInJobTitle","NaukriJobTitle", "JobLocation", "Experience", "Hiring Manager Message");
+        List<String> keys = Arrays.asList("EmailID", "Password", "LinkedInJobTitle", "NaukriJobTitle", "JobLocation", "Experience", "Hiring Manager Message");
         return provideLoginCredentials("datasets", keys); // Pass keys dynamically
     }
 
@@ -30,7 +30,7 @@ public class dataRead {
         String datasetName = DataConfig.getInstance().getDatasetName();
 
         JsonParser jsonParser = new JsonParser();
-        String filePath = System.getProperty("user.dir") + File.separator +"dataset.json";
+        String filePath = System.getProperty("user.dir") + File.separator + "dataset.json";
         FileReader reader = new FileReader(filePath);
         Object obj = jsonParser.parse(reader);
         JsonObject userlogin = (JsonObject) obj;

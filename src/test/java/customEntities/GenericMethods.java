@@ -20,10 +20,16 @@ public class GenericMethods {
     public void launchBrowser(String baseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        driver = new ChromeDriver(options);
+        this.driver = new ChromeDriver(options);
         driver.get(baseURL);
         System.setProperty("webdriver.chrome.logfile", "path/to/chromedriver.log");
         System.setProperty("webdriver.chrome.verboseLogging", "true");
+
+        if (this.driver == null) {
+            System.out.println("ERROR: WebDriver is NULL after launchBrowser()!");
+        } else {
+            System.out.println("SUCCESS: WebDriver initialized correctly.");
+        }
     }
 
     public static WebElement findElement(WebDriver driver, LocatorsDetails locatorsDetails) {

@@ -27,9 +27,17 @@ public class LinkedinTest {
     @BeforeClass
     @Parameters("baseURL1")
     public void setUp(String baseURL, ITestContext context) throws FileNotFoundException {
+        System.out.println("Launching browser...");
         generic.launchBrowser(baseURL);
-        driver = generic.driver;
+        driver = generic.driver;  // Ensure WebDriver instance is assigned
         linkedinData = new LinkedinPage(driver);
+
+        if (driver == null) {
+            System.out.println("WebDriver is NULL in setUp! Cannot set context attribute.");
+        } else {
+            System.out.println("WebDriver is successfully set in setUp. Storing in context...");
+            context.setAttribute("WebDriver", driver);
+        }
     }
 
     @Test(priority = 1, dataProvider = "login_cred", dataProviderClass = dataRead.class)
@@ -40,6 +48,7 @@ public class LinkedinTest {
         linkedinData.searchForJobs(driver, data);
         linkedinData.ZoomOut(driver);
         linkedinData.applyForJobs(driver, wait, js, data);
+
 
     }
 

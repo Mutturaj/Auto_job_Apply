@@ -19,28 +19,42 @@ public class ScreenshotListener implements ITestListener {
     @Override
     public void onStart(ITestContext context) {
         this.driver = (WebDriver) context.getAttribute("WebDriver");
+
+        if (this.driver == null) {
+            System.out.println("WebDriver is NULL in ScreenshotListener's onStart()! Check if setUp() stored it correctly.");
+        } else {
+            System.out.println("WebDriver is successfully retrieved in ScreenshotListener.");
+        }
     }
+
 
     @Override
     public void onTestFailure(ITestResult result) {
-        if (driver != null) {
-            System.out.println("Driver is set, taking screenshot for failure in " + result.getMethod().getMethodName());
+        if (this.driver == null) {
+            System.out.println("WebDriver is NULL inside onTestFailure! Attempting to retrieve again from context...");
+            this.driver = (WebDriver) result.getTestContext().getAttribute("WebDriver");
+        }
+
+        if (this.driver != null) {
+            System.out.println("Driver retrieved, taking screenshot for failure in " + result.getMethod().getMethodName());
             takeScreenshot(result.getMethod().getMethodName());
         } else {
-            System.out.println("WebDriver is null. Cannot take screenshot.");
+            System.out.println("WebDriver is still NULL after re-attempt. Cannot take screenshot.");
         }
     }
+
 
     private void takeScreenshot(String methodName) {
         File screenshotDir = new File(System.getProperty("user.dir") + "/screenshots/");
         if (!screenshotDir.exists() && !screenshotDir.mkdir()) {
-            System.out.println("Failed to create directory: " + screenshotDir.getAbsolutePath());
+            System.out.println("Failed to create screenshot directory: " + screenshotDir.getAbsolutePath());
             return;
         }
+
         try {
-            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File srcFile = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.FILE);
             String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-            String filePath = screenshotDir.getAbsolutePath() + "/" + methodName + "_" + timestamp + ".png";
+            String filePath = screenshotDir.getAbsolutePath() + "/" + methodName + "_" + timestamp + ".jpg";
             FileUtils.copyFile(srcFile, new File(filePath));
             System.out.println("Screenshot saved at: " + filePath);
         } catch (IOException e) {
@@ -49,4 +63,3 @@ public class ScreenshotListener implements ITestListener {
         }
     }
 }
-
