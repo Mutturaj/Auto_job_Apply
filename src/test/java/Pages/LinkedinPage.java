@@ -94,6 +94,7 @@ public class LinkedinPage extends GenericMethods {
         executeJavaScript(driver, "arguments[0].removeAttribute('aria-checked');", locators.EasyApplyFilter);
         Thread.sleep(1000);
         ApplyFilters(driver);
+       // DatePosted(driver);
     }
 
     public void ApplyFilters(WebDriver driver) throws InterruptedException {
@@ -111,6 +112,34 @@ public class LinkedinPage extends GenericMethods {
         clickElement(driver, locators.ShowAllResults);
         System.out.println("Applied advanced filters");
         Thread.sleep(4000);
+    }
+    public void DatePosted(WebDriver driver) throws InterruptedException {
+        Thread.sleep(1000);
+        clickElement(driver, locators.EasyApplyFilter);
+        waitForPageLoad(driver);
+        Thread.sleep(1000);
+        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.DatePostedButton);
+        Thread.sleep(1000);
+        clickElement(driver,locators.DatePostedButton);
+        waitForPageLoad(driver);
+        Thread.sleep(1000);
+        clickElement(driver,locators.PastWeekButton);
+        waitForPageLoad(driver);
+        Thread.sleep(2000);
+        List<WebElement> buttons = driver.findElements(By.xpath(
+                "//button[contains(@class, 'artdeco-button') and contains(@class, 'artdeco-button--primary') and .//span[starts-with(normalize-space(.), 'Show ') and contains(normalize-space(.), 'results')]]"
+        ));
+        for (WebElement btn : buttons) {
+            String text = btn.getText().trim();
+            if (text.matches("Show \\d+ results")) {
+                btn.click();
+                break;
+            }
+        }
+
+        Thread.sleep(4000);
+
+
     }
 
     private boolean navigatePagination(WebDriver driver, int currentPage) {

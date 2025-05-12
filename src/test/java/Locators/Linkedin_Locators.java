@@ -2,6 +2,7 @@ package Locators;
 
 import customEntities.GenericMethods;
 
+
 public class Linkedin_Locators extends GenericMethods {
 
     public GenericMethods.LocatorsDetails EmailID = new GenericMethods.LocatorsDetails("xpath", "//input[@id='username' or @id='email-or-phone']", "EmailID Input");
@@ -14,7 +15,7 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails TitleOfJob = new LocatorsDetails("xpath", "//input[contains(@class, 'jobs-search-box__text-input') and contains(@class, 'jobs-search-global-typeahead__input')]", "Title of the Job Input");
     public GenericMethods.LocatorsDetails LocationOfJob = new LocatorsDetails("xpath", "//input[@aria-label=\"City, state, or zip code\" and contains(@id, 'jobs-search-box-location-id-')]", "Location of the Job");
     public GenericMethods.LocatorsDetails SearchBox = new LocatorsDetails("xpath", "//button[text()='Search']", "Search Box");
-    public GenericMethods.LocatorsDetails listOfJobs = new LocatorsDetails("xpath", "//li[contains(@class, 'job-card-container__job-insight-flavor-pill')]//div[contains(@class, 'job-card-container__job-insight-text') and contains(., 'Easy Apply')] | //li[contains(@class, 'job-card-container__footer-item')]//span[contains(., 'Easy Apply')]", "List of Jobs");
+    public GenericMethods.LocatorsDetails listOfJobs = new LocatorsDetails("xpath", "//span[normalize-space()='Easy Apply']/ancestor::li[1]", "List of Jobs");
     public GenericMethods.LocatorsDetails EasyApplyFilter = new LocatorsDetails("xpath", "//button[@aria-label='Easy Apply filter.']", "Easy Apply Filter");
     public GenericMethods.LocatorsDetails listOfJobsFrame = new LocatorsDetails("cssSelector", ".scaffold-layout__list .jobs-search-results-list", "List of Jobs Frame");
     public GenericMethods.LocatorsDetails continueButton = new LocatorsDetails("xpath", "//div[@class='display-flex']//button//span[text()='Continue']", "Continue button");
@@ -51,7 +52,10 @@ public class Linkedin_Locators extends GenericMethods {
     public GenericMethods.LocatorsDetails DateTextField = new LocatorsDetails("xpath", "//input[@placeholder='mm/dd/yyyy']", "Date Text field");
     public GenericMethods.LocatorsDetails reachedMaxLimit = new LocatorsDetails("xpath", "//span[text()='You’ve reached the Easy Apply application limit for today. Save this job and come back tomorrow to continue applying.']", "Reached Max limit");
     public GenericMethods.LocatorsDetails AllFiltersButton = new LocatorsDetails("xpath", "//button[text()='All filters']", "All filters Button");
+    public GenericMethods.LocatorsDetails DatePostedButton=new LocatorsDetails("xpath","//button[text()='Date posted']","Date Posted button");
+    public GenericMethods.LocatorsDetails PastWeekButton=new LocatorsDetails("xpath","//span[text()='Past week']","Past Week");
     public GenericMethods.LocatorsDetails JobTitleCheckbox = new LocatorsDetails("xpath", "//h3[text()='Title']/ancestor::fieldset//input[@name='title-filter-value']", "Jobs Title Check Boxes");
     public GenericMethods.LocatorsDetails JobTitleFilter = new LocatorsDetails("xpath", "//h3[text()='Title']", "Job Titel Filter");
     public GenericMethods.LocatorsDetails ShowAllResults = new LocatorsDetails("xpath", "//button[@data-test-reusables-filters-modal-show-results-button='true']", "Show All results Button");
+
 }
