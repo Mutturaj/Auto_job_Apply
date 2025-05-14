@@ -91,10 +91,11 @@ public class LinkedinPage extends GenericMethods {
         Thread.sleep(1000);
         actions.sendKeys(locationElement, Keys.ENTER).perform();
         waitForPageLoad(driver);
-        executeJavaScript(driver, "arguments[0].removeAttribute('aria-checked');", locators.EasyApplyFilter);
+        // executeJavaScript(driver, "arguments[0].removeAttribute('aria-checked');", locators.EasyApplyFilter);
         Thread.sleep(1000);
-        ApplyFilters(driver);
-       // DatePosted(driver);
+        clickElement(driver, locators.EasyApplyFilter);
+        //ApplyFilters(driver);
+        // DatePosted(driver);
     }
 
     public void ApplyFilters(WebDriver driver) throws InterruptedException {
@@ -113,6 +114,7 @@ public class LinkedinPage extends GenericMethods {
         System.out.println("Applied advanced filters");
         Thread.sleep(4000);
     }
+
     public void DatePosted(WebDriver driver) throws InterruptedException {
         Thread.sleep(1000);
         clickElement(driver, locators.EasyApplyFilter);
@@ -120,10 +122,10 @@ public class LinkedinPage extends GenericMethods {
         Thread.sleep(1000);
         executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.DatePostedButton);
         Thread.sleep(1000);
-        clickElement(driver,locators.DatePostedButton);
+        clickElement(driver, locators.DatePostedButton);
         waitForPageLoad(driver);
         Thread.sleep(1000);
-        clickElement(driver,locators.PastWeekButton);
+        clickElement(driver, locators.PastWeekButton);
         waitForPageLoad(driver);
         Thread.sleep(2000);
         List<WebElement> buttons = driver.findElements(By.xpath(
