@@ -83,17 +83,17 @@ public class LinkedinPage extends GenericMethods {
         actions.sendKeys(titleElement, Keys.ENTER).perform();
         waitForPageLoad(driver);
         Thread.sleep(1000);
-        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.LocationOfJob);
-        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.LocationOfJob);
-        sendKeysToElement(driver, locators.LocationOfJob, data[4]);
-        waitForPageLoad(driver);
-        WebElement locationElement = findElement(driver, locators.LocationOfJob);
-        Thread.sleep(1000);
-        actions.sendKeys(locationElement, Keys.ENTER).perform();
-        waitForPageLoad(driver);
-        // executeJavaScript(driver, "arguments[0].removeAttribute('aria-checked');", locators.EasyApplyFilter);
-        Thread.sleep(1000);
-        clickElement(driver, locators.EasyApplyFilter);
+//        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.LocationOfJob);
+//        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.LocationOfJob);
+//        sendKeysToElement(driver, locators.LocationOfJob, data[4]);
+//        waitForPageLoad(driver);
+//        WebElement locationElement = findElement(driver, locators.LocationOfJob);
+//        Thread.sleep(1000);
+//        actions.sendKeys(locationElement, Keys.ENTER).perform();
+//        waitForPageLoad(driver);
+//        // executeJavaScript(driver, "arguments[0].removeAttribute('aria-checked');", locators.EasyApplyFilter);
+//        Thread.sleep(1000);
+//        clickElement(driver, locators.EasyApplyFilter);
         //ApplyFilters(driver);
         // DatePosted(driver);
     }

@@ -17,7 +17,7 @@ import java.util.Set;
 public class GenericMethods {
     public WebDriver driver;
 
-    public void launchBrowser(String baseURL) {
+    public WebDriver launchBrowser(String baseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         this.driver = new ChromeDriver(options);
@@ -30,6 +30,7 @@ public class GenericMethods {
         } else {
             System.out.println("SUCCESS: WebDriver initialized correctly.");
         }
+        return driver;
     }
 
     public static WebElement findElement(WebDriver driver, LocatorsDetails locatorsDetails) {
