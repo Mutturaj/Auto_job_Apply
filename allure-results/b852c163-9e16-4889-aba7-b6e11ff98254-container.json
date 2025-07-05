@@ -1,0 +1,1 @@
+{"uuid":"b852c163-9e16-4889-aba7-b6e11ff98254","name":"Test.NaukariTest","children":["cec839a0-7cd1-4f3f-9ee4-f86087396095"],"befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1751187942759,"stop":1751187945542}],"afters":[],"start":1751187942722,"stop":1751189290835}

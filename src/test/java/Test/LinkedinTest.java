@@ -28,8 +28,7 @@ public class LinkedinTest {
     @Parameters("baseURL1")
     public void setUp(String baseURL, ITestContext context) throws FileNotFoundException {
         System.out.println("Launching browser...");
-        generic.launchBrowser(baseURL);
-        driver = generic.driver;  // Ensure WebDriver instance is assigned
+        driver=generic.launchBrowser(baseURL);
         linkedinData = new LinkedinPage(driver);
 
         if (driver == null) {
