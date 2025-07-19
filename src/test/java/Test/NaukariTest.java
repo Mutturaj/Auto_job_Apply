@@ -10,6 +10,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 @Listeners({ScreenshotListener.class})
@@ -21,7 +22,7 @@ public class NaukariTest {
 
     @BeforeClass
     @Parameters("baseURL2")
-    public void setUp(String baseURL, ITestContext context) throws FileNotFoundException {
+    public void setUp(String baseURL, ITestContext context) throws IOException {
         driver=generic.launchBrowser(baseURL);
         naukaridata = new NaukriPage(driver);
         if (driver == null) {
@@ -33,7 +34,7 @@ public class NaukariTest {
     }
 
     @Test(priority = 1, dataProvider = "login_cred", dataProviderClass = dataRead.class)
-    public void verifyLoginAndUpdateProfile(String[] data, JavascriptExecutor js) throws InterruptedException {
+    public void verifyLoginAndUpdateProfile(String[] data, JavascriptExecutor js) throws InterruptedException, IOException {
         naukaridata.NaukriLogin(driver, data);
         naukaridata.NaukriUpdate(driver);
         naukaridata.JobApplyFromSearch(driver, data);

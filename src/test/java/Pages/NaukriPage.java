@@ -3,13 +3,12 @@ package Pages;
 import AppConfg.DataConfig;
 import Locators.Naukri_Locators;
 import customEntities.GenericMethods;
+import java.io.IOException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,17 +16,20 @@ import java.util.List;
 import java.util.Set;
 
 public class NaukriPage extends GenericMethods {
+
     Naukri_Locators locators = new Naukri_Locators();
 
     QuestionAnswerHandler questionAnswerHandler;
+    OpenAIClient openAIClient;
+    String currentDatasetName = DataConfig.getInstance().getDatasetName();
+    String profile = ProfileFormatter.loadProfileAsPrompt("Muttu", "C:\\Users\\Welcome\\Downloads\\testrail_poc-master\\AutoJob_Apply\\dataset.json");
 
-    public NaukriPage(WebDriver driver) throws FileNotFoundException {
-        PageFactory.initElements(driver,this);
-        String currentDatasetName = DataConfig.getInstance().getDatasetName();
+    public NaukriPage(WebDriver driver) throws IOException {
+        PageFactory.initElements(driver, this);
 
         if (currentDatasetName != null) {
-            questionAnswerHandler = new QuestionAnswerHandler(currentDatasetName);
-            questionAnswerHandler.initializeQuestionAnswerMap(currentDatasetName);
+            openAIClient = new OpenAIClient(profile);
+            //  questionAnswerHandler.initializeQuestionAnswerMap(currentDatasetName);
         }
     }
 
@@ -86,14 +88,14 @@ public class NaukriPage extends GenericMethods {
         clickElement(driver, locators.SaveButton);
     }
 
-    public void JobApplyFrom_Recommended(WebDriver driver) throws InterruptedException {
+    public void JobApplyFrom_Recommended(WebDriver driver) throws InterruptedException, IOException {
         waitForPageLoad(driver);
         clickElement(driver, locators.JobButton);
         waitForPageLoad(driver);
         JobsApply(driver);
     }
 
-    public void JobApplyFromSearch(WebDriver driver, String data[]) throws InterruptedException {
+    public void JobApplyFromSearch(WebDriver driver, String data[]) throws InterruptedException, IOException {
         waitForPageLoad(driver);
         scrollToTop(driver);
         Thread.sleep(2000);
@@ -113,7 +115,7 @@ public class NaukriPage extends GenericMethods {
 
     }
 
-    private void JobsApply(WebDriver driver) throws InterruptedException {
+    private void JobsApply(WebDriver driver) throws InterruptedException, IOException {
         applyJobsOnCurrentPage(driver);
 
         while (true) {
@@ -142,7 +144,7 @@ public class NaukriPage extends GenericMethods {
         }
     }
 
-    private void applyJobsOnCurrentPage(WebDriver driver) throws InterruptedException {
+    private void applyJobsOnCurrentPage(WebDriver driver) throws InterruptedException, IOException {
         Thread.sleep(2000);
         List<WebElement> jobList = new ArrayList<>();
         if (isElementPresent(driver, locators.listOfJobs)) {
@@ -201,7 +203,7 @@ public class NaukriPage extends GenericMethods {
         }
     }
 
-    public void handleDOB(WebDriver driver) throws InterruptedException {
+    public void handleDOB(WebDriver driver) throws InterruptedException, IOException {
         waitForPageLoad(driver);
         Thread.sleep(1000);
         List<WebElement> dobFields = findElements(driver, locators.DOBfield);
@@ -211,11 +213,11 @@ public class NaukriPage extends GenericMethods {
             return;
         }
         String questionText = findElement(driver, locators.chatBotQuestion).getText();
-        String dateValue = questionAnswerHandler.getAnswer(questionText);
+        String dateValue = openAIClient.getAnswer(questionText + " pls give me single ans", profile);
         Thread.sleep(1000);
         if (dateValue != null && !dateValue.isEmpty()) {
             String[] dateParts = dateValue.split("/");
-            System.out.println("DOB is "+ Arrays.toString(dateParts));
+            System.out.println("DOB is " + Arrays.toString(dateParts));
 
             String day = dateParts[0];
             String month = dateParts[1];
@@ -260,8 +262,9 @@ public class NaukriPage extends GenericMethods {
         System.out.println("Total Jobs Applied on Naukri: " + appliedJobsCount);
     }
 
-    public void handleChatbot(WebDriver driver) throws InterruptedException {
+    public void handleChatbot(WebDriver driver) throws InterruptedException, IOException {
         waitForPageLoad(driver);
+        Thread.sleep(1000);
         if (!isElementPresent(driver, locators.chatBotPage)) {
             System.out.println("Chatbot is not present");
             return;
@@ -294,7 +297,7 @@ public class NaukriPage extends GenericMethods {
         return false;
     }
 
-    private boolean handleAnswers(WebDriver driver) throws InterruptedException {
+    private boolean handleAnswers(WebDriver driver) throws InterruptedException, IOException {
         if (!findElements(driver, locators.DOBfield).isEmpty()) {
             handleDOB(driver);
             return true;
@@ -323,7 +326,7 @@ public class NaukriPage extends GenericMethods {
         return false;
     }
 
-    private boolean handleTextFieldAnswer(WebDriver driver) throws InterruptedException {
+    private boolean handleTextFieldAnswer(WebDriver driver) throws InterruptedException, IOException {
         waitForPageLoad(driver);
         Thread.sleep(1000);
         if (isElementPresent(driver, locators.answerTextFiled)) {
@@ -333,7 +336,7 @@ public class NaukriPage extends GenericMethods {
                 List<WebElement> questionElement = findElements(driver, locators.chatBotQuestion);
                 WebElement latestQuestionElement = questionElement.get(questionElement.size() - 1);
                 String latestQuestionText = latestQuestionElement.getText();
-                String answers = questionAnswerHandler.getAnswer(latestQuestionText);
+                String answers = openAIClient.getAnswer(latestQuestionText + " pls give me single ans", profile);
                 sendKeysToElement(driver, locators.answerTextFiled, answers);
                 Thread.sleep(2000);
                 return true;
@@ -344,7 +347,7 @@ public class NaukriPage extends GenericMethods {
 
     private boolean handleRadioButtons(WebDriver driver) throws InterruptedException {
         waitForPageLoad(driver);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         List<WebElement> radioButtons = findElements(driver, locators.RadioButtons);
         if (!radioButtons.isEmpty()) {
             WebElement firstRadioButton = radioButtons.get(0);
@@ -365,6 +368,7 @@ public class NaukriPage extends GenericMethods {
 
     private boolean handleCheckboxes(WebDriver driver) throws InterruptedException {
         waitForPageLoad(driver);
+        Thread.sleep(2000);
         List<WebElement> checkboxes = findElements(driver, locators.checkbox);
         for (WebElement checkbox : checkboxes) {
             if (checkbox.isDisplayed() && checkbox.isEnabled()) {
@@ -388,13 +392,14 @@ public class NaukriPage extends GenericMethods {
         return false;
     }
 
-    private boolean handleSearchField(WebDriver driver) throws InterruptedException {
+    private boolean handleSearchField(WebDriver driver) throws InterruptedException, IOException {
         waitForPageLoad(driver);
+        Thread.sleep(2000);
         if (!findElements(driver, locators.SearchFiled).isEmpty()) {
             List<WebElement> questionElement = findElements(driver, locators.chatBotQuestion);
             WebElement latestQuestionElement = questionElement.get(questionElement.size() - 1);
             String latestQuestionText = latestQuestionElement.getText();
-            String answers = questionAnswerHandler.getAnswer(latestQuestionText);
+            String answers = openAIClient.getAnswer(latestQuestionText, profile);
             sendKeysToElement(driver, locators.SearchFiled, answers);
             Thread.sleep(2000);
             clickElement(driver, locators.suggestionList);
@@ -405,6 +410,7 @@ public class NaukriPage extends GenericMethods {
 
     private void handleSaveButton(WebDriver driver, boolean skipButtonClicked, boolean answerProvided) throws InterruptedException {
         waitForPageLoad(driver);
+        Thread.sleep(2000);
         if (answerProvided && !skipButtonClicked && findElement(driver, locators.saveButtonContainer) != null) {
             WebElement saveButtonContainer = findElement(driver, locators.saveButtonContainer);
             WebElement saveButton = saveButtonContainer.findElement(By.className("sendMsg"));
@@ -424,4 +430,3 @@ public class NaukriPage extends GenericMethods {
     }
 
 }
-
