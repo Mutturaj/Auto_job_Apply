@@ -82,7 +82,7 @@ public class LinkedinPage extends GenericMethods {
         WebElement titleElement = findElement(driver, locators.TitleOfJob);
         actions.sendKeys(titleElement, Keys.ENTER).perform();
         waitForPageLoad(driver);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 //        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.LocationOfJob);
 //        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.LocationOfJob);
 //        sendKeysToElement(driver, locators.LocationOfJob, data[4]);
@@ -92,6 +92,7 @@ public class LinkedinPage extends GenericMethods {
 //        actions.sendKeys(locationElement, Keys.ENTER).perform();
 //        waitForPageLoad(driver);
 //        // executeJavaScript(driver, "arguments[0].removeAttribute('aria-checked');", locators.EasyApplyFilter);
+//        executeJavaScript(driver, "arguments[0].removeAttribute('aria-checked');", locators.EasyApplyFilter);
 //        Thread.sleep(1000);
 //        clickElement(driver, locators.EasyApplyFilter);
         //ApplyFilters(driver);
@@ -295,17 +296,18 @@ public class LinkedinPage extends GenericMethods {
     }
 
     private void EnterCityName(WebDriver driver) throws InterruptedException {
-        if (!findElements(driver, locators.cityName).isEmpty()) {
-            List<WebElement> cityNameTextfield = findElements(driver, locators.cityName);
+        List<WebElement> cityNameTextfield = findElements(driver, locators.cityName);
+        if (!cityNameTextfield.isEmpty()) {
             for (WebElement send : cityNameTextfield) {
+                send.clear();
                 send.sendKeys("Bengaluru, Karnataka, India");
                 Thread.sleep(2000);
-                WebElement ele = findElement(driver, locators.cityName);
                 Actions actions = new Actions(driver);
-                actions.sendKeys(ele, Keys.ENTER).perform();
+                actions.sendKeys(Keys.ENTER).perform();
             }
         }
-    }
+
+}
 
     private boolean clickContinueApplying(WebDriver driver) throws InterruptedException {
         List<WebElement> ContinueApplying = findElements(driver, locators.continueApplyingButton);

@@ -73,7 +73,7 @@ public class QuestionAnswerHandler {
 
     public String getAnswer(String question) {
         String normalizedQuestion = normalizeText(question);
-        String bestMatch = "2";
+        String bestMatch = "3";
 
         System.out.println("Normalized Question: " + normalizedQuestion);
 
