@@ -307,7 +307,7 @@ public class LinkedinPage extends GenericMethods {
             }
         }
 
-}
+    }
 
     private boolean clickContinueApplying(WebDriver driver) throws InterruptedException {
         List<WebElement> ContinueApplying = findElements(driver, locators.continueApplyingButton);

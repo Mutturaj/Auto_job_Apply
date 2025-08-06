@@ -381,6 +381,7 @@ public class NaukriPage extends GenericMethods {
     }
 
     private boolean handleYesButton(WebDriver driver) {
+        waitForPageLoad(driver);
         if (!findElements(driver, locators.yesButton).isEmpty()) {
             clickElement(driver, locators.yesButton);
             return true;
@@ -405,20 +406,34 @@ public class NaukriPage extends GenericMethods {
 
     private void handleSaveButton(WebDriver driver, boolean skipButtonClicked, boolean answerProvided) throws InterruptedException {
         waitForPageLoad(driver);
-        if (answerProvided && !skipButtonClicked && findElement(driver, locators.saveButtonContainer) != null) {
-            WebElement saveButtonContainer = findElement(driver, locators.saveButtonContainer);
-            WebElement saveButton = saveButtonContainer.findElement(By.className("sendMsg"));
-            if (saveButton.isEnabled()) {
-                saveButton.click();
-                waitForPageLoad(driver);
+
+        if (answerProvided && !skipButtonClicked) {
+            List<WebElement> containers = findElements(driver,locators.saveButtonContainer);
+
+            if (!containers.isEmpty()) {
+                WebElement saveButtonContainer = containers.get(0);
+                List<WebElement> saveButtons = saveButtonContainer.findElements(By.className("sendMsg"));
+
+                if (!saveButtons.isEmpty()) {
+                    WebElement saveButton = saveButtons.get(0);
+                    if (saveButton.isEnabled()) {
+                        saveButton.click();
+                        waitForPageLoad(driver);
+                        System.out.println("Save button clicked successfully.");
+                    } else {
+                        System.out.println("Save button is present but not enabled.");
+                    }
+                } else {
+                    System.out.println("Save button not found inside container.");
+                }
             } else {
-                System.out.println("Save button is present but not enabled.");
+                System.out.println("Save button container not found.");
             }
         } else {
             if (skipButtonClicked) {
                 System.out.println("Skip button was clicked, not processing save button.");
             } else {
-                System.out.println("Save button is not enabled, visible, or answer not provided.");
+                System.out.println("Answer not provided, skipping save button.");
             }
         }
     }

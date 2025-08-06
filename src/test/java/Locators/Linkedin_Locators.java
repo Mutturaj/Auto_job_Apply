@@ -7,7 +7,6 @@ public class Linkedin_Locators extends GenericMethods {
 
     public GenericMethods.LocatorsDetails EmailID = new GenericMethods.LocatorsDetails("xpath", "//input[@id='username' or @id='email-or-phone']", "EmailID Input");
     public GenericMethods.LocatorsDetails Password = new LocatorsDetails("xpath", "//input[@id='password']", "Password Input");
-
     public GenericMethods.LocatorsDetails SignInButton = new LocatorsDetails("xpath", "//button[@type='submit' or @value='Agree & Join']", "Sign in Button");
     public GenericMethods.LocatorsDetails JobIcon = new LocatorsDetails("xpath", "//li-icon[@type='job']//*[name()='svg' and @class='mercado-match']", "Job Icon");
     public GenericMethods.LocatorsDetails SearchIcon = new LocatorsDetails("xpath", "//*[name()='svg' and @class='jobs-search-box__search-icon--custom']", "Search Icon");
