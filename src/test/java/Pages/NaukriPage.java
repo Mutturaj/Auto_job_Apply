@@ -22,7 +22,7 @@ public class NaukriPage extends GenericMethods {
     QuestionAnswerHandler questionAnswerHandler;
 
     public NaukriPage(WebDriver driver) throws FileNotFoundException {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
         String currentDatasetName = DataConfig.getInstance().getDatasetName();
 
         if (currentDatasetName != null) {
@@ -46,40 +46,41 @@ public class NaukriPage extends GenericMethods {
         driver.navigate().refresh();
         Thread.sleep(2000);
 
-        if (!isElementPresent(driver, locators.chatBotPage)) {
-            System.out.println("Chatbot is not present");
-            return;
-        }
-
-        boolean isChatbotActive = true;
+        boolean isChatbotActive = isElementPresent(driver, locators.chatBotPage);
 
         while (isChatbotActive) {
             waitForPageLoad(driver);
 
             if (isElementPresent(driver, locators.chatBotPage)) {
-                WebElement closeIcon = driver.findElement(By.xpath("//div[@class='crossIcon chatBot chatBot-ic-cross']"));
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                wait.until(ExpectedConditions.elementToBeClickable(closeIcon));
-
-                Actions actions = new Actions(driver);
-                actions.moveToElement(closeIcon).click().perform();
-
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeIcon);
-
                 try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                    WebElement closeIcon = driver.findElement(
+                            By.xpath("//div[@class='crossIcon chatBot chatBot-ic-cross']")
+                    );
 
-                if (!isElementPresent(driver, locators.chatBotPage)) {
-                    isChatbotActive = false;
-                    System.out.println("Chatbot closed successfully");
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                    wait.until(ExpectedConditions.elementToBeClickable(closeIcon));
+
+                    try {
+                        closeIcon.click();
+                    } catch (Exception e) {
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeIcon);
+                    }
+
+                    Thread.sleep(2000);
+
+                    if (!isElementPresent(driver, locators.chatBotPage)) {
+                        isChatbotActive = false;
+                        System.out.println("Chatbot closed successfully");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Could not close chatbot: " + e.getMessage());
+                    isChatbotActive = false; // Avoid infinite loop
                 }
             } else {
                 isChatbotActive = false;
             }
         }
+        Thread.sleep(1000);
         waitForPageLoad(driver);
         clickElement(driver, locators.EditIcon);
         Thread.sleep(3000);
@@ -215,7 +216,7 @@ public class NaukriPage extends GenericMethods {
         Thread.sleep(1000);
         if (dateValue != null && !dateValue.isEmpty()) {
             String[] dateParts = dateValue.split("/");
-            System.out.println("DOB is "+ Arrays.toString(dateParts));
+            System.out.println("DOB is " + Arrays.toString(dateParts));
 
             String day = dateParts[0];
             String month = dateParts[1];
@@ -408,7 +409,7 @@ public class NaukriPage extends GenericMethods {
         waitForPageLoad(driver);
 
         if (answerProvided && !skipButtonClicked) {
-            List<WebElement> containers = findElements(driver,locators.saveButtonContainer);
+            List<WebElement> containers = findElements(driver, locators.saveButtonContainer);
 
             if (!containers.isEmpty()) {
                 WebElement saveButtonContainer = containers.get(0);

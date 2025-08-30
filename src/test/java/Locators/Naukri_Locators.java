@@ -7,7 +7,7 @@ public class Naukri_Locators {
     public GenericMethods.LocatorsDetails Password = new GenericMethods.LocatorsDetails("xpath", "//input[@id='passwordField']", "Password");
     public GenericMethods.LocatorsDetails LoginButton = new GenericMethods.LocatorsDetails("xpath", "//button[.='Login']", "Login Button");
     public GenericMethods.LocatorsDetails ViewProfile = new GenericMethods.LocatorsDetails("xpath", "//a[text()='View']", "View Profile button");
-    public GenericMethods.LocatorsDetails EditIcon = new GenericMethods.LocatorsDetails("xpath", "//div[@class='widgetHead']//span[@class='edit icon' and .='editOneTheme']", "Edit Icon");
+    public GenericMethods.LocatorsDetails EditIcon = new GenericMethods.LocatorsDetails("xpath", "//span[text()='Resume headline']/following-sibling::span[@class='edit icon' and .='editOneTheme']", "Edit Icon");
     public GenericMethods.LocatorsDetails SaveButton = new GenericMethods.LocatorsDetails("xpath", "//button[.='Save']", "Save button");
     public GenericMethods.LocatorsDetails JobTitle=new GenericMethods.LocatorsDetails("xpath","//h1[@class=\"styles_jd-header-title__rZwM1\"]","Job Name");
     public GenericMethods.LocatorsDetails SuccessMessage = new GenericMethods.LocatorsDetails("xpath", "//p[.='Success']", "Success Message");

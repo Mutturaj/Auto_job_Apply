@@ -59,8 +59,8 @@ public class LinkedinPage extends GenericMethods {
         clickElement(driver, locators.NotificationIcon);
         waitForPageLoad(driver);
         Thread.sleep(1000);
-        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.viewJobsButton);
-        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.viewJobsButton);
+//        executeJavaScript(driver, "arguments[0].removeAttribute('disabled');", locators.viewJobsButton);
+//        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.viewJobsButton);
         List<WebElement> viewJobs = findElements(driver, locators.viewJobsButton);
         for (int i = 0; i < viewJobs.size(); i++) {
             if (i == 0) {

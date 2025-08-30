@@ -22,7 +22,7 @@ public class NaukariTest {
     @BeforeClass
     @Parameters("baseURL2")
     public void setUp(String baseURL, ITestContext context) throws FileNotFoundException {
-        driver=generic.launchBrowser(baseURL);
+        driver = generic.launchBrowser(baseURL);
         naukaridata = new NaukriPage(driver);
         if (driver == null) {
             System.out.println("WebDriver is NULL in setUp! Cannot set context attribute.");
