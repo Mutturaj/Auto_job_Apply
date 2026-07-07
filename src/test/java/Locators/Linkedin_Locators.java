@@ -5,13 +5,13 @@ import customEntities.GenericMethods;
 
 public class Linkedin_Locators extends GenericMethods {
 
-    public GenericMethods.LocatorsDetails EmailID = new GenericMethods.LocatorsDetails("xpath", "//input[@id='username' or @id='email-or-phone']", "EmailID Input");
-    public GenericMethods.LocatorsDetails Password = new LocatorsDetails("xpath", "//input[@id='password']", "Password Input");
-    public GenericMethods.LocatorsDetails SignInButton = new LocatorsDetails("xpath", "//button[@type='submit' or @value='Agree & Join']", "Sign in Button");
-    public GenericMethods.LocatorsDetails JobIcon = new LocatorsDetails("xpath", "//li-icon[@type='job']//*[name()='svg' and @class='mercado-match']", "Job Icon");
+    public GenericMethods.LocatorsDetails EmailID = new GenericMethods.LocatorsDetails("xpath", "//input[@type='email' and @autocomplete=\"username webauthn\"]", "EmailID Input");
+    public GenericMethods.LocatorsDetails Password = new LocatorsDetails("xpath", "(//button[@aria-label='Show password']/ancestor::div[2]//input[@type='password'])[2]", "Password Input");
+    public GenericMethods.LocatorsDetails SignInButton = new LocatorsDetails("xpath", "(//button[.//span[normalize-space()='Sign in']])[2]", "Sign in Button");
+    public GenericMethods.LocatorsDetails JobIcon = new LocatorsDetails("xpath", "//li-icon[@type='job']", "Job Icon");
     public GenericMethods.LocatorsDetails SearchIcon = new LocatorsDetails("xpath", "//*[name()='svg' and @class='jobs-search-box__search-icon--custom']", "Search Icon");
     public GenericMethods.LocatorsDetails ShowAllButton = new LocatorsDetails("xpath", "//div[@class='discovery-templates-vertical-list__footer']/a[@href='https://www.linkedin.com/jobs/collections/recommended?discover=recommended&discoveryOrigin=JOBS_HOME_JYMBII']", "Show All Button");
-    public GenericMethods.LocatorsDetails TitleOfJob = new LocatorsDetails("xpath", "//input[contains(@class, 'jobs-search-box__text-input') and contains(@class, 'jobs-search-global-typeahead__input')]", "Title of the Job Input");
+    public GenericMethods.LocatorsDetails TitleOfJob = new LocatorsDetails("xpath", "//input[@data-testid=\"typeahead-input\"]","Job search icon");
     public GenericMethods.LocatorsDetails LocationOfJob = new LocatorsDetails("xpath", "//input[@aria-label=\"City, state, or zip code\" and contains(@id, 'jobs-search-box-location-id-')]", "Location of the Job");
     public GenericMethods.LocatorsDetails SearchBox = new LocatorsDetails("xpath", "//button[text()='Search']", "Search Box");
     public GenericMethods.LocatorsDetails listOfJobs = new LocatorsDetails("xpath", "//span[normalize-space()='Easy Apply']/ancestor::li[1]", "List of Jobs");

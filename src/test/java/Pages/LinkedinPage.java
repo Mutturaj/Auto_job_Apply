@@ -45,9 +45,11 @@ public class LinkedinPage extends GenericMethods {
 
     public void navigateToJobs(WebDriver driver) throws InterruptedException {
         waitForPageLoad(driver);
-        executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.JobIcon);
+        Thread.sleep(5000);
+        driver.navigate().to("https://www.linkedin.com/jobs/");
+        // executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.JobIcon);
         Thread.sleep(1000);
-        clickElement(driver, locators.JobIcon);
+        //       clickElement(driver, locators.JobIcon);
 //        waitForElement(driver, locators.ShowAllButton);
 //        clickElement(driver, locators.ShowAllButton);
     }
@@ -139,10 +141,7 @@ public class LinkedinPage extends GenericMethods {
                 break;
             }
         }
-
         Thread.sleep(4000);
-
-
     }
 
     private boolean navigatePagination(WebDriver driver, int currentPage) {
@@ -504,8 +503,9 @@ public class LinkedinPage extends GenericMethods {
 
     private int appliedJobsCount = 0;
 
-    private void JobName(WebDriver driver) {
+    private void JobName(WebDriver driver) throws InterruptedException {
         waitForPageLoad(driver);
+        Thread.sleep(1000);
         String jobTitle = findElement(driver, locators.JobTitle).getText();
         String cleanJobTitle = jobTitle.replace("Apply to ", "");
         appliedJobsCount++;
@@ -520,6 +520,7 @@ public class LinkedinPage extends GenericMethods {
         while (true) {
             List<WebElement> jobs = findElements(driver, locators.listOfJobs);
             if (!isElementListEmpty(jobs)) {
+                System.out.println("got list of jobs");
                 processJobList(driver, wait, js, jobs, data);
             } else {
                 boolean jobsFound = scrollForJobs(driver, js, maxScrollAttempts);
@@ -538,8 +539,11 @@ public class LinkedinPage extends GenericMethods {
         for (int i = 0; i < jobs.size(); i++) {
             WebElement easyApply = jobs.get(i);
             try {
+                System.out.println("going to scroll");
                 scrollToElement(driver, easyApply);
+                System.out.println("scrolled");
                 waitUntilClickable(wait, easyApply);
+                System.out.println("going to apply");
                 easyApply.click();
                 Thread.sleep(2000);
                 if (!findElements(driver, locators.reachedMaxLimit).isEmpty()) {
@@ -566,9 +570,8 @@ public class LinkedinPage extends GenericMethods {
         boolean pagesFound = false;
 
         while (!jobsFound && !pagesFound && scrollAttempts < maxScrollAttempts) {
-            js.executeScript("document.querySelector('.scaffold-layout__list').scrollTop += 450;");
+            js.executeScript("window.scrollBy(0, 450);");
             waitForPageLoad(driver);
-
             jobsFound = !findElements(driver, locators.listOfJobs).isEmpty();
             pagesFound = !findElements(driver, locators.listOfPages).isEmpty();
             scrollAttempts++;

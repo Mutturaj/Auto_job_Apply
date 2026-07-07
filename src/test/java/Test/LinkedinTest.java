@@ -28,7 +28,7 @@ public class LinkedinTest {
     @Parameters("baseURL1")
     public void setUp(String baseURL, ITestContext context) throws FileNotFoundException {
         System.out.println("Launching browser...");
-        driver=generic.launchBrowser(baseURL);
+        driver = generic.launchBrowser(baseURL);
         linkedinData = new LinkedinPage(driver);
 
         if (driver == null) {
@@ -43,7 +43,7 @@ public class LinkedinTest {
     public void applyJobFromSearchJob(String[] data, JavascriptExecutor js) throws InterruptedException, AWTException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         linkedinData.loginToLinkedIn(driver, data);
-        linkedinData.navigateToJobs(driver);
+       linkedinData.navigateToJobs(driver);
         linkedinData.searchForJobs(driver, data);
         linkedinData.ZoomOut(driver);
         linkedinData.applyForJobs(driver, wait, js, data);

@@ -5,7 +5,7 @@
         <listener class-name="customEntities.ScreenshotListener"/>
     </listeners>
     <test verbose="1" preserve-order="true" name="C:\Users\Welcome\Downloads\testrail_poc-master\AutoJob_Apply">
-        <parameter name="baseURL1" value="https://www.linkedin.com/feed/?trk=homepage-basic_sign-in-submit"/>
+        <parameter name="baseURL1" value="https://www.linkedin.com/login/"/>
         <parameter name="baseURL2" value="https://www.naukri.com/nlogin/login"></parameter>
         <classes>
             <class name="Test.LinkedinTest">

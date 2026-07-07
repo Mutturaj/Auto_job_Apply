@@ -74,7 +74,7 @@ public class NaukriPage extends GenericMethods {
                     }
                 } catch (Exception e) {
                     System.out.println("Could not close chatbot: " + e.getMessage());
-                    isChatbotActive = false; // Avoid infinite loop
+                    isChatbotActive = false;
                 }
             } else {
                 isChatbotActive = false;
@@ -85,6 +85,10 @@ public class NaukriPage extends GenericMethods {
         clickElement(driver, locators.EditIcon);
         Thread.sleep(3000);
         clickElement(driver, locators.SaveButton);
+        waitForPageLoad(driver);
+        if(!findElements(driver,locators.premiumCloseIcon).isEmpty()){
+           clickElement(driver,locators.premiumCloseIcon);
+        }
     }
 
     public void JobApplyFrom_Recommended(WebDriver driver) throws InterruptedException {

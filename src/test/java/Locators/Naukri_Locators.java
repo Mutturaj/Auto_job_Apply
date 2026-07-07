@@ -23,6 +23,7 @@ public class Naukri_Locators {
     public GenericMethods.LocatorsDetails SearchIcon1 = new GenericMethods.LocatorsDetails("xpath", "//button[@class='nI-gNb-sb__icon-wrapper']//span[@class=\"ni-gnb-icn ni-gnb-icn-search\"]", "Search Icon");
     public GenericMethods.LocatorsDetails pageNum=new GenericMethods.LocatorsDetails("xpath","//div[@class='styles_pages__v1rAK']/a","Page nums");
     public GenericMethods.LocatorsDetails closeIcon = new GenericMethods.LocatorsDetails("xpath", "//div[@class='crossIcon chatBot chatBot-ic-cross']", "Cross Icon");
+    public GenericMethods.LocatorsDetails premiumCloseIcon=new GenericMethods.LocatorsDetails("xpath","//div[contains(@class,'profileUpdatedProLayer')]//div[@class='crossLayer']","Close Icon on Premium-popup");
     public GenericMethods.LocatorsDetails chatBotPage = new GenericMethods.LocatorsDetails("xpath", "//div[@class='chatbot_Drawer chatbot_right']", "Chat bot page");
     public GenericMethods.LocatorsDetails answerTextFiled = new GenericMethods.LocatorsDetails("xpath", "//div[@class='textArea' and @data-placeholder='Type message here...']", "Input text filed");
     public GenericMethods.LocatorsDetails skipThisQues = new GenericMethods.LocatorsDetails("xpath", "//span[text()='Skip this question']", "Skip this button");
