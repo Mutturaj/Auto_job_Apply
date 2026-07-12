@@ -45,7 +45,7 @@ public class LinkedinPage extends GenericMethods {
 
     public void navigateToJobs(WebDriver driver) throws InterruptedException {
         waitForPageLoad(driver);
-        Thread.sleep(5000);
+        Thread.sleep(9000);
         driver.navigate().to("https://www.linkedin.com/jobs/");
         // executeJavaScript(driver, "arguments[0].removeAttribute('aria-hidden');", locators.JobIcon);
         Thread.sleep(1000);
